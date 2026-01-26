@@ -1,0 +1,735 @@
+/* ============================================
+   PARTITURAS PREMIUM - DESIGN COMPLETAMENTE NOVO
+   UI/UX Profissional, Vivo e Claro
+   ============================================ */
+
+/* 1. SEÇÃO PRINCIPAL - BACKGROUND VIBRANTE */
+.partituras-section {
+    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 50%, #f1f5f9 100%);
+    padding: 2rem 0 4rem;
+    min-height: 80vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.partituras-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 300px;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.08) 0%, rgba(30, 58, 138, 0.05) 100%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.partituras-section .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* 2. HEADER DE BUSCA E CONTROLES - PREMIUM */
+.partituras-controls {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.partituras-search-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.partituras-search-wrapper i {
+    position: absolute;
+    left: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9CA3AF;
+    font-size: 1.125rem;
+    z-index: 2;
+}
+
+.partituras-search {
+    width: 100%;
+    padding: 1rem 1rem 1rem 3.5rem;
+    border: 2px solid rgba(255, 215, 0, 0.25);
+    border-radius: 12px;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    background: #f9fafb;
+    color: #1F2937;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.partituras-search:focus {
+    outline: none;
+    border-color: #FFD700;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.15), 0 4px 12px rgba(255, 215, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.partituras-search::placeholder {
+    color: #9CA3AF;
+}
+
+/* 3. FILTROS DE CATEGORIA - DESIGN MODERNO */
+.partituras-category-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.category-filter-btn {
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    border-radius: 50px;
+    color: #1F2937;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 0.875rem;
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.category-filter-btn i {
+    font-size: 0.875rem;
+}
+
+.category-filter-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 215, 0, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.5s ease, height 0.5s ease;
+}
+
+.category-filter-btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.category-filter-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.25);
+    border-color: #FFD700;
+}
+
+.category-filter-btn.active {
+    background: linear-gradient(135deg, #FFD700 0%, #FFC107 100%);
+    color: #000000;
+    border-color: #FFD700;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(255, 215, 0, 0.4);
+    font-weight: 700;
+}
+
+.category-filter-btn.active::before {
+    display: none;
+}
+
+/* 4. CONTAINER DE PARTITURAS - GRID MODERNO */
+.partituras-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+    animation: fadeIn 0.6s ease;
+}
+
+@media (max-width: 768px) {
+    .partituras-container {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 5. CARD DE PARTITURA - DESIGN PREMIUM */
+.partituras-widget {
+    background: #ffffff;
+    border: 2px solid rgba(255, 215, 0, 0.2);
+    border-radius: 20px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    position: relative;
+    opacity: 1;
+    animation: slideInUp 0.5s ease backwards;
+    display: flex;
+    flex-direction: column;
+}
+
+.partituras-widget:nth-child(1) { animation-delay: 0.05s; }
+.partituras-widget:nth-child(2) { animation-delay: 0.1s; }
+.partituras-widget:nth-child(3) { animation-delay: 0.15s; }
+.partituras-widget:nth-child(4) { animation-delay: 0.2s; }
+.partituras-widget:nth-child(5) { animation-delay: 0.25s; }
+.partituras-widget:nth-child(n+6) { animation-delay: 0.3s; }
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.partituras-widget::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #FFD700 0%, #FFC107 50%, #FFD700 100%);
+    background-size: 200% 100%;
+    animation: shimmer 3s ease-in-out infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.partituras-widget:hover::before {
+    opacity: 1;
+}
+
+.partituras-widget[data-state="open"]::before {
+    opacity: 1;
+}
+
+@keyframes shimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.partituras-widget:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12), 0 8px 16px rgba(255, 215, 0, 0.2);
+    border-color: rgba(255, 215, 0, 0.5);
+}
+
+.partituras-widget[data-state="open"] {
+    border-color: #FFD700;
+    border-width: 2px;
+    box-shadow: 0 16px 40px rgba(255, 193, 7, 0.3), 
+                0 8px 20px rgba(255, 193, 7, 0.2),
+                0 0 0 1px rgba(255, 215, 0, 0.1);
+    transform: translateY(-8px) scale(1.02);
+    background: linear-gradient(to bottom, #ffffff 0%, rgba(255, 215, 0, 0.04) 100%);
+}
+
+/* 6. HEADER DO CARD - PREMIUM */
+.partituras-header {
+    padding: 1.5rem;
+    cursor: pointer;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.05) 0%, rgba(255, 215, 0, 0.02) 100%);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    touch-action: manipulation;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.partituras-header:hover {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
+}
+
+.partituras-header:active {
+    transform: scale(0.98);
+}
+
+.partituras-widget[data-state="open"] .partituras-header {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 207, 64, 0.08) 100%);
+    border-bottom: 3px solid #FFD700;
+}
+
+/* 7. ÍCONE DE EXPANDIR - MODERNO */
+.partituras-header::before {
+    content: '▼';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 207, 64, 0.15) 100%);
+    border-radius: 12px;
+    border: 2px solid rgba(255, 215, 0, 0.4);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
+    color: #FFD700;
+    font-size: 0.875rem;
+    font-weight: bold;
+    line-height: 1;
+    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.2);
+}
+
+.partituras-widget[data-state="open"] .partituras-header::before {
+    content: '▲';
+    background: linear-gradient(135deg, #FFD700 0%, #FFC107 100%);
+    border-color: #FFD700;
+    box-shadow: 0 4px 12px rgba(255, 193, 7, 0.4);
+    color: #000000;
+    transform: scale(1.1) rotate(0deg);
+}
+
+/* 8. TÍTULO E INFORMAÇÕES */
+.partituras-header-content {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.partitura-title {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1F2937;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.partituras-header-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.instrument-count-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.375rem 0.875rem;
+    background: linear-gradient(135deg, rgba(30, 58, 138, 0.1) 0%, rgba(59, 130, 246, 0.08) 100%);
+    border: 1px solid rgba(30, 58, 138, 0.2);
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #1E3A8A;
+    white-space: nowrap;
+    font-family: 'Poppins', sans-serif;
+}
+
+.partituras-widget[data-state="open"] .instrument-count-badge {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 207, 64, 0.15) 100%);
+    border-color: #FFD700;
+    color: #000000;
+}
+
+/* 9. CONTROLES DO HEADER */
+.partituras-header-actions {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-left: auto;
+}
+
+.pr-filtro {
+    padding: 0.625rem 1rem;
+    border-radius: 10px;
+    border: 2px solid rgba(255, 215, 0, 0.25);
+    min-width: 180px;
+    max-width: 220px;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 0.875rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: #f9fafb;
+    color: #1F2937;
+    font-family: 'Poppins', sans-serif;
+    height: 42px;
+}
+
+@media (max-width: 768px) {
+    .pr-filtro {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+}
+
+.pr-filtro:focus {
+    outline: none;
+    border-color: #FFD700;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(255, 193, 7, 0.15);
+    transform: translateY(-1px);
+}
+
+.download-button {
+    background: linear-gradient(135deg, #FFD700 0%, #FFC107 100%);
+    color: #000000;
+    padding: 0.625rem 1.25rem;
+    border-radius: 10px;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+    font-size: 0.875rem;
+    height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(255, 193, 7, 0.3);
+    letter-spacing: 0.3px;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+}
+
+.download-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.4s ease, height 0.4s ease;
+}
+
+.download-button:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.download-button:hover {
+    background: linear-gradient(135deg, #FFC107 0%, #FFD700 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(255, 193, 7, 0.4);
+}
+
+/* 10. CONTAINER DA LISTA - ANIMAÇÃO FLUIDA */
+.partitura-list-container {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.5s ease,
+                padding 0.4s ease;
+    background: #ffffff;
+    opacity: 0;
+    padding: 0;
+}
+
+.partituras-widget[data-state="open"] .partitura-list-container {
+    max-height: 6000px;
+    padding: 1.5rem;
+    opacity: 1;
+}
+
+/* 11. LISTA DE INSTRUMENTOS */
+.partitura-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+@media (max-width: 768px) {
+    .partitura-list {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+}
+
+/* 12. ITEM DE INSTRUMENTO - CARD MODERNO */
+.partitura-item {
+    background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+    border: 2px solid rgba(255, 215, 0, 0.15);
+    border-radius: 16px;
+    padding: 1.25rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.partitura-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, #FFD700 0%, #FFC107 100%);
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+    transform-origin: top;
+}
+
+.partitura-item:hover::before {
+    transform: scaleY(1);
+}
+
+.partitura-item:hover {
+    transform: translateX(4px) translateY(-2px);
+    border-color: #FFD700;
+    box-shadow: 0 8px 24px rgba(255, 193, 7, 0.2), 0 4px 12px rgba(0, 0, 0, 0.08);
+    background: linear-gradient(135deg, #ffffff 0%, rgba(255, 215, 0, 0.05) 100%);
+}
+
+.partitura-item-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+.partitura-item .instrumento-nome {
+    font-weight: 700;
+    color: #1F2937;
+    font-size: 1rem;
+    position: relative;
+    padding-left: 1.75rem;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+}
+
+.partitura-item .instrumento-nome::before {
+    content: '♪';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #FFD700;
+    font-size: 1.25rem;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.partitura-item:hover .instrumento-nome::before {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.3) rotate(15deg);
+}
+
+/* 13. ÁUDIO PLAYER */
+.partitura-item audio {
+    width: 100%;
+    height: 44px;
+    border-radius: 10px;
+    outline: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* 14. LINKS DE DOWNLOAD - MODERNOS */
+.download-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.download-link-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1rem;
+    background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(30, 58, 138, 0.25);
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+.download-link-item::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.4s ease, height 0.4s ease;
+}
+
+.download-link-item:hover::before {
+    width: 200px;
+    height: 200px;
+}
+
+.download-link-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(30, 58, 138, 0.35);
+    background: linear-gradient(135deg, #1E40AF 0%, #2563EB 100%);
+}
+
+/* 15. MÚSICA COMPLETA */
+.full-song-item {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.12) 0%, rgba(255, 207, 64, 0.06) 100%);
+    border: 2px solid rgba(255, 215, 0, 0.4);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    grid-column: 1 / -1;
+}
+
+.full-song-item-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.full-song-item .instrumento-nome {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1F2937;
+}
+
+/* 16. MENSAGEM VAZIA */
+.partitura-empty {
+    padding: 3rem 2rem;
+    text-align: center;
+    color: #6B7280;
+    font-style: italic;
+    grid-column: 1 / -1;
+}
+
+.partitura-empty i {
+    font-size: 3rem;
+    color: #D1D5DB;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+/* 17. RESPONSIVIDADE */
+@media (max-width: 768px) {
+    .partituras-section {
+        padding: 1.5rem 0 3rem;
+    }
+
+    .partituras-controls {
+        padding: 1.5rem;
+        border-radius: 16px;
+    }
+
+    .partituras-header {
+        padding: 1.25rem;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .partituras-header-content {
+        width: 100%;
+    }
+
+    .partituras-header-actions {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .partituras-header::before {
+        width: 36px;
+        height: 36px;
+    }
+
+    .partituras-widget[data-state="open"] .partitura-list-container {
+        padding: 1rem;
+    }
+}
+
+/* 18. ANIMAÇÕES E PERFORMANCE */
+@media (prefers-reduced-motion: no-preference) {
+    .partituras-widget,
+    .partitura-item {
+        will-change: transform;
+    }
+
+    .partitura-list-container {
+        will-change: max-height, opacity;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .partituras-widget,
+    .partitura-list-container,
+    .partituras-header,
+    .partitura-item {
+        transition: none;
+        animation: none;
+    }
+}
+
+/* 19. ACESSIBILIDADE */
+.partituras-header:focus-visible,
+.download-button:focus-visible,
+.pr-filtro:focus-visible {
+    outline: 3px solid #FFD700;
+    outline-offset: 2px;
+}
+
+/* 20. ESTADO DE CARREGAMENTO */
+.partituras-container.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* 21. CONTADOR DE RESULTADOS */
+.partituras-results-count {
+    padding: 0.75rem 1.25rem;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
+    border-radius: 12px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #1F2937;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+}

@@ -45,16 +45,18 @@
     object-fit: cover;
 }
 
-/* Efeito parallax suave no scroll */
-.hero:hover .hero-background-image {
-    transform: scale(1.05);
-    filter: brightness(0.45) contrast(1.25) saturate(1.15);
-}
+/* Efeito parallax suave no scroll - apenas desktop */
+@media (hover: hover) and (pointer: fine) {
+    .hero:hover .hero-background-image {
+        transform: scale(1.05);
+        filter: brightness(0.45) contrast(1.25) saturate(1.15);
+    }
 
-.hero:hover .hero-background-image[alt="Logo Banda Racional"],
-.hero:hover .hero-background-image[alt=""] {
-    transform: scale(1.03);
-    filter: brightness(0.75) contrast(1.2) saturate(1.1);
+    .hero:hover .hero-background-image[alt="Logo Banda Racional"],
+    .hero:hover .hero-background-image[alt=""] {
+        transform: scale(1.03);
+        filter: brightness(0.75) contrast(1.2) saturate(1.1);
+    }
 }
 
 /* 3. OVERLAY MODERNO - GRADIENTE SUTIL */
@@ -107,6 +109,11 @@
     max-width: 1100px;
     padding: 4rem 2rem;
     animation: contentFadeIn 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
 
@@ -420,76 +427,260 @@
 
 @media (max-width: 768px) {
     .hero {
-        min-height: 85vh;
-        padding-top: 80px;
+        min-height: 100vh;
+        padding-top: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Remover imagem de fundo no mobile */
+    .hero-background-image {
+        display: none;
+    }
+    
+    /* Background gradiente amarelo claro para branco - mais visível */
+    .hero.hero-with-logo {
+        background: linear-gradient(180deg, #FFF9E6 0%, #FFFEF5 50%, #FFFFFF 100%);
+    }
+    
+    /* Overlay removido no mobile */
+    .hero-overlay {
+        display: none;
     }
     
     .hero-content {
-        padding: 2.5rem 1.5rem;
+        padding: 3rem 1.5rem 2rem;
+        width: 100%;
+        max-width: 100%;
+        text-align: center;
     }
     
     .hero-title {
-        margin-bottom: 1.75rem;
+        margin-bottom: 1.25rem;
+        font-size: clamp(2.25rem, 9vw, 4rem);
+        line-height: 1.1;
+    }
+    
+    .title-line:nth-child(1) {
+        margin-bottom: 0.5rem;
+        font-size: clamp(2rem, 8.5vw, 3.5rem);
+        /* Cor sólida amarela para mobile - mais nítida */
+        color: #FFD700;
+        -webkit-text-fill-color: #FFD700;
+        background: none;
+        background-clip: unset;
+        -webkit-background-clip: unset;
+        filter: none;
+        animation: none;
+        text-shadow: 0 2px 8px rgba(255, 215, 0, 0.4);
+        font-weight: 800;
+        /* Melhorar renderização no mobile */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+    }
+    
+    .title-line:nth-child(2) {
+        font-size: clamp(1.75rem, 7.5vw, 3rem);
+        color: #1a1f3a;
+        font-weight: 700;
+        text-shadow: none;
     }
     
     .hero-subtitle {
         margin-bottom: 2.5rem;
-        font-size: clamp(0.95rem, 3vw, 1.2rem);
-        line-height: 1.6;
+        font-size: clamp(1rem, 4vw, 1.25rem);
+        line-height: 1.7;
+        padding: 0 1rem;
+        font-weight: 400;
+        color: #4a5568;
+        text-shadow: none;
+        max-width: 90%;
+        margin-left: auto;
+        margin-right: auto;
     }
     
     .hero-buttons {
         flex-direction: column;
-        gap: 0.875rem;
+        gap: 1rem;
         width: 100%;
-        align-items: center;
+        max-width: 320px;
+        margin: 0 auto;
+        align-items: stretch;
+        padding: 0;
     }
     
     .hero-buttons .btn {
         width: 100%;
-        max-width: 320px;
-        padding: 1rem 2rem;
+        padding: 1.15rem 2rem;
         font-size: 0.95rem;
         justify-content: center;
+        border-radius: 50px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    /* Botão primário - Amarelo vibrante */
+    .hero-buttons .btn-primary {
+        background: #FFD700;
+        color: #1a1f3a;
+        border: none;
+        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+    }
+    
+    .hero-buttons .btn-primary:hover,
+    .hero-buttons .btn-primary:active {
+        background: #FFE55C;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+    }
+    
+    /* Botão secundário - Cinza claro */
+    .hero-buttons .btn-secondary {
+        background: #F7FAFC;
+        color: #718096;
+        border: 1px solid #E2E8F0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+    
+    .hero-buttons .btn-secondary:hover,
+    .hero-buttons .btn-secondary:active {
+        background: #EDF2F7;
+        color: #4a5568;
+        border-color: #CBD5E0;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    }
+    
+    .hero-buttons .btn i {
+        font-size: 1.1rem;
+        margin-right: 0.5rem;
     }
     
     .scroll-indicator {
-        bottom: 2rem;
-        width: 40px;
-        height: 40px;
-        font-size: 1.3rem;
+        bottom: 1.5rem;
+        width: 44px;
+        height: 44px;
+        font-size: 1.2rem;
+        background: rgba(255, 215, 0, 0.15);
+        border: 1.5px solid rgba(255, 215, 0, 0.4);
+        color: #FFD700;
+    }
+    
+    .scroll-indicator:hover {
+        background: rgba(255, 215, 0, 0.25);
+        border-color: rgba(255, 215, 0, 0.6);
+        transform: translateX(-50%) translateY(5px);
     }
 }
 
 @media (max-width: 480px) {
     .hero {
-        min-height: 80vh;
+        min-height: 100vh;
+        padding-top: 60px;
     }
     
     .hero-content {
-        padding: 2rem 1.25rem;
+        padding: 2.5rem 1.25rem 2rem;
     }
     
     .hero-title {
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
+        font-size: clamp(1.9rem, 10vw, 3.5rem);
+    }
+    
+    .title-line:nth-child(1) {
+        margin-bottom: 0.4rem;
+        font-size: clamp(1.7rem, 9vw, 3rem);
+        /* Garantir que o estilo sólido seja mantido em telas menores */
+        color: #FFD700;
+        -webkit-text-fill-color: #FFD700;
+        background: none;
+        background-clip: unset;
+        -webkit-background-clip: unset;
+        filter: none;
+        animation: none;
+        text-shadow: 0 2px 6px rgba(255, 215, 0, 0.4);
+        font-weight: 800;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+    }
+    
+    .title-line:nth-child(2) {
+        font-size: clamp(1.5rem, 8vw, 2.6rem);
     }
     
     .hero-subtitle {
-        margin-bottom: 2rem;
-        font-size: clamp(0.9rem, 4vw, 1.1rem);
+        margin-bottom: 2.25rem;
+        font-size: clamp(0.95rem, 4.5vw, 1.15rem);
+        line-height: 1.65;
+        padding: 0 0.5rem;
+        max-width: 95%;
+    }
+    
+    .hero-buttons {
+        gap: 0.875rem;
+        max-width: 100%;
+        padding: 0 0.5rem;
     }
     
     .hero-buttons .btn {
-        max-width: 100%;
-        padding: 0.9rem 1.75rem;
+        padding: 1.05rem 1.75rem;
+        font-size: 0.9rem;
+        border-radius: 45px;
+    }
+    
+    .hero-buttons .btn i {
+        font-size: 1rem;
+    }
+    
+    .scroll-indicator {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+        bottom: 1.25rem;
+    }
+}
+
+/* Ajustes para telas muito pequenas (landscape mobile) */
+@media (max-width: 768px) and (max-height: 500px) {
+    .hero {
+        min-height: 100vh;
+        padding-top: 50px;
+    }
+    
+    .hero-content {
+        padding: 1.5rem 1.25rem;
+    }
+    
+    .hero-title {
+        margin-bottom: 1rem;
+        font-size: clamp(1.5rem, 6vw, 2.5rem);
+    }
+    
+    .hero-subtitle {
+        margin-bottom: 1.5rem;
+        font-size: clamp(0.9rem, 3vw, 1.1rem);
+    }
+    
+    .hero-buttons {
+        gap: 0.75rem;
+    }
+    
+    .hero-buttons .btn {
+        padding: 0.9rem 1.5rem;
         font-size: 0.9rem;
     }
     
     .scroll-indicator {
-        width: 38px;
-        height: 38px;
-        font-size: 1.2rem;
-        bottom: 1.5rem;
+        display: none;
     }
 }
 

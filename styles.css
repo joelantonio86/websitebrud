@@ -1366,8 +1366,9 @@ section {
 }
 
 .calendario-actions .btn {
-    flex: 1;
-    min-width: 140px;
+    flex: 0 0 auto;
+    min-width: 180px;
+    max-width: 250px;
     padding: 0.875rem 1.5rem;
     font-size: 0.875rem;
 }
@@ -1674,7 +1675,7 @@ section {
 .social-link {
     width: 45px;
     height: 45px;
-    border-radius: 50%;
+    border-radius: 12px;
     background: var(--dark-secondary);
     display: flex;
     align-items: center;
@@ -1685,10 +1686,8 @@ section {
     border: 2px solid rgba(255, 215, 0, 0.3);
 }
 
+/* Estilos específicos das redes sociais serão aplicados pelo styles-footer-modern.css */
 .social-link:hover {
-    background: var(--gradient-gold);
-    color: var(--black);
-    border-color: var(--primary-gold);
     transform: translateY(-5px);
 }
 

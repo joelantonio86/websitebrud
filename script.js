@@ -1,56 +1,91 @@
 // Navigation Toggle
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('navMenu');
-const navLinks = document.querySelectorAll('.nav-link');
+let navLinks = null;
 
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navMenu.classList.toggle('active');
-});
-
-// Close menu when clicking on a link (apenas links que não são dropdown)
-navLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-        // Se o link não tem submenu, fecha o menu mobile
-        const parentLi = link.closest('li');
-        if (!parentLi.classList.contains('has-submenu') || !link.getAttribute('href') || link.getAttribute('href') === '#') {
-            // Se não é um link de submenu ou é um link vazio (#), não fecha
-            if (link.getAttribute('href') && link.getAttribute('href') !== '#') {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-            }
-        }
+// Função para fechar o menu
+function closeMenu() {
+    if (hamburger) hamburger.classList.remove('active');
+    if (navMenu) navMenu.classList.remove('active');
+    // Fechar todos os submenus também
+    document.querySelectorAll('.has-submenu').forEach(li => {
+        li.classList.remove('active');
     });
-});
+}
 
-// Submenu Toggle para Mobile
+// Função para abrir/fechar o menu
+function toggleMenu() {
+    if (hamburger && navMenu) {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+    }
+}
+
+// Toggle do menu hamburger
+if (hamburger) {
+    hamburger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        toggleMenu();
+    });
+}
+
+// Submenu Toggle para Mobile e Desktop
 document.querySelectorAll('.has-submenu > .nav-link').forEach(link => {
     link.addEventListener('click', function(e) {
-        // No mobile, permite toggle do submenu
-        if (window.innerWidth <= 768) {
+        const parentLi = this.closest('li');
+        const href = this.getAttribute('href');
+        
+        // Se o link é apenas #, faz toggle do submenu
+        if (href === '#' || !href) {
             e.preventDefault();
-            const parentLi = this.closest('li');
+            e.stopPropagation();
             parentLi.classList.toggle('active');
+        } else {
+            // Se tem href válido, fecha o menu após navegar
+            setTimeout(() => {
+                closeMenu();
+            }, 100);
         }
     });
 });
 
-// Fechar menu ao clicar fora dele (mobile)
-document.addEventListener('click', function(e) {
-    const navMenu = document.getElementById('navMenu');
-    const hamburger = document.getElementById('hamburger');
+// Fechar menu ao clicar em links de navegação (exceto submenu toggle)
+document.addEventListener('DOMContentLoaded', function() {
+    navLinks = document.querySelectorAll('.nav-link');
     
-    if (navMenu && hamburger && window.innerWidth <= 768) {
-        // Verificar se o clique foi fora do menu e do hamburger
-        const isClickInsideMenu = navMenu.contains(e.target);
-        const isClickOnHamburger = hamburger.contains(e.target);
-        
-        if (!isClickInsideMenu && !isClickOnHamburger && navMenu.classList.contains('active')) {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            const parentLi = this.closest('li');
+            const isSubmenuToggle = parentLi && parentLi.classList.contains('has-submenu') && (href === '#' || !href);
+            
+            // Se não é um toggle de submenu e tem href válido, fecha o menu
+            if (!isSubmenuToggle && href && href !== '#') {
+                // Pequeno delay para permitir navegação
+                setTimeout(() => {
+                    closeMenu();
+                }, 100);
+            }
+        });
+    });
+});
+
+// Fechar menu ao clicar fora dele (mobile e desktop)
+document.addEventListener('click', function(e) {
+    if (!navMenu || !hamburger) return;
+    
+    // Verificar se o clique foi dentro do menu ou no hamburger
+    const isClickInsideMenu = navMenu.contains(e.target);
+    const isClickOnHamburger = hamburger.contains(e.target);
+    const isClickOnSubmenuToggle = e.target.closest('.has-submenu > .nav-link[href="#"]');
+    
+    // Se o menu está aberto e clicou fora, fecha
+    if (navMenu.classList.contains('active')) {
+        if (!isClickInsideMenu && !isClickOnHamburger && !isClickOnSubmenuToggle) {
+            closeMenu();
         }
     }
-});
+}, true); // Usar capture phase para garantir que seja executado primeiro
 
 // Navbar scroll effect
 const navbar = document.getElementById('navbar');
@@ -437,9 +472,8 @@ window.addEventListener('load', () => {
 
 // Keyboard navigation support
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && navMenu.classList.contains('active')) {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
+    if (e.key === 'Escape' && navMenu && navMenu.classList.contains('active')) {
+        closeMenu();
     }
 });
 

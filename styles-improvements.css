@@ -274,23 +274,24 @@
     background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(255, 250, 240, 1) 100%);
 }
 
-/* Item de música completa destacado */
+/* Item de música completa destacado - AZUL */
 .partitura-item.full-song-item {
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.08) 0%, rgba(255, 215, 0, 0.03) 100%);
-    border: 2px solid rgba(255, 215, 0, 0.3);
-    border-left: 6px solid var(--primary-gold);
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.25) 0%, rgba(96, 165, 250, 0.2) 50%, rgba(147, 197, 253, 0.22) 100%);
+    border: 2px solid rgba(96, 165, 250, 0.4);
+    border-left: 6px solid rgba(59, 130, 246, 0.9);
 }
 
 .partitura-item.full-song-item:hover {
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.12) 0%, rgba(255, 215, 0, 0.06) 100%);
-    border-color: var(--primary-gold);
-    box-shadow: 0 8px 24px rgba(255, 215, 0, 0.25);
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.32) 0%, rgba(96, 165, 250, 0.26) 50%, rgba(147, 197, 253, 0.28) 100%);
+    border-color: rgba(96, 165, 250, 0.6);
+    border-left-color: rgba(59, 130, 246, 1);
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.25);
 }
 
 .partitura-item.full-song-item .instrumento-nome {
     font-size: 1.1rem;
     font-weight: 700;
-    color: var(--primary-gold);
+    color: #1E3A8A;
     margin-bottom: 1rem;
 }
 
@@ -355,38 +356,34 @@
     transform: scale(1.15) rotate(5deg);
 }
 
-/* Cores específicas por tipo de arquivo - Harmonizadas com a paleta */
-/* PDF - Vermelho (padrão reconhecível para PDFs) */
+/* Cores específicas por tipo de arquivo - OPÇÃO 2: Azul + Acentos Sutis */
+/* PDF - Verde Suave (harmoniza com azul) */
 .download-link-item.pr-pdf-link,
 .download-link-item[href*=".pdf"] {
-    background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+    background: linear-gradient(135deg, #10B981 0%, #34D399 100%);
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
 }
 
 .download-link-item.pr-pdf-link:hover,
 .download-link-item[href*=".pdf"]:hover {
-    background: linear-gradient(135deg, #b91c1c 0%, #dc2626 100%);
+    background: linear-gradient(135deg, #059669 0%, #10B981 100%);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
 }
 
-/* Sibelius - Roxo/violeta moderno */
+/* Sibelius - Índigo (harmoniza com azul) */
 .download-link-item[href*=".sib"],
 .download-link-item[href*="Sibelius"] {
-    background: linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%);
+    background: linear-gradient(135deg, #6366F1 0%, #818CF8 100%);
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
 }
 
 .download-link-item[href*=".sib"]:hover,
 .download-link-item[href*="Sibelius"]:hover {
-    background: linear-gradient(135deg, #6D28D9 0%, #7C3AED 100%);
+    background: linear-gradient(135deg, #4F46E5 0%, #6366F1 100%);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
 }
 
-.download-link-item[href*=".enc"],
-.download-link-item[href*="Encore"] {
-    background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
-}
-
-.download-link-item[href*=".enc"]:hover,
-.download-link-item[href*="Encore"]:hover {
-    background: linear-gradient(135deg, #059669 0%, #10b981 100%);
-}
+/* Encore removido - todas as músicas agora usam Sibelius */
 
 .download-link-item[href*=".mp3"],
 .download-link-item[href*="MP3"] {

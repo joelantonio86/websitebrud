@@ -1,0 +1,857 @@
+/* ============================================
+   ESTILOS MODERNOS PARA PÁGINA DE PARTITURAS
+   UI/UX Profissional - Mobile e Web
+   ============================================ */
+
+/* 1. SEÇÃO DE PARTITURAS - CONTAINER PRINCIPAL */
+.partituras-section {
+    background: linear-gradient(to bottom, #fafafa 0%, #ffffff 100%);
+    padding: 3rem 0 5rem;
+    min-height: 60vh;
+}
+
+/* 2. FILTROS DE CATEGORIA - MELHORADOS */
+.partituras-category-filters {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+    padding: 0 1rem;
+}
+
+.category-filter-btn {
+    padding: 0.75rem 1.5rem;
+    background: #ffffff;
+    border: 2px solid rgba(255, 215, 0, 0.25);
+    border-radius: 50px;
+    color: #1F2937;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 0.875rem;
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.category-filter-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 215, 0, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.4s ease, height 0.4s ease;
+}
+
+.category-filter-btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.category-filter-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
+    border-color: #FFD700;
+}
+
+.category-filter-btn.active {
+    background: linear-gradient(135deg, #FFD700 0%, #FFC107 100%);
+    color: #000000;
+    border-color: #FFD700;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(255, 215, 0, 0.35);
+    font-weight: 700;
+}
+
+.category-filter-btn.active::before {
+    display: none;
+}
+
+/* 3. CONTAINER DE PARTITURAS */
+.partituras-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* 4. WIDGET DE PARTITURA - DESIGN MODERNO */
+.partituras-widget {
+    background: #ffffff;
+    border: 2px solid rgba(30, 58, 138, 0.15);
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    position: relative;
+    opacity: 1;
+    animation: slideInUp 0.5s ease backwards;
+}
+
+/* Padronizar altura dos widgets quando fechados */
+.partituras-widget[data-state="closed"] {
+    min-height: 80px; /* Altura do header padronizada */
+}
+
+.partituras-widget:nth-child(1) { animation-delay: 0.05s; }
+.partituras-widget:nth-child(2) { animation-delay: 0.1s; }
+.partituras-widget:nth-child(3) { animation-delay: 0.15s; }
+.partituras-widget:nth-child(4) { animation-delay: 0.2s; }
+.partituras-widget:nth-child(5) { animation-delay: 0.25s; }
+.partituras-widget:nth-child(n+6) { animation-delay: 0.3s; }
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.partituras-widget:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(30, 58, 138, 0.1);
+    border-color: rgba(30, 58, 138, 0.3);
+}
+
+/* Widget Aberto - Estado Expandido */
+.partituras-widget[data-state="open"] {
+    border-color: #1E3A8A;
+    border-width: 2px;
+    box-shadow: 0 12px 32px rgba(30, 58, 138, 0.15), 
+                0 4px 16px rgba(30, 58, 138, 0.1),
+                0 0 0 1px rgba(30, 58, 138, 0.05);
+    transform: translateY(-4px);
+    background: linear-gradient(to bottom, #ffffff 0%, rgba(30, 58, 138, 0.02) 100%);
+}
+
+/* 5. HEADER DO WIDGET - ÁREA CLICÁVEL MELHORADA */
+.partituras-header {
+    display: grid;
+    grid-template-columns: 40px 1fr auto auto;
+    gap: 1rem;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+    min-height: 80px; /* Altura mínima padronizada */
+    height: 80px; /* Altura fixa para padronizar todos os widgets */
+    cursor: pointer;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    background: linear-gradient(135deg, rgba(30, 58, 138, 0.03) 0%, rgba(59, 130, 246, 0.02) 100%);
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    touch-action: manipulation;
+    z-index: 1;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Área de toque maior em mobile */
+@media (max-width: 768px) {
+    .partituras-header {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        min-height: auto; /* No mobile permite altura flexível */
+        height: auto; /* No mobile permite altura flexível */
+        align-items: stretch;
+        gap: 0.75rem;
+    }
+    
+    .partituras-header::before {
+        order: 0;
+        align-self: flex-start;
+        margin-bottom: 0.25rem;
+    }
+    
+    .partitura-title {
+        order: 1;
+        width: 100%;
+        margin-bottom: 0;
+        font-size: 1rem;
+        white-space: normal; /* Permite quebra de linha no mobile */
+        min-height: auto;
+    }
+    
+    .pr-filtro {
+        order: 2;
+        width: 100%;
+        margin-bottom: 0;
+        min-height: 44px; /* Touch target mínimo */
+    }
+    
+    .download-button {
+        order: 3;
+        width: 100%;
+        min-height: 44px; /* Touch target mínimo */
+    }
+}
+
+.partituras-header:hover {
+    background: linear-gradient(135deg, rgba(30, 58, 138, 0.06) 0%, rgba(59, 130, 246, 0.04) 100%);
+}
+
+.partituras-header:active {
+    transform: scale(0.98);
+}
+
+/* Header quando expandido */
+.partituras-widget[data-state="open"] .partituras-header {
+    background: linear-gradient(135deg, rgba(30, 58, 138, 0.08) 0%, rgba(59, 130, 246, 0.05) 100%);
+    border-bottom-color: #1E3A8A;
+    border-bottom-width: 3px;
+    box-shadow: 0 4px 12px rgba(30, 58, 138, 0.1);
+}
+
+/* 6. ÍCONE DE EXPANDIR/RECOLHER - MODERNO E CLARO */
+.partituras-header::before {
+    content: '▼';
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, rgba(30, 58, 138, 0.1) 0%, rgba(59, 130, 246, 0.08) 100%);
+    border-radius: 8px;
+    border: 2px solid rgba(30, 58, 138, 0.2);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
+    position: relative;
+    order: 0;
+    color: #1E3A8A;
+    font-size: 0.75rem;
+    font-weight: bold;
+    line-height: 1;
+    z-index: 2;
+    grid-column: 1;
+    align-self: center;
+}
+
+/* Quando expandido - rotaciona o ícone */
+.partituras-widget[data-state="open"] .partituras-header::before {
+    content: '▲';
+    background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+    border-color: #1E3A8A;
+    box-shadow: 0 2px 8px rgba(30, 58, 138, 0.3);
+    color: #ffffff;
+    transform: scale(1.1);
+}
+
+/* 7. TÍTULO DA PARTITURA */
+.partitura-title {
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 700;
+    flex: 1;
+    min-width: 200px;
+    order: 1;
+    color: #1F2937;
+    letter-spacing: -0.01em;
+    line-height: 1.4;
+    display: flex;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    grid-column: 2;
+    align-self: center;
+    min-height: 1.4em; /* Altura mínima baseada no line-height */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; /* Evita quebra de linha para manter altura consistente */
+}
+
+@media (max-width: 768px) {
+    .partitura-title {
+        font-size: 1rem;
+        min-width: 0;
+        width: 100%;
+        order: 1;
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* Garantir que todos os elementos do header sejam visíveis */
+.partituras-header > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* 8. BADGE DE CONTAGEM DE INSTRUMENTOS */
+.instrument-count-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.375rem 0.75rem;
+    background: linear-gradient(135deg, rgba(30, 58, 138, 0.1) 0%, rgba(59, 130, 246, 0.08) 100%);
+    border: 1px solid rgba(30, 58, 138, 0.2);
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #1E3A8A;
+    white-space: nowrap;
+    order: 2;
+    font-family: 'Poppins', sans-serif;
+}
+
+.partituras-widget[data-state="open"] .instrument-count-badge {
+    background: linear-gradient(135deg, rgba(30, 58, 138, 0.15) 0%, rgba(59, 130, 246, 0.12) 100%);
+    border-color: #1E3A8A;
+}
+
+/* 9. CAMPO DE FILTRO */
+.pr-filtro {
+    padding: 0.625rem 1rem;
+    border-radius: 10px;
+    border: 2px solid rgba(30, 58, 138, 0.2);
+    min-width: 200px;
+    max-width: 250px;
+    width: 100%;
+    flex-shrink: 0;
+    order: 3;
+    box-sizing: border-box;
+    font-size: 0.875rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: #ffffff;
+    color: #1F2937;
+    font-family: 'Poppins', sans-serif;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    align-self: center;
+}
+
+@media (max-width: 768px) {
+    .pr-filtro {
+        width: 100%;
+        max-width: 100%;
+        order: 3;
+        min-width: 0;
+    }
+}
+
+.pr-filtro:focus {
+    outline: none;
+    border-color: #1E3A8A;
+    border-width: 2px;
+    box-shadow: 0 0 0 4px rgba(30, 58, 138, 0.1);
+    background: #ffffff;
+    transform: translateY(-1px);
+    z-index: 10;
+}
+
+.pr-filtro::placeholder {
+    color: #9CA3AF;
+    opacity: 0.7;
+}
+
+/* 10. BOTÃO DE DOWNLOAD */
+.download-button {
+    background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+    color: #ffffff;
+    padding: 0.625rem 1.25rem;
+    border-radius: 10px;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+    font-size: 0.875rem;
+    flex-shrink: 0;
+    text-align: center;
+    height: 44px;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(30, 58, 138, 0.25);
+    letter-spacing: 0.3px;
+    position: relative;
+    overflow: hidden;
+    order: 4;
+    font-family: 'Poppins', sans-serif;
+    z-index: 2;
+    align-self: center;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    .download-button {
+        width: 100%;
+        order: 4;
+    }
+}
+
+.download-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.4s ease, height 0.4s ease;
+}
+
+.download-button:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.download-button:hover {
+    background: linear-gradient(135deg, #1E40AF 0%, #2563EB 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(30, 58, 138, 0.35);
+}
+
+.download-button:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.download-button i {
+    font-size: 0.875rem;
+}
+
+/* 11. CONTAINER DA LISTA - ANIMAÇÃO FLUÍDA */
+.partitura-list-container {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                padding 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    background: #ffffff;
+    opacity: 0;
+    padding: 0;
+    will-change: max-height, opacity, padding;
+}
+
+.partituras-widget[data-state="open"] .partitura-list-container {
+    max-height: 6000px;
+    padding: 1.25rem 0;
+    opacity: 1;
+}
+
+/* 12. LISTA DE INSTRUMENTOS - CENTRALIZADA */
+.partitura-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+}
+
+@media (max-width: 768px) {
+    .partitura-list {
+        gap: 0.75rem;
+        padding: 0;
+    }
+}
+
+/* 13. ITEM DE INSTRUMENTO - CENTRALIZADO */
+.partitura-item {
+    padding: 1.25rem 2rem;
+    border: 1px solid rgba(219, 234, 254, 0.4);
+    border-radius: 14px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    background: rgba(255, 255, 255, 0.9);
+    margin: 0.75rem auto;
+    max-width: calc(100% - 2rem);
+    border-left: 3px solid transparent;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.04);
+}
+
+@media (max-width: 768px) {
+    .partitura-item {
+        padding: 1.25rem 1.5rem;
+        margin: 0.75rem 0.75rem;
+        max-width: calc(100% - 1.5rem);
+    }
+}
+
+.partitura-item:hover {
+    background: rgba(255, 255, 255, 0.98);
+    transform: translateX(4px) translateY(-1px);
+    border-left-color: rgba(96, 165, 250, 0.6);
+    border-color: rgba(147, 197, 253, 0.5);
+    box-shadow: 
+        0 4px 16px rgba(96, 165, 250, 0.1),
+        0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.partitura-item-inner {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .partitura-item-inner {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .audio-player-wrapper {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    
+    .download-links {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        width: 100%;
+    }
+    
+    .download-link-item {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* 14. INFO DO INSTRUMENTO */
+.instrumento-info {
+    display: flex;
+    align-items: center;
+    min-width: 180px;
+    flex-shrink: 0;
+}
+
+/* NOME DO INSTRUMENTO */
+.partitura-item .instrumento-nome,
+.instrumento-nome {
+    font-weight: 600;
+    margin-bottom: 0;
+    color: #1F2937;
+    font-size: 1rem;
+    position: relative;
+    padding-left: 2rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.partitura-item .instrumento-nome::before {
+    content: '♪';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(96, 165, 250, 0.7);
+    font-size: 1.125rem;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.partitura-item:hover .instrumento-nome::before {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.2);
+    color: rgba(59, 130, 246, 0.9);
+}
+
+/* 15. ÁUDIO PLAYER */
+.audio-player-wrapper {
+    flex: 1;
+    min-width: 200px;
+    max-width: 500px;
+    display: flex;
+    align-items: center;
+}
+
+.audio-controls {
+    width: 100%;
+    height: 44px;
+    border-radius: 12px;
+    outline: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.audio-controls:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.audio-placeholder {
+    color: #9CA3AF;
+    font-size: 0.875rem;
+    font-style: italic;
+    padding: 0.75rem;
+}
+
+.partitura-item audio {
+    width: 100%;
+    height: 44px;
+    border-radius: 12px;
+    outline: none;
+}
+
+.partitura-item audio::-webkit-media-controls-panel {
+    background-color: #f9fafb;
+}
+
+/* Estilização padronizada de TODOS os players de áudio - Azul (Opção 2) */
+.partitura-item audio::-webkit-media-controls-play-button {
+    background-color: #3B82F6 !important;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.partitura-item audio::-webkit-media-controls-play-button:hover {
+    background-color: #2563EB !important;
+}
+
+.partitura-item audio::-webkit-media-controls-current-time-display,
+.partitura-item audio::-webkit-media-controls-time-remaining-display {
+    color: #1E3A8A !important;
+}
+
+.partitura-item audio::-webkit-media-controls-timeline {
+    background-color: rgba(59, 130, 246, 0.3) !important;
+    border-radius: 2px;
+}
+
+.partitura-item audio::-webkit-media-controls-volume-slider {
+    background-color: rgba(59, 130, 246, 0.3) !important;
+}
+
+.partitura-item audio::-webkit-media-controls-mute-button {
+    background-color: transparent;
+}
+
+/* Estilos específicos para música completa (mantém consistência) */
+.full-song-item audio::-webkit-media-controls-play-button {
+    background-color: #3B82F6 !important;
+}
+
+.full-song-item audio::-webkit-media-controls-play-button:hover {
+    background-color: #2563EB !important;
+}
+
+/* 16. LINKS DE DOWNLOAD */
+.download-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+    width: 100%;
+}
+
+.download-link-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 6px rgba(30, 58, 138, 0.2);
+    font-family: 'Poppins', sans-serif;
+    min-height: 44px; /* Touch target mínimo para mobile */
+}
+
+@media (max-width: 768px) {
+    .download-link-item {
+        min-height: 44px;
+        padding: 0.625rem 1rem;
+        font-size: 0.875rem;
+    }
+}
+
+.download-link-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
+    background: linear-gradient(135deg, #1E40AF 0%, #2563EB 100%);
+}
+
+/* Botão Baixar MP3 - Azul Intenso (combinando com o fundo) */
+.download-link-item.mp3-btn {
+    background: linear-gradient(135deg, #2563EB 0%, #3B82F6 50%, #60A5FA 100%);
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.35);
+    border: 1px solid rgba(59, 130, 246, 0.5);
+}
+
+.download-link-item.mp3-btn:hover {
+    background: linear-gradient(135deg, #1E40AF 0%, #2563EB 50%, #3B82F6 100%);
+    box-shadow: 0 4px 16px rgba(37, 99, 235, 0.45);
+    transform: translateY(-2px);
+    border-color: rgba(59, 130, 246, 0.7);
+}
+
+.download-link-item i {
+    font-size: 0.875rem;
+}
+
+/* 17. ITEM DE MÚSICA COMPLETA - AZUL COM GRADIENTE */
+.full-song-item {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.25) 0%, rgba(96, 165, 250, 0.2) 50%, rgba(147, 197, 253, 0.22) 100%);
+    border: 1px solid rgba(96, 165, 250, 0.4);
+    border-left: 6px solid rgba(59, 130, 246, 0.9);
+    border-radius: 14px;
+    padding: 1.25rem 2rem;
+    margin: 0.75rem auto;
+    max-width: calc(100% - 2rem);
+    box-shadow: 0 2px 12px rgba(59, 130, 246, 0.2), 0 1px 4px rgba(96, 165, 250, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    .full-song-item {
+        padding: 1.25rem 1.5rem;
+        margin: 0.75rem 0.75rem;
+        max-width: calc(100% - 1.5rem);
+    }
+}
+
+.full-song-item-inner {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+    padding: 0 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .full-song-item-inner {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 0;
+    }
+}
+
+.full-song-item .instrumento-nome {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #1E3A8A;
+}
+
+.full-song-item:hover {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.32) 0%, rgba(96, 165, 250, 0.26) 50%, rgba(147, 197, 253, 0.28) 100%);
+    border-color: rgba(96, 165, 250, 0.6);
+    border-left-color: rgba(59, 130, 246, 1);
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.25), 0 2px 8px rgba(96, 165, 250, 0.2);
+    transform: translateY(-2px);
+}
+
+/* 18. MENSAGEM VAZIA */
+.partitura-empty {
+    padding: 2rem;
+    text-align: center;
+    color: #6B7280;
+    font-style: italic;
+}
+
+.partitura-empty i {
+    font-size: 2rem;
+    color: #D1D5DB;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+/* 19. RESPONSIVIDADE MOBILE */
+@media (max-width: 768px) {
+    .partituras-section {
+        padding: 2rem 0 3rem;
+    }
+
+    .partituras-category-filters {
+        gap: 0.5rem;
+        padding: 0 0.5rem;
+    }
+
+    .category-filter-btn {
+        padding: 0.625rem 1rem;
+        font-size: 0.8125rem;
+    }
+
+    .partituras-container {
+        gap: 1rem;
+        padding: 0 0.5rem;
+    }
+
+    .partituras-header {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+    }
+
+    .partituras-header::before {
+        width: 28px;
+        height: 28px;
+        font-size: 0.6875rem;
+    }
+
+    .partituras-widget[data-state="open"] .partitura-list-container {
+        padding: 1.25rem 0;
+    }
+}
+
+/* 20. ANIMAÇÕES E TRANSIÇÕES */
+@media (prefers-reduced-motion: no-preference) {
+    .partituras-widget {
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .partitura-list-container {
+        transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                    opacity 0.4s ease,
+                    padding 0.3s ease;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .partituras-widget,
+    .partitura-list-container,
+    .partituras-header,
+    .partitura-item {
+        transition: none;
+        animation: none;
+    }
+}
+
+/* 21. ACESSIBILIDADE */
+.partituras-header:focus-visible {
+    outline: 3px solid #FFD700;
+    outline-offset: 2px;
+}
+
+.download-button:focus-visible,
+.pr-filtro:focus-visible {
+    outline: 3px solid #FFD700;
+    outline-offset: 2px;
+}
+
+/* 22. MELHORIAS DE PERFORMANCE */
+.partituras-widget,
+.partituras-header,
+.partitura-item {
+    will-change: transform;
+}
+
+.partitura-list-container {
+    will-change: max-height, opacity;
+}

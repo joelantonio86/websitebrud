@@ -187,10 +187,8 @@
         header.setAttribute('tabindex', '0');
         header.setAttribute('aria-expanded', 'false');
 
-        const instrumentCount = musica.instrumentos ? musica.instrumentos.length : 0;
         header.innerHTML = `
             <h3 class="partitura-title">${musica.title}</h3>
-            ${instrumentCount > 0 ? `<span class="instrument-count-badge">${instrumentCount} instrumentos</span>` : ''}
             <input 
                 class="pr-filtro" 
                 type="search" 
@@ -249,15 +247,21 @@
         const mp3Url = `${MP3_BASE_URL}${musica.folder}.mp3`;
 
         item.innerHTML = `
-            <div class="full-song-item-inner">
-                <div class="instrumento-nome">Música Completa</div>
-                <audio controls preload="none" style="flex:1;">
-                    <source src="${mp3Url}" type="audio/mpeg">
-                    Seu navegador não suporta o elemento de áudio.
-                </audio>
-                <a class="download-button" href="${mp3Url}" download="${musica.folder}.mp3">
-                    Baixar MP3
-                </a>
+            <div class="partitura-item-inner">
+                <div class="instrumento-info">
+                    <div class="instrumento-nome">Música Completa</div>
+                </div>
+                <div class="audio-player-wrapper">
+                    <audio controls preload="none" class="audio-controls">
+                        <source src="${mp3Url}" type="audio/mpeg">
+                        Seu navegador não suporta o elemento de áudio.
+                    </audio>
+                </div>
+                <div class="download-links">
+                    <a class="download-link-item mp3-btn" href="${mp3Url}" download="${musica.folder}.mp3">
+                        <i class="fas fa-download"></i> Baixar MP3
+                    </a>
+                </div>
             </div>
         `;
 
@@ -268,73 +272,33 @@
     function createInstrumentItem(musica, instrumento) {
         const item = document.createElement('div');
         item.className = 'partitura-item';
-        item.setAttribute('data-instrumento', instrumento.toLowerCase());
-
-        const sanitized = sanitizeInstrumentNameLocal(instrumento, musica.isSibelius);
+        
+        const sanitized = sanitizeInstrumentNameLocal(instrumento, true); // Sempre Sibelius agora
         const mp3Key = getMP3KeyLocal(instrumento);
         const hasMP3 = musica.mp3Instruments && musica.mp3Instruments.includes(mp3Key);
-
+    
         const pdfUrl = `${PDF_BASE_URL}${musica.category}/${musica.folder}/${musica.folder}${sanitized}.pdf`;
-        const sibUrl = musica.isSibelius 
-            ? `${PDF_BASE_URL}${musica.category}/${musica.folder}/${musica.folder}${sanitized}.sib`
-            : null;
-        const encUrl = !musica.isSibelius
-            ? `${PDF_BASE_URL}${musica.category}/${musica.folder}/${musica.folder}${sanitized}.enc`
-            : null;
-
-        const mp3Url = hasMP3 
-            ? `${MP3_BASE_URL}${musica.folder}/${musica.folder}${mp3Key}.mp3`
-            : null;
-
-        let audioHTML = '';
-        if (hasMP3 && mp3Url) {
-            audioHTML = `
-                <audio controls preload="none">
-                    <source src="${mp3Url}" type="audio/mpeg">
-                    Seu navegador não suporta o elemento de áudio.
-                </audio>
-            `;
-        }
-
-        let formatLinks = `
-            <a href="${pdfUrl}" target="_blank" class="download-link-item pr-pdf-link" 
-               title="Abrir PDF - ${instrumento}" 
-               style="display:inline-flex;align-items:center;gap:6px;">
-                <i class="fas fa-file-pdf"></i>
-                <span>PDF</span>
-            </a>
-        `;
-
-        if (musica.isSibelius && sibUrl) {
-            formatLinks += `
-                <a href="${sibUrl}" download="${musica.folder}${sanitized}.sib" target="_blank" 
-                   class="download-link-item" title="Baixar Sibelius - ${instrumento}" 
-                   style="display:inline-flex;align-items:center;gap:6px;">
-                    <i class="fas fa-file-music"></i>
-                    <span>Sibelius</span>
-                </a>
-            `;
-        } else if (!musica.isSibelius && encUrl) {
-            formatLinks += `
-                <a href="${encUrl}" download="${musica.folder}${sanitized}.enc" target="_blank" 
-                   class="download-link-item" title="Baixar Encore - ${instrumento}" 
-                   style="display:inline-flex;align-items:center;gap:6px;">
-                    <i class="fas fa-file-music"></i>
-                    <span>Encore</span>
-                </a>
-            `;
-        }
-
+        const audioUrl = hasMP3 ? `${MP3_BASE_URL}${musica.folder}/${musica.folder}${mp3Key}.mp3` : null;
+    
         item.innerHTML = `
             <div class="partitura-item-inner">
-                <div class="instrumento-nome">${instrumento}</div>
-                ${audioHTML}
+                <div class="instrumento-info">
+                    <div class="instrumento-nome">${instrumento}</div>
+                </div>
+                <div class="audio-player-wrapper">
+                    ${audioUrl ? `<audio controls preload="none" class="audio-controls"><source src="${audioUrl}" type="audio/mpeg"></audio>` : 
+                    '<span class="audio-placeholder">Áudio em breve</span>'}
+                </div>
                 <div class="download-links">
-                    ${formatLinks}
+                    <a href="${pdfUrl}" target="_blank" class="download-link-item pr-pdf-link" download>
+                        <i class="fas fa-file-pdf"></i> PDF
+                    </a>
+                    <a href="${PDF_BASE_URL}${musica.category}/${musica.folder}/${musica.folder}${sanitized}.sib" class="download-link-item sibelius-btn" download>
+                        <i class="fas fa-music"></i> SIB
+                    </a>
                 </div>
             </div>
         `;
-
         return item;
     }
 
@@ -349,8 +313,16 @@
             const filtro = widget.querySelector('.pr-filtro');
             const downloadAllBtn = widget.querySelector('.pr-download-all');
 
-            // Toggle do widget
+            // Toggle do widget - Melhorado com animações suaves
             if (header && listContainer) {
+                // Adicionar suporte para teclado (Enter e Space)
+                header.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        header.click();
+                    }
+                });
+
                 header.addEventListener('click', function(e) {
                     // Não fechar se clicar em input ou button
                     if (e.target.closest('.pr-filtro') || 
@@ -365,22 +337,39 @@
                     
                     widget.setAttribute('data-state', newState);
                     
-                    // Animação suave de abertura/fechamento
+                    // Animação fluída e suave de abertura/fechamento
                     if (newState === 'open') {
+                        // Abrir: mostrar e animar
                         listContainer.style.display = 'block';
-                        listContainer.style.opacity = '0';
                         listContainer.style.maxHeight = '0';
-                        setTimeout(() => {
-                            listContainer.style.transition = 'opacity 0.3s ease, max-height 0.4s ease';
-                            listContainer.style.opacity = '1';
-                            listContainer.style.maxHeight = '2000px';
-                        }, 10);
+                        listContainer.style.opacity = '0';
+                        listContainer.style.padding = '0';
+                        
+                        // Forçar reflow para garantir que a transição funcione
+                        listContainer.offsetHeight;
+                        
+                        // Animar com requestAnimationFrame para suavidade máxima
+                        requestAnimationFrame(() => {
+                            requestAnimationFrame(() => {
+                                listContainer.style.transition = 'max-height 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                                listContainer.style.maxHeight = '6000px';
+                                listContainer.style.opacity = '1';
+                                listContainer.style.padding = '1.5rem 0';
+                            });
+                        });
                     } else {
-                        listContainer.style.opacity = '0';
+                        // Fechar: animar e esconder
+                        listContainer.style.transition = 'max-height 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
                         listContainer.style.maxHeight = '0';
+                        listContainer.style.opacity = '0';
+                        listContainer.style.padding = '0';
+                        
+                        // Esconder após animação
                         setTimeout(() => {
-                            listContainer.style.display = 'none';
-                        }, 300);
+                            if (widget.getAttribute('data-state') === 'closed') {
+                                listContainer.style.display = 'none';
+                            }
+                        }, 600);
                     }
                     
                     header.setAttribute('aria-expanded', newState === 'open');
@@ -389,21 +378,22 @@
 
             // Filtro de busca
             if (filtro) {
-                const filterItems = debounce(function(searchTerm) {
-                    const items = listContainer.querySelectorAll('.partitura-item');
-                    const termo = searchTerm.trim().toLowerCase();
-                    
-                    if (termo.length > 0) {
-                        widget.setAttribute('data-state', 'open');
-                        listContainer.style.display = 'block';
-                    }
-                    
-                    items.forEach(item => {
-                        const text = item.getAttribute('data-instrumento') || 
-                                   item.querySelector('.instrumento-nome')?.textContent?.toLowerCase() || '';
-                        item.style.display = text.indexOf(termo) !== -1 ? '' : 'none';
-                    });
-                }, 300);
+    const filterItems = debounce(function(searchTerm) {
+        const items = listContainer.querySelectorAll('.partitura-item');
+        const termo = searchTerm.trim().toLowerCase();
+        
+        // Se estiver filtrando, garantimos que o container não quebre o layout
+        if (termo.length > 0) {
+            widget.setAttribute('data-state', 'open');
+            listContainer.style.display = 'block';
+            listContainer.style.maxHeight = 'none'; // Permite expansão dinâmica
+        }
+        
+        items.forEach(item => {
+            const text = item.getAttribute('data-instrumento') || '';
+            item.style.display = text.indexOf(termo) !== -1 ? 'flex' : 'none';
+        });
+    }, 300);
 
                 filtro.addEventListener('input', function(e) {
                     filterItems(this.value);
@@ -504,9 +494,8 @@
             sanitized = sanitized.replace(new RegExp(search[i], 'g'), replace[i]);
         }
         
-        if (isSibelius) {
-            sanitized = sanitized.replace(/[123]/g, '');
-        }
+        // Sempre remove números (formato Sibelius)
+        sanitized = sanitized.replace(/[123]/g, '');
         
         return sanitized;
     }
