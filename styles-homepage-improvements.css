@@ -1,0 +1,498 @@
+/* ========================================================= */
+/* MELHORIAS UI/UX - PÁGINA PRINCIPAL */
+/* ========================================================= */
+
+/* 1. SCROLL ANIMATIONS - Fade In Sections */
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
+                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fade-in-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 2. SEPARADORES ELEGANTES ENTRE SEÇÕES */
+section {
+    position: relative;
+}
+
+section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, var(--primary-gold), transparent);
+    border-radius: 2px;
+    opacity: 0.5;
+}
+
+section:last-child::after {
+    display: none;
+}
+
+/* 3. HERO SECTION MELHORADO */
+.hero {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+    animation: rotate 20s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 3;
+}
+
+.hero-title {
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.hero-subtitle {
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 4. CARDS DE AGENDA MELHORADOS */
+.show-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.show-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(30%, -30%);
+    transition: transform 0.6s ease;
+    pointer-events: none;
+}
+
+.show-card:hover::after {
+    transform: translate(20%, -20%) scale(1.5);
+}
+
+.show-date {
+    position: relative;
+    overflow: hidden;
+}
+
+.show-date::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+    animation: rotate 15s linear infinite;
+}
+
+/* Badge "Próximo Evento" */
+.show-card:first-child::before {
+    content: 'PRÓXIMO EVENTO';
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--gradient-gold);
+    color: var(--black);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    z-index: 10;
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+    }
+}
+
+/* 5. GALERIA MELHORADA */
+.galeria-item {
+    position: relative;
+    overflow: hidden;
+}
+
+.galeria-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.galeria-item:hover::before {
+    opacity: 1;
+}
+
+.galeria-overlay {
+    background: linear-gradient(135deg, rgba(30, 58, 138, 0.95) 0%, rgba(59, 130, 246, 0.9) 100%);
+    backdrop-filter: blur(5px);
+}
+
+.galeria-overlay i {
+    animation: zoomIn 0.5s ease;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* 6. FORMULÁRIO DE CONTATO MELHORADO */
+.contato-form {
+    position: relative;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    position: absolute;
+    top: 1.2rem;
+    left: 1.5rem;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    background: var(--white);
+    padding: 0 0.5rem;
+    z-index: 1;
+}
+
+.form-group input:focus ~ label,
+.form-group input:not(:placeholder-shown) ~ label,
+.form-group textarea:focus ~ label,
+.form-group textarea:not(:placeholder-shown) ~ label,
+.form-group select:focus ~ label,
+.form-group select:not([value=""]) ~ label {
+    top: -0.5rem;
+    left: 1rem;
+    font-size: 0.85rem;
+    color: var(--primary-gold);
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    padding-top: 1.5rem;
+    padding-bottom: 1rem;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: var(--primary-gold);
+    box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Validação visual */
+.form-group input:valid:not(:placeholder-shown),
+.form-group textarea:valid:not(:placeholder-shown) {
+    border-color: #10b981;
+}
+
+.form-group input:invalid:not(:placeholder-shown):not(:focus),
+.form-group textarea:invalid:not(:placeholder-shown):not(:focus) {
+    border-color: #ef4444;
+}
+
+/* 7. BOTÃO VOLTAR AO TOPO */
+.back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 50px;
+    height: 50px;
+    background: var(--gradient-gold);
+    color: var(--black);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 999;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 8px 30px rgba(255, 215, 0, 0.6);
+}
+
+.back-to-top:active {
+    transform: translateY(-3px) scale(1.05);
+}
+
+/* 8. CARDS DE CALENDÁRIO MELHORADOS */
+.calendario-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.calendario-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+    transition: transform 0.6s ease;
+    pointer-events: none;
+}
+
+.calendario-card:hover::before {
+    transform: translate(-25%, -25%);
+}
+
+.calendario-icon {
+    transition: transform 0.4s ease;
+}
+
+.calendario-card:hover .calendario-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* 9. INFO ITEMS MELHORADOS */
+.info-item {
+    position: relative;
+    overflow: hidden;
+}
+
+.info-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--gradient-gold);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.4s ease;
+}
+
+.info-item:hover::before {
+    transform: scaleY(1);
+}
+
+.info-icon {
+    transition: transform 0.4s ease;
+}
+
+.info-item:hover .info-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* 10. SECTION HEADERS MELHORADOS */
+.section-header {
+    position: relative;
+    margin-bottom: 4rem;
+}
+
+.section-title {
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: var(--gradient-gold);
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+/* 11. ANIMAÇÕES DE ENTRADA ESCALONADAS */
+.sobre-content > * {
+    animation: fadeInUp 0.8s ease backwards;
+}
+
+.sobre-text {
+    animation-delay: 0.1s;
+}
+
+.sobre-image {
+    animation-delay: 0.3s;
+}
+
+.stats > * {
+    animation: fadeInUp 0.6s ease backwards;
+}
+
+.stats > *:nth-child(1) { animation-delay: 0.1s; }
+.stats > *:nth-child(2) { animation-delay: 0.2s; }
+.stats > *:nth-child(3) { animation-delay: 0.3s; }
+.stats > *:nth-child(4) { animation-delay: 0.4s; }
+
+.shows-list > * {
+    animation: fadeInUp 0.6s ease backwards;
+}
+
+.shows-list > *:nth-child(1) { animation-delay: 0.1s; }
+.shows-list > *:nth-child(2) { animation-delay: 0.2s; }
+.shows-list > *:nth-child(3) { animation-delay: 0.3s; }
+.shows-list > *:nth-child(4) { animation-delay: 0.4s; }
+
+.calendarios-grid > * {
+    animation: fadeInUp 0.6s ease backwards;
+}
+
+.calendarios-grid > *:nth-child(1) { animation-delay: 0.1s; }
+.calendarios-grid > *:nth-child(2) { animation-delay: 0.2s; }
+.calendarios-grid > *:nth-child(3) { animation-delay: 0.3s; }
+.calendarios-grid > *:nth-child(4) { animation-delay: 0.4s; }
+.calendarios-grid > *:nth-child(5) { animation-delay: 0.5s; }
+.calendarios-grid > *:nth-child(6) { animation-delay: 0.6s; }
+
+.galeria-grid > * {
+    animation: fadeInUp 0.6s ease backwards;
+}
+
+.galeria-grid > *:nth-child(1) { animation-delay: 0.1s; }
+.galeria-grid > *:nth-child(2) { animation-delay: 0.2s; }
+.galeria-grid > *:nth-child(3) { animation-delay: 0.3s; }
+.galeria-grid > *:nth-child(4) { animation-delay: 0.4s; }
+.galeria-grid > *:nth-child(5) { animation-delay: 0.5s; }
+.galeria-grid > *:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 12. MELHORIAS NO FOOTER - Removido (agora em styles-footer-modern.css) */
+
+/* 13. RESPONSIVIDADE */
+@media (max-width: 768px) {
+    .back-to-top {
+        bottom: 1.5rem;
+        right: 1.5rem;
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+    }
+    
+    section::after {
+        width: 60px;
+        height: 3px;
+    }
+    
+    .show-card:first-child::before {
+        font-size: 0.65rem;
+        padding: 0.4rem 0.8rem;
+        top: 0.75rem;
+        right: 0.75rem;
+    }
+}
+
+/* 14. PERFORMANCE - Otimizações */
+.fade-in-section,
+.show-card,
+.galeria-item,
+.calendario-card {
+    will-change: transform, opacity;
+}
+
+/* 15. ACESSIBILIDADE */
+.back-to-top:focus {
+    outline: 3px solid var(--primary-gold);
+    outline-offset: 2px;
+}
+
+/* 16. ESTADOS DE LOADING */
+.loading-state {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.loading-state::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(255, 215, 0, 0.3);
+    border-top-color: var(--primary-gold);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}

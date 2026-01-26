@@ -1,0 +1,80 @@
+/* ========================================================= */
+/* ANIMAÇÕES PARA CONTADORES */
+/* ========================================================= */
+
+.stat-number {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    display: inline-block;
+    min-width: 1ch; /* Garantir espaço mínimo para o número */
+}
+
+/* Animação inicial - números começam invisíveis e aparecem */
+.stat-number:not(.animated) {
+    opacity: 0.3;
+    transform: scale(0.8);
+}
+
+/* Quando animando, números ficam mais visíveis */
+.stat-number.animated {
+    opacity: 1;
+    transform: scale(1);
+    animation: pulseNumber 0.5s ease-out;
+}
+
+/* Animação de pulso quando o número muda */
+@keyframes pulseNumber {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Efeito de brilho durante a animação */
+.stat-number.animated::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
+    pointer-events: none;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Melhorar a transição dos números durante a contagem */
+.stat-number {
+    font-variant-numeric: tabular-nums; /* Números com largura fixa para evitar "pulo" */
+    text-rendering: optimizeLegibility;
+}
+
+/* Efeito de destaque quando o número final é alcançado */
+.stat-number.finished {
+    animation: celebrate 0.6s ease-out;
+}
+
+@keyframes celebrate {
+    0%, 100% {
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(1.15) rotate(-2deg);
+    }
+    75% {
+        transform: scale(1.15) rotate(2deg);
+    }
+}

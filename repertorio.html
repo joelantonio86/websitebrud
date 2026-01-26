@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Repertório da Banda Racional - Lista completa de músicas">
+    <title>Repertório - Banda Racional</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles-improvements.css">
+    <link rel="stylesheet" href="styles-menu-submenu.css">
+    <link rel="stylesheet" href="styles-repertorio-modern.css">
+    <link rel="stylesheet" href="styles-repertorio-pdf-optimized.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 1rem;">
+                        <i class="fas fa-music"></i>
+                        <div class="logo-text">
+                            <span class="logo-main">Banda Racional</span>
+                            <span class="logo-sub">Cultura Racional</span>
+                        </div>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html#home" class="nav-link">Início</a></li>
+                    <li><a href="index.html#sobre" class="nav-link">Sobre</a></li>
+                    <li class="has-submenu active">
+                        <a href="#" class="nav-link">Repertório</a>
+                        <ul class="submenu">
+                            <li><a href="repertorio.html" class="nav-link active">Lista do Repertório</a></li>
+                            <li><a href="partituras.html" class="nav-link">Partituras</a></li>
+                            <li><a href="material-apoio.html" class="nav-link">Material de Apoio</a></li>
+                            <li class="has-submenu">
+                                <a href="#" class="nav-link">Sibelius</a>
+                                <ul class="sub-submenu">
+                                    <li><a href="sibelius-computador.html" class="nav-link">Computador</a></li>
+                                    <li><a href="sibelius-ios.html" class="nav-link">iOS</a></li>
+                                    <li><a href="sibelius-android.html" class="nav-link">Android</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="letras-musicas.html" class="nav-link">Letra das Músicas</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="index.html#agenda" class="nav-link">Agenda</a></li>
+                    <li><a href="index.html#calendarios" class="nav-link">Calendários BRUD</a></li>
+                    <li><a href="index.html#galeria" class="nav-link">Galeria</a></li>
+                    <li><a href="index.html#contato" class="nav-link">Contato</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="page-header-content">
+                <h1 class="page-title">Repertório</h1>
+                <p class="page-subtitle">Lista completa de músicas do repertório da Banda Racional</p>
+                <nav class="breadcrumb">
+                    <a href="index.html">Início</a>
+                    <span>/</span>
+                    <span>Repertório</span>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- Repertório Section - Versão Web Moderna -->
+    <section class="repertorio-page">
+        <div class="container">
+            <div class="repertorio-header-section">
+                <h1>Repertório Completo</h1>
+                <p>Explore todas as músicas organizadas por categoria</p>
+                <button onclick="gerarPDF()" class="repertorio-download-btn" id="btnGerarPDF">
+                    <i class="fas fa-file-pdf"></i>
+                    <span>Baixar Repertório em PDF</span>
+                </button>
+            </div>
+            
+            <!-- Músicas Racionais -->
+            <div class="repertorio-categoria-modern">
+                <div class="repertorio-categoria-header">
+                    <div class="repertorio-categoria-icon racionais">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="repertorio-categoria-title">
+                        <h2>Músicas Racionais</h2>
+                        <span class="repertorio-categoria-count" id="racionais-count">0 músicas</span>
+                    </div>
+                </div>
+                <div class="repertorio-grid-modern" id="racionais-lista">
+                    <!-- Será preenchido via JavaScript -->
+                </div>
+            </div>
+
+            <!-- Músicas Diversas -->
+            <div class="repertorio-categoria-modern">
+                <div class="repertorio-categoria-header">
+                    <div class="repertorio-categoria-icon diversas">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <div class="repertorio-categoria-title">
+                        <h2>Músicas Diversas</h2>
+                        <span class="repertorio-categoria-count" id="diversas-count">0 músicas</span>
+                    </div>
+                </div>
+                <div class="repertorio-grid-modern" id="diversas-lista">
+                    <!-- Será preenchido via JavaScript -->
+                </div>
+            </div>
+
+            <!-- Apresentações -->
+            <div class="repertorio-categoria-modern">
+                <div class="repertorio-categoria-header">
+                    <div class="repertorio-categoria-icon apresentacoes">
+                        <i class="fas fa-theater-masks"></i>
+                    </div>
+                    <div class="repertorio-categoria-title">
+                        <h2>Apresentações</h2>
+                        <span class="repertorio-categoria-count" id="apresentacoes-count">0 músicas</span>
+                    </div>
+                </div>
+                <div class="repertorio-grid-modern" id="apresentacoes-lista">
+                    <!-- Será preenchido via JavaScript -->
+                </div>
+            </div>
+
+            <!-- Toques de Fanfarra -->
+            <div class="repertorio-categoria-modern">
+                <div class="repertorio-categoria-header">
+                    <div class="repertorio-categoria-icon fanfarra">
+                        <i class="fas fa-drum"></i>
+                    </div>
+                    <div class="repertorio-categoria-title">
+                        <h2>Toques de Fanfarra</h2>
+                        <span class="repertorio-categoria-count" id="fanfarra-count">0 músicas</span>
+                    </div>
+                </div>
+                <div class="repertorio-grid-modern" id="fanfarra-lista">
+                    <!-- Será preenchido via JavaScript -->
+                </div>
+            </div>
+
+            <!-- Hinos -->
+            <div class="repertorio-categoria-modern">
+                <div class="repertorio-categoria-header">
+                    <div class="repertorio-categoria-icon hinos">
+                        <i class="fas fa-flag"></i>
+                    </div>
+                    <div class="repertorio-categoria-title">
+                        <h2>Hinos</h2>
+                        <span class="repertorio-categoria-count" id="hinos-count">0 músicas</span>
+                    </div>
+                </div>
+                <div class="repertorio-grid-modern" id="hinos-lista">
+                    <!-- Será preenchido via JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Versão PDF (oculta na web, visível apenas para impressão/PDF) -->
+    <div class="repertorio-pdf-view" id="repertorioPDFView" style="display: none;">
+        <div class="repertorio-pdf-header">
+            <h1>REPERTÓRIO COMPLETO</h1>
+            <p>Banda Racional - Cultura Racional</p>
+        </div>
+        
+        <!-- Músicas Racionais PDF -->
+        <div class="repertorio-pdf-categoria racionais">
+            <div class="repertorio-pdf-categoria-title">MÚSICAS RACIONAIS</div>
+            <div class="repertorio-pdf-lista" id="racionais-lista-pdf">
+                <!-- Será preenchido via JavaScript -->
+            </div>
+        </div>
+
+        <!-- Músicas Diversas PDF -->
+        <div class="repertorio-pdf-categoria diversas">
+            <div class="repertorio-pdf-categoria-title">MÚSICAS DIVERSAS</div>
+            <div class="repertorio-pdf-lista" id="diversas-lista-pdf">
+                <!-- Será preenchido via JavaScript -->
+            </div>
+        </div>
+
+        <!-- Apresentações PDF -->
+        <div class="repertorio-pdf-categoria apresentacoes">
+            <div class="repertorio-pdf-categoria-title">APRESENTAÇÕES</div>
+            <div class="repertorio-pdf-lista" id="apresentacoes-lista-pdf">
+                <!-- Será preenchido via JavaScript -->
+            </div>
+        </div>
+
+        <!-- Toques de Fanfarra PDF -->
+        <div class="repertorio-pdf-categoria fanfarra">
+            <div class="repertorio-pdf-categoria-title">TOQUES DE FANFARRA</div>
+            <div class="repertorio-pdf-lista" id="fanfarra-lista-pdf">
+                <!-- Será preenchido via JavaScript -->
+            </div>
+        </div>
+
+        <!-- Hinos PDF -->
+        <div class="repertorio-pdf-categoria hinos">
+            <div class="repertorio-pdf-categoria-title">HINOS</div>
+            <div class="repertorio-pdf-lista" id="hinos-lista-pdf">
+                <!-- Será preenchido via JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <i class="fas fa-music"></i>
+                        <div class="logo-text">
+                            <span class="logo-main">Banda Racional</span>
+                            <span class="logo-sub">Cultura Racional</span>
+                        </div>
+                    </div>
+                    <p>Levando a música e a espiritualidade da Cultura Racional por todo o Brasil.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html#home">Início</a></li>
+                        <li><a href="index.html#sobre">Sobre</a></li>
+                        <li><a href="repertorio.html">Repertório</a></li>
+                        <li><a href="partituras.html">Partituras</a></li>
+                        <li><a href="index.html#agenda">Agenda</a></li>
+                        <li><a href="index.html#contato">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Recursos</h3>
+                    <ul>
+                        <li><a href="repertorio.html">Músicas</a></li>
+                        <li><a href="partituras.html">Partituras</a></li>
+                        <li><a href="index.html#agenda">Shows</a></li>
+                        <li><a href="https://www.culturaracional.com.br" target="_blank">Cultura Racional</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Redes Sociais</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-spotify"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Banda Racional - Cultura Racional. Todos os direitos reservados.</p>
+                <p class="footer-cultura">Cultura Racional - A verdadeira origem de tudo e de todos</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        // Verificar se as bibliotecas carregaram
+        window.addEventListener('load', function() {
+            if (typeof jspdf === 'undefined' && typeof window.jspdf === 'undefined') {
+                console.warn('jsPDF não carregado. Usando fallback para impressão.');
+            }
+            if (typeof html2canvas === 'undefined') {
+                console.warn('html2canvas não carregado. Usando fallback para impressão.');
+            }
+        });
+    </script>
+    <script src="partituras-data.js"></script>
+    <script src="repertorio.js"></script>
+    <script src="script.js"></script>
+    <script src="repertorio-pdf.js"></script>
+</body>
+</html>

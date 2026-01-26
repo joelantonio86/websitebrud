@@ -1,0 +1,301 @@
+/* ========================================================= */
+/* ESTILOS PARA MENU COM SUBMENUS */
+/* ========================================================= */
+
+/* Menu Item com Submenu */
+.nav-menu li {
+    position: relative;
+}
+
+.nav-menu li.has-submenu > .nav-link {
+    padding-right: 1.5rem;
+}
+
+.nav-menu li.has-submenu > .nav-link::before {
+    content: '\f107';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.75rem;
+    transition: transform 0.3s ease;
+}
+
+.nav-menu li.has-submenu:hover > .nav-link::before,
+.nav-menu li.has-submenu.active > .nav-link::before {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+/* Submenu */
+.submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 220px;
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    margin-top: 0.5rem;
+    padding: 0.5rem 0;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.nav-menu li.has-submenu:hover > .submenu,
+.nav-menu li.has-submenu.active > .submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Submenu Items */
+.submenu li {
+    list-style: none;
+    margin: 0;
+}
+
+.submenu .nav-link {
+    display: block;
+    padding: 0.75rem 1.5rem;
+    color: var(--black);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    border-left: 3px solid transparent;
+}
+
+.submenu .nav-link:hover {
+    background: rgba(255, 215, 0, 0.1);
+    border-left-color: var(--primary-gold);
+    padding-left: 1.75rem;
+    color: var(--black);
+}
+
+.submenu .nav-link.active {
+    background: rgba(255, 215, 0, 0.15);
+    border-left-color: var(--primary-gold);
+    font-weight: 600;
+    color: var(--black);
+}
+
+.submenu .nav-link::after {
+    display: none;
+}
+
+/* Submenu de Segundo Nível (Sibelius) */
+.submenu li.has-submenu {
+    position: relative;
+}
+
+.submenu li.has-submenu > .nav-link {
+    padding-right: 2.5rem;
+}
+
+.submenu li.has-submenu > .nav-link::after {
+    content: '\f105';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.75rem;
+    transition: transform 0.3s ease;
+}
+
+.submenu li.has-submenu:hover > .nav-link::after {
+    transform: translateY(-50%) translateX(3px);
+}
+
+.sub-submenu {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    min-width: 200px;
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1001;
+    margin-left: 0.5rem;
+    padding: 0.5rem 0;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.submenu li.has-submenu:hover > .sub-submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+.sub-submenu li {
+    list-style: none;
+    margin: 0;
+}
+
+.sub-submenu .nav-link {
+    display: block;
+    padding: 0.75rem 1.5rem;
+    color: var(--black);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    border-left: 3px solid transparent;
+}
+
+.sub-submenu .nav-link:hover {
+    background: rgba(255, 215, 0, 0.1);
+    border-left-color: var(--primary-gold);
+    padding-left: 1.75rem;
+    color: var(--black);
+}
+
+.sub-submenu .nav-link.active {
+    background: rgba(255, 215, 0, 0.15);
+    border-left-color: var(--primary-gold);
+    font-weight: 600;
+    color: var(--black);
+}
+
+/* Mobile Menu - Submenus */
+@media (max-width: 768px) {
+    .nav-menu {
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+
+    .nav-menu.active {
+        max-height: 1000px;
+        padding: 1rem 0;
+    }
+
+    .nav-menu li {
+        width: 100%;
+    }
+
+    .nav-link {
+        display: block;
+        padding: 1rem 1.5rem;
+        width: 100%;
+    }
+
+    .nav-menu li.has-submenu > .nav-link::before {
+        right: 1.5rem;
+    }
+
+    /* Submenu no Mobile */
+    .submenu {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        border: none;
+        margin: 0;
+        padding: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        background: rgba(255, 215, 0, 0.05);
+        border-left: 3px solid var(--primary-gold);
+        margin-left: 1rem;
+    }
+
+    .nav-menu li.has-submenu.active > .submenu {
+        max-height: 1000px;
+        padding: 0.5rem 0;
+    }
+
+    .submenu .nav-link {
+        padding-left: 2.5rem;
+        border-left: none;
+    }
+
+    .submenu .nav-link:hover {
+        padding-left: 2.75rem;
+        border-left: none;
+    }
+
+    /* Sub-submenu no Mobile */
+    .sub-submenu {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        border: none;
+        margin: 0;
+        padding: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        background: rgba(255, 215, 0, 0.08);
+        border-left: 3px solid var(--primary-gold);
+        margin-left: 1rem;
+    }
+
+    .submenu li.has-submenu.active > .sub-submenu {
+        max-height: 1000px;
+        padding: 0.5rem 0;
+    }
+
+    .sub-submenu .nav-link {
+        padding-left: 3.5rem;
+        border-left: none;
+    }
+
+    .sub-submenu .nav-link:hover {
+        padding-left: 3.75rem;
+        border-left: none;
+    }
+}
+
+/* Animação de entrada para submenus */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.submenu,
+.sub-submenu {
+    animation: slideDown 0.3s ease;
+}
+
+/* Indicador visual para itens com submenu */
+.nav-menu li.has-submenu > .nav-link {
+    position: relative;
+}
+
+/* Melhorias de acessibilidade */
+.nav-menu li.has-submenu > .nav-link:focus {
+    outline: 2px solid var(--primary-gold);
+    outline-offset: 2px;
+}
+
+.submenu .nav-link:focus,
+.sub-submenu .nav-link:focus {
+    outline: 2px solid var(--primary-gold);
+    outline-offset: -2px;
+}

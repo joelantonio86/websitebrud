@@ -1,0 +1,289 @@
+/* ========================================================= */
+/* REPERTÓRIO - DESIGN MODERNO E ATRATIVO */
+/* ========================================================= */
+
+.repertorio-page {
+    padding: 4rem 0;
+    background: linear-gradient(to bottom, #f8f9fa 0%, #ffffff 100%);
+    min-height: 60vh;
+}
+
+.repertorio-header-section {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem 0;
+}
+
+.repertorio-header-section h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--primary-blue);
+    margin-bottom: 0.5rem;
+    font-family: var(--font-heading);
+}
+
+.repertorio-header-section p {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+.repertorio-download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+    text-decoration: none;
+}
+
+.repertorio-download-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(220, 38, 38, 0.4);
+    background: linear-gradient(135deg, #b91c1c 0%, #dc2626 100%);
+}
+
+.repertorio-download-btn i {
+    font-size: 1.2rem;
+}
+
+/* Cards de Categoria Modernos */
+.repertorio-categoria-modern {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.repertorio-categoria-modern:hover {
+    box-shadow: 0 8px 30px rgba(255, 215, 0, 0.2);
+    transform: translateY(-4px);
+}
+
+.repertorio-categoria-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--primary-gold);
+}
+
+.repertorio-categoria-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    flex-shrink: 0;
+}
+
+.repertorio-categoria-icon.racionais {
+    background: linear-gradient(135deg, #FFD700 0%, #FFE55C 100%);
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+}
+
+.repertorio-categoria-icon.diversas {
+    background: linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%);
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+}
+
+.repertorio-categoria-icon.apresentacoes {
+    background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+}
+
+.repertorio-categoria-icon.fanfarra {
+    background: linear-gradient(135deg, #EF4444 0%, #F87171 100%);
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+}
+
+.repertorio-categoria-icon.hinos {
+    background: linear-gradient(135deg, #10B981 0%, #34D399 100%);
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+}
+
+.repertorio-categoria-title {
+    flex: 1;
+}
+
+.repertorio-categoria-title h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+    margin: 0;
+    font-family: var(--font-heading);
+}
+
+.repertorio-categoria-count {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-top: 0.25rem;
+}
+
+/* Grid de Músicas Moderno */
+.repertorio-grid-modern {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.repertorio-item-modern {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border: 2px solid rgba(255, 215, 0, 0.2);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.repertorio-item-modern::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--gradient-gold);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.3s ease;
+}
+
+.repertorio-item-modern:hover {
+    border-color: var(--primary-gold);
+    transform: translateX(8px);
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+    background: linear-gradient(135deg, #ffffff 0%, #fffef5 100%);
+}
+
+.repertorio-item-modern:hover::before {
+    transform: scaleY(1);
+}
+
+.repertorio-item-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.repertorio-item-codigo {
+    background: var(--primary-blue);
+    color: white;
+    padding: 0.4rem 0.75rem;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    font-family: 'Courier New', monospace;
+    min-width: 55px;
+    text-align: center;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(30, 58, 138, 0.3);
+}
+
+.repertorio-item-nome {
+    flex: 1;
+    font-weight: 600;
+    color: var(--black);
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.repertorio-item-link {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    color: var(--primary-gold);
+    font-size: 1.1rem;
+}
+
+.repertorio-item-modern:hover .repertorio-item-link {
+    opacity: 1;
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+    .repertorio-grid-modern {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .repertorio-header-section h1 {
+        font-size: 2.25rem;
+    }
+    
+    .repertorio-header-section p {
+        font-size: 1rem;
+    }
+    
+    .repertorio-categoria-modern {
+        padding: 1.5rem;
+    }
+    
+    .repertorio-categoria-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+    
+    .repertorio-categoria-title h2 {
+        font-size: 1.5rem;
+    }
+    
+    .repertorio-grid-modern {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    
+    .repertorio-item-modern {
+        padding: 0.875rem 1rem;
+    }
+    
+    .repertorio-item-link {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .repertorio-header-section {
+        padding: 1.5rem 0;
+    }
+    
+    .repertorio-header-section h1 {
+        font-size: 1.75rem;
+    }
+    
+    .repertorio-download-btn {
+        padding: 0.875rem 1.5rem;
+        font-size: 1rem;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .repertorio-categoria-modern {
+        padding: 1.25rem;
+        border-radius: 16px;
+    }
+    
+    .repertorio-categoria-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.25rem;
+    }
+}

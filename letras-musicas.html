@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Letras das Músicas - Banda Racional">
+    <title>Letras das Músicas - Banda Racional</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles-improvements.css">
+    <link rel="stylesheet" href="styles-menu-submenu.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 1rem;">
+                        <i class="fas fa-music"></i>
+                        <div class="logo-text">
+                            <span class="logo-main">Banda Racional</span>
+                            <span class="logo-sub">Cultura Racional</span>
+                        </div>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html#home" class="nav-link">Início</a></li>
+                    <li><a href="index.html#sobre" class="nav-link">Sobre</a></li>
+                    <li class="has-submenu active">
+                        <a href="#" class="nav-link">Repertório</a>
+                        <ul class="submenu">
+                            <li><a href="repertorio.html" class="nav-link">Lista do Repertório</a></li>
+                            <li><a href="partituras.html" class="nav-link">Partituras</a></li>
+                            <li><a href="material-apoio.html" class="nav-link">Material de Apoio</a></li>
+                            <li class="has-submenu">
+                                <a href="#" class="nav-link">Sibelius</a>
+                                <ul class="sub-submenu">
+                                    <li><a href="sibelius-computador.html" class="nav-link">Computador</a></li>
+                                    <li><a href="sibelius-ios.html" class="nav-link">iOS</a></li>
+                                    <li><a href="sibelius-android.html" class="nav-link">Android</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="letras-musicas.html" class="nav-link active">Letra das Músicas</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="index.html#agenda" class="nav-link">Agenda</a></li>
+                    <li><a href="index.html#calendarios" class="nav-link">Calendários BRUD</a></li>
+                    <li><a href="index.html#galeria" class="nav-link">Galeria</a></li>
+                    <li><a href="index.html#contato" class="nav-link">Contato</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Início</a>
+                <span>/</span>
+                <a href="#">Repertório</a>
+                <span>/</span>
+                <span>Letra das Músicas</span>
+            </div>
+            <h1 class="page-title">
+                <i class="fas fa-file-alt"></i>
+                Letra das Músicas
+            </h1>
+            <p class="page-subtitle">Letras completas de todas as músicas do repertório da Banda Racional</p>
+        </div>
+    </section>
+
+    <!-- Content Section -->
+    <section class="repertorio-page">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Letras do Repertório</h2>
+                <p class="section-subtitle">Acesse as letras das músicas por categoria</p>
+            </div>
+            <div class="repertorio-categoria">
+                <h3 class="categoria-title">
+                    <i class="fas fa-music"></i>
+                    Músicas Racionais
+                </h3>
+                <p class="section-subtitle">As letras das músicas racionais estarão disponíveis em breve.</p>
+            </div>
+            <div class="repertorio-categoria">
+                <h3 class="categoria-title">
+                    <i class="fas fa-music"></i>
+                    Músicas Diversas
+                </h3>
+                <p class="section-subtitle">As letras das músicas diversas estarão disponíveis em breve.</p>
+            </div>
+            <div class="repertorio-categoria">
+                <h3 class="categoria-title">
+                    <i class="fas fa-music"></i>
+                    Hinos
+                </h3>
+                <p class="section-subtitle">As letras dos hinos estarão disponíveis em breve.</p>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
