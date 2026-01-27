@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Banda Racional - Site oficial da Banda da Cultura Racional. Músicas, partituras, agenda de eventos e muito mais.">
-    <title>Banda Racional - Cultura Racional</title>
+    <meta name="description" content="Banda Racional Universo em Desencanto - Site oficial da Banda União Racional (BUR). Conheça nossa história, repertório, partituras, eventos e muito mais. Cultura Racional do Terceiro Milênio.">
+    <meta name="keywords" content="Banda Racional, Banda União Racional, BUR, Cultura Racional, Universo em Desencanto, música, partituras, eventos, bandas marciais">
+    <meta name="author" content="Banda Racional Universo em Desencanto">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Banda Racional - Cultura Racional Universo em Desencanto">
+    <meta property="og:description" content="Site oficial da Banda União Racional. Conheça nossa história, repertório, partituras e eventos.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <title>Banda Racional Universo em Desencanto - Site Oficial | Cultura Racional</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="styles-improvements.css">
-    <link rel="stylesheet" href="styles-homepage-improvements.css">
     <link rel="stylesheet" href="styles-menu-submenu.css">
-    <link rel="stylesheet" href="styles-counter-animation.css">
-    <link rel="stylesheet" href="styles-sobre-empolgante.css">
-    <link rel="stylesheet" href="styles-destaques-timeline.css">
-    <link rel="stylesheet" href="styles-hero-modern.css">
-    <link rel="stylesheet" href="styles-hero-premium.css">
-    <link rel="stylesheet" href="styles-hero-ultra-modern.css">
-    <link rel="stylesheet" href="styles-footer-modern.css">
+    <link rel="stylesheet" href="styles-index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
@@ -26,50 +26,53 @@
     <nav class="navbar" id="navbar">
         <div class="container">
             <div class="nav-wrapper">
-                <div class="logo">
-                    <i class="fas fa-music"></i>
+                <a href="#home" class="logo" aria-label="Banda Racional - Página inicial">
+                    <i class="fas fa-music" aria-hidden="true"></i>
                     <div class="logo-text">
                         <span class="logo-main">Banda Racional</span>
                         <span class="logo-sub">Universo em Desencanto</span>
                     </div>
-                </div>
-                <ul class="nav-menu" id="navMenu">
-                    <li><a href="index.html#home" class="nav-link">Início</a></li>
-                    <li><a href="index.html#sobre" class="nav-link">Sobre</a></li>
-                    <li class="has-submenu">
-                        <a href="#" class="nav-link">Repertório</a>
-                        <ul class="submenu">
-                            <li><a href="repertorio.html" class="nav-link">Lista do Repertório</a></li>
-                            <li><a href="partituras.html" class="nav-link">Partituras</a></li>
-                            <li><a href="material-apoio.html" class="nav-link">Material de Apoio</a></li>
-                            <li class="has-submenu">
-                                <a href="#" class="nav-link">Sibelius</a>
-                                <ul class="sub-submenu">
-                                    <li><a href="sibelius-computador.html" class="nav-link">Computador</a></li>
-                                    <li><a href="sibelius-ios.html" class="nav-link">iOS</a></li>
-                                    <li><a href="sibelius-android.html" class="nav-link">Android</a></li>
+                </a>
+                <ul class="nav-menu" id="navMenu" role="menubar">
+                    <li role="none"><a href="#home" class="nav-link" role="menuitem">Início</a></li>
+                    <li role="none"><a href="#sobre" class="nav-link" role="menuitem">Sobre</a></li>
+                    <li class="has-submenu" role="none">
+                        <a href="#" class="nav-link" role="menuitem" aria-haspopup="true" aria-expanded="false">Repertório</a>
+                        <ul class="submenu" role="menu">
+                            <li role="none"><a href="repertorio.html" class="nav-link" role="menuitem">Lista do Repertório</a></li>
+                            <li role="none"><a href="partituras.html" class="nav-link" role="menuitem">Partituras</a></li>
+                            <li role="none"><a href="material-apoio.html" class="nav-link" role="menuitem">Material de Apoio</a></li>
+                            <li class="has-submenu" role="none">
+                                <a href="#" class="nav-link" role="menuitem" aria-haspopup="true" aria-expanded="false">Sibelius</a>
+                                <ul class="sub-submenu" role="menu">
+                                    <li role="none"><a href="sibelius-computador.html" class="nav-link" role="menuitem">Computador</a></li>
+                                    <li role="none"><a href="sibelius-ios.html" class="nav-link" role="menuitem">iOS</a></li>
+                                    <li role="none"><a href="sibelius-android.html" class="nav-link" role="menuitem">Android</a></li>
                                 </ul>
                             </li>
-                            <li><a href="letras-musicas.html" class="nav-link">Letra das Músicas</a></li>
+                            <li role="none"><a href="letras-musicas.html" class="nav-link" role="menuitem">Letra das Músicas</a></li>
                         </ul>
                     </li>
-                    <li><a href="eventos.html" class="nav-link">Eventos</a></li>
-                    <li><a href="index.html#calendarios" class="nav-link">Calendários BRUD</a></li>
-                    <li><a href="index.html#galeria" class="nav-link">Galeria</a></li>
-                    <li><a href="index.html#contato" class="nav-link">Contato</a></li>
+                    <li role="none"><a href="eventos.html" class="nav-link" role="menuitem">Eventos</a></li>
+                    <li role="none"><a href="#calendarios" class="nav-link" role="menuitem">Calendários BRUD</a></li>
+                    <li role="none"><a href="#galeria" class="nav-link" role="menuitem">Galeria</a></li>
+                    <li role="none"><a href="#contato" class="nav-link" role="menuitem">Contato</a></li>
                 </ul>
-                <div class="hamburger" id="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
+                <button class="hamburger" id="hamburger" aria-label="Menu de navegação" aria-expanded="false" aria-controls="navMenu">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </button>
             </div>
         </div>
     </nav>
+    </header>
 
+    <!-- Main Content -->
+    <main id="main-content">
     <!-- Hero Section -->
-    <section id="home" class="hero hero-with-logo">
-        <img src="images/logo-nova.png" alt="Logo Banda Racional" class="hero-background-image parallax-image">
+    <section id="home" class="hero hero-with-logo" aria-label="Apresentação principal">
+        <img src="images/logo-nova.png" alt="Logo Banda Racional Universo em Desencanto" class="hero-background-image parallax-image" loading="eager" fetchpriority="high" decoding="async" width="1200" height="800">
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <h1 class="hero-title">
@@ -77,18 +80,20 @@
                 <span class="title-line">Universo em Desencanto</span>
             </h1>
             <p class="hero-subtitle">Levando a música e a energia da Cultura Racional por todo o Brasil</p>
-            <div class="hero-buttons">
-                <a href="repertorio.html" class="btn btn-primary">
-                    <i class="fas fa-music"></i> Ouvir Músicas
+            <div class="hero-buttons" role="group" aria-label="Ações principais">
+                <a href="repertorio.html" class="btn btn-primary" aria-label="Acessar repertório completo de músicas">
+                    <i class="fas fa-music" aria-hidden="true"></i> 
+                    <span>Ouvir Músicas</span>
                 </a>
-                <a href="eventos.html" class="btn btn-secondary">
-                    <i class="fas fa-calendar-alt"></i> Próximos Eventos
+                <a href="eventos.html" class="btn btn-secondary" aria-label="Ver próximos eventos e apresentações">
+                    <i class="fas fa-calendar-alt" aria-hidden="true"></i> 
+                    <span>Próximos Eventos</span>
                 </a>
             </div>
         </div>
-        <div class="scroll-indicator">
-            <i class="fas fa-chevron-down"></i>
-        </div>
+        <a href="#sobre" class="scroll-indicator" aria-label="Rolar para próxima seção">
+            <i class="fas fa-chevron-down" aria-hidden="true"></i>
+        </a>
     </section>
 
     <!-- Sobre Section -->
@@ -100,18 +105,18 @@
             </div>
             
             <!-- Header Impactante BUR -->
-            <div class="bur-header">
+            <article class="bur-header" aria-labelledby="bur-title">
                 <div class="bur-header-content">
-                    <div class="bur-acronym">BUR</div>
-                    <div class="bur-full-name">Banda União Racional</div>
-                    <div class="bur-tagline">
-                        Uma Banda Marcial sem fins lucrativos, cujo maior objetivo é divulgar a CULTURA RACIONAL DO TERCEIRO MILÊNIO
-                    </div>
+                    <div class="bur-acronym" aria-label="BUR - Banda União Racional">BUR</div>
+                    <h3 class="bur-full-name" id="bur-title">Banda União Racional</h3>
+                    <p class="bur-tagline">
+                        Uma Banda Marcial sem fins lucrativos, cujo maior objetivo é divulgar a <strong>CULTURA RACIONAL DO TERCEIRO MILÊNIO</strong>
+                    </p>
                 </div>
-            </div>
+            </article>
 
             <!-- Texto Principal -->
-            <div class="sobre-text-modern">
+            <article class="sobre-text-modern" aria-labelledby="historia-title">
                 <p>
                     A <strong>Banda União Racional (BUR)</strong> é uma Banda Marcial sem fins lucrativos, cujo maior objetivo é divulgar a <span class="highlight">CULTURA RACIONAL DO TERCEIRO MILÊNIO</span>, dos livros <strong>UNIVERSO EM DESENCANTO</strong>, que é um conhecimento de <strong>paz, amor e fraternidade</strong> entre os povos.
                 </p>
@@ -140,10 +145,10 @@
             </div>
 
             <!-- Nossos Números -->
-            <div class="stats-header">
+            <header class="stats-header">
                 <h3 class="stats-title">NOSSOS NÚMEROS</h3>
-            </div>
-            <div class="stats">
+            </header>
+            <div class="stats" role="region" aria-label="Estatísticas da Banda Racional">
                 <div class="stat-item stat-yellow">
                     <div class="stat-icon"><i class="fas fa-music"></i></div>
                     <div class="stat-number" data-target="24">0</div>
@@ -473,15 +478,15 @@
     </section>
 
     <!-- Agenda Section -->
-    <section id="agenda" class="agenda fade-in-section">
+    <section id="agenda" class="agenda fade-in-section" aria-labelledby="agenda-title">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Agenda de Eventos</h2>
+            <header class="section-header">
+                <h2 class="section-title" id="agenda-title">Agenda de Eventos</h2>
                 <p class="section-subtitle">Próximas apresentações da Banda Racional</p>
-            </div>
-            <div class="shows-list">
-                <div class="show-card">
-                    <div class="show-date">
+            </header>
+            <div class="shows-list" role="list">
+                <article class="show-card" role="listitem">
+                    <div class="show-date" aria-label="Data do evento: 15 de março de 2026">
                         <div class="date-day">15</div>
                         <div class="date-month">MAR</div>
                         <div class="date-year">2026</div>
@@ -489,11 +494,11 @@
                     <div class="show-info">
                         <h3>Dia da Cultura Racional em São Paulo</h3>
                         <p class="show-location">
-                            <i class="fas fa-map-marker-alt"></i> 
+                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i> 
                             <span>São Paulo, SP - Centro Cultural Racional</span>
                         </p>
                         <p class="show-time">
-                            <i class="fas fa-clock"></i> 
+                            <i class="fas fa-clock" aria-hidden="true"></i> 
                             <span>19:00</span>
                         </p>
                         <p class="show-description">
@@ -501,12 +506,12 @@
                         </p>
                     </div>
                     <div class="show-action">
-                        <a href="#contato" class="btn btn-small">Mais Informações</a>
+                        <a href="#contato" class="btn btn-small" aria-label="Mais informações sobre o evento em São Paulo">Mais Informações</a>
                     </div>
-                </div>
+                </article>
 
-                <div class="show-card">
-                    <div class="show-date">
+                <article class="show-card" role="listitem">
+                    <div class="show-date" aria-label="Data do evento: 22 de março de 2026">
                         <div class="date-day">22</div>
                         <div class="date-month">MAR</div>
                         <div class="date-year">2026</div>
@@ -514,11 +519,11 @@
                     <div class="show-info">
                         <h3>Dia da Cultura Racional no Rio de Janeiro</h3>
                         <p class="show-location">
-                            <i class="fas fa-map-marker-alt"></i> 
+                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i> 
                             <span>Rio de Janeiro, RJ - Teatro Municipal</span>
                         </p>
                         <p class="show-time">
-                            <i class="fas fa-clock"></i> 
+                            <i class="fas fa-clock" aria-hidden="true"></i> 
                             <span>20:00</span>
                         </p>
                         <p class="show-description">
@@ -526,12 +531,12 @@
                         </p>
                     </div>
                     <div class="show-action">
-                        <a href="#contato" class="btn btn-small">Mais Informações</a>
+                        <a href="#contato" class="btn btn-small" aria-label="Mais informações sobre o evento no Rio de Janeiro">Mais Informações</a>
                     </div>
-                </div>
+                </article>
 
-                <div class="show-card">
-                    <div class="show-date">
+                <article class="show-card" role="listitem">
+                    <div class="show-date" aria-label="Data do evento: 5 de abril de 2026">
                         <div class="date-day">05</div>
                         <div class="date-month">ABR</div>
                         <div class="date-year">2026</div>
@@ -539,11 +544,11 @@
                     <div class="show-info">
                         <h3>Dia da Cultura Racional em Belo Horizonte</h3>
                         <p class="show-location">
-                            <i class="fas fa-map-marker-alt"></i> 
+                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i> 
                             <span>Belo Horizonte, MG - Centro de Convenções</span>
                         </p>
                         <p class="show-time">
-                            <i class="fas fa-clock"></i> 
+                            <i class="fas fa-clock" aria-hidden="true"></i> 
                             <span>19:30</span>
                         </p>
                         <p class="show-description">
@@ -551,12 +556,12 @@
                         </p>
                     </div>
                     <div class="show-action">
-                        <a href="#contato" class="btn btn-small">Mais Informações</a>
+                        <a href="#contato" class="btn btn-small" aria-label="Mais informações sobre o evento em Belo Horizonte">Mais Informações</a>
                     </div>
-                </div>
+                </article>
 
-                <div class="show-card">
-                    <div class="show-date">
+                <article class="show-card" role="listitem">
+                    <div class="show-date" aria-label="Data do evento: 12 de abril de 2026">
                         <div class="date-day">12</div>
                         <div class="date-month">ABR</div>
                         <div class="date-year">2026</div>
@@ -564,11 +569,11 @@
                     <div class="show-info">
                         <h3>Dia da Cultura Racional em Brasília</h3>
                         <p class="show-location">
-                            <i class="fas fa-map-marker-alt"></i> 
+                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i> 
                             <span>Brasília, DF - Praça da Cultura Racional</span>
                         </p>
                         <p class="show-time">
-                            <i class="fas fa-clock"></i> 
+                            <i class="fas fa-clock" aria-hidden="true"></i> 
                             <span>18:00</span>
                         </p>
                         <p class="show-description">
@@ -576,36 +581,37 @@
                         </p>
                     </div>
                     <div class="show-action">
-                        <a href="#contato" class="btn btn-small">Mais Informações</a>
+                        <a href="#contato" class="btn btn-small" aria-label="Mais informações sobre o evento em Brasília">Mais Informações</a>
                     </div>
-                </div>
+                </article>
             </div>
         </div>
     </section>
 
     <!-- Calendários BRUD Section -->
-    <section id="calendarios" class="calendarios fade-in-section">
+    <section id="calendarios" class="calendarios fade-in-section" aria-labelledby="calendarios-title">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Calendários dos BRUDs</h2>
+            <header class="section-header">
+                <h2 class="section-title" id="calendarios-title">Calendários dos BRUDs</h2>
                 <p class="section-subtitle">Acesse os calendários de eventos de cada BRUD (Banda Racional Unidade Desencanto)</p>
-            </div>
+            </header>
             <div class="calendarios-grid">
-                <div class="calendario-card">
+                <article class="calendario-card" role="listitem">
                     <div class="calendario-icon">
                         <i class="fas fa-calendar-alt"></i>
                     </div>
                     <h3 class="calendario-title">BRUD São Paulo</h3>
                     <p class="calendario-description">Calendário de eventos e apresentações do BRUD de São Paulo</p>
                     <div class="calendario-actions">
-                        <a href="calendarios/brud-sao-paulo.pdf" class="btn btn-primary" download>
-                            <i class="fas fa-download"></i> Baixar PDF
+                        <a href="calendarios/brud-sao-paulo.pdf" class="btn btn-primary" download aria-label="Baixar calendário do BRUD São Paulo em PDF">
+                            <i class="fas fa-download" aria-hidden="true"></i> 
+                            <span>Baixar PDF</span>
                         </a>
                     </div>
-                </div>
+                </article>
 
-                <div class="calendario-card">
-                    <div class="calendario-icon">
+                <article class="calendario-card" role="listitem">
+                    <div class="calendario-icon" aria-hidden="true">
                         <i class="fas fa-calendar-alt"></i>
                     </div>
                     <h3 class="calendario-title">BRUD Rio de Janeiro</h3>
@@ -617,20 +623,21 @@
                     </div>
                 </div>
 
-                <div class="calendario-card">
+                <article class="calendario-card" role="listitem">
                     <div class="calendario-icon">
                         <i class="fas fa-calendar-alt"></i>
                     </div>
                     <h3 class="calendario-title">BRUD Minas Gerais</h3>
                     <p class="calendario-description">Calendário de eventos e apresentações do BRUD de Minas Gerais</p>
                     <div class="calendario-actions">
-                        <a href="calendarios/brud-minas-gerais.pdf" class="btn btn-primary" download>
-                            <i class="fas fa-download"></i> Baixar PDF
+                        <a href="calendarios/brud-minas-gerais.pdf" class="btn btn-primary" download aria-label="Baixar calendário do BRUD Minas Gerais em PDF">
+                            <i class="fas fa-download" aria-hidden="true"></i> 
+                            <span>Baixar PDF</span>
                         </a>
                     </div>
                 </div>
 
-                <div class="calendario-card">
+                <article class="calendario-card" role="listitem">
                     <div class="calendario-icon">
                         <i class="fas fa-calendar-alt"></i>
                     </div>
@@ -643,28 +650,30 @@
                     </div>
                 </div>
 
-                <div class="calendario-card">
+                <article class="calendario-card" role="listitem">
                     <div class="calendario-icon">
                         <i class="fas fa-calendar-alt"></i>
                     </div>
                     <h3 class="calendario-title">BRUD Santa Catarina</h3>
                     <p class="calendario-description">Calendário de eventos e apresentações do BRUD de Santa Catarina</p>
                     <div class="calendario-actions">
-                        <a href="calendarios/brud-santa-catarina.pdf" class="btn btn-primary" download>
-                            <i class="fas fa-download"></i> Baixar PDF
+                        <a href="calendarios/brud-santa-catarina.pdf" class="btn btn-primary" download aria-label="Baixar calendário do BRUD Santa Catarina em PDF">
+                            <i class="fas fa-download" aria-hidden="true"></i> 
+                            <span>Baixar PDF</span>
                         </a>
                     </div>
                 </div>
 
-                <div class="calendario-card">
+                <article class="calendario-card" role="listitem">
                     <div class="calendario-icon">
                         <i class="fas fa-calendar-alt"></i>
                     </div>
                     <h3 class="calendario-title">BRUD Rio Grande do Sul</h3>
                     <p class="calendario-description">Calendário de eventos e apresentações do BRUD do Rio Grande do Sul</p>
                     <div class="calendario-actions">
-                        <a href="calendarios/brud-rio-grande-do-sul.pdf" class="btn btn-primary" download>
-                            <i class="fas fa-download"></i> Baixar PDF
+                        <a href="calendarios/brud-rio-grande-do-sul.pdf" class="btn btn-primary" download aria-label="Baixar calendário do BRUD Rio Grande do Sul em PDF">
+                            <i class="fas fa-download" aria-hidden="true"></i> 
+                            <span>Baixar PDF</span>
                         </a>
                     </div>
                 </div>
@@ -673,12 +682,12 @@
     </section>
 
     <!-- Galeria Section -->
-    <section id="galeria" class="galeria fade-in-section">
+    <section id="galeria" class="galeria fade-in-section" aria-labelledby="galeria-title">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Galeria</h2>
+            <header class="section-header">
+                <h2 class="section-title" id="galeria-title">Galeria</h2>
                 <p class="section-subtitle">Momentos especiais da Banda Racional</p>
-            </div>
+            </header>
             <div class="galeria-grid">
                 <div class="galeria-item">
                     <div class="galeria-image">
@@ -751,12 +760,12 @@
     </section>
 
     <!-- Contato Section -->
-    <section id="contato" class="contato fade-in-section">
+    <section id="contato" class="contato fade-in-section" aria-labelledby="contato-title">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Entre em Contato</h2>
+            <header class="section-header">
+                <h2 class="section-title" id="contato-title">Entre em Contato</h2>
                 <p class="section-subtitle">Fale conosco sobre eventos, parcerias e informações</p>
-            </div>
+            </header>
             <div class="contato-content">
                 <div class="contato-info">
                     <div class="info-item">
@@ -847,9 +856,10 @@
             </div>
         </div>
     </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">

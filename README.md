@@ -1,138 +1,146 @@
-# Banda Racional - Site Oficial
+# 🎵 Banda Racional Universo em Desencanto
 
-Site moderno e profissional da **Banda Racional** da Cultura Racional. Uma evolução completa do site original com design moderno, mantendo a essência e identidade visual da Cultura Racional.
+Site oficial da **Banda União Racional (BUR)** - uma Banda Marcial sem fins lucrativos que divulga a **CULTURA RACIONAL DO TERCEIRO MILÊNIO** através da música.
 
-## 🎵 Sobre o Projeto
+## 📋 Sobre
 
-Este projeto é uma evolução do site www.bandaracional.com.br, desenvolvido com:
-- Design moderno e profissional
-- Identidade visual da Cultura Racional (cores dourado/amarelo e azul)
-- Todas as funcionalidades do site original
-- Interface responsiva e otimizada
+Este projeto é o site oficial da Banda Racional Universo em Desencanto, desenvolvido com design moderno e profissional, mantendo a identidade visual da Cultura Racional.
 
-## ✨ Características
+### ✨ Características
 
-- **Design Moderno**: Interface elegante com cores da Cultura Racional (dourado e azul)
-- **Totalmente Responsivo**: Funciona perfeitamente em todos os dispositivos
-- **Navegação Suave**: Scroll suave entre seções
-- **Animações Interativas**: Elementos animados ao rolar a página
-- **Repertório Completo**: Músicas com player de áudio e partituras para download
-- **Agenda de Shows**: Próximas apresentações da banda
-- **Galeria de Fotos**: Momentos especiais da banda
-- **Formulário de Contato**: Sistema de contato funcional
-- **Filtros de Músicas**: Filtro por categoria (Hinos, Marchas, Outras)
-- **Performance Otimizada**: Carregamento rápido e eficiente
+- 🎨 Design moderno com identidade visual da Cultura Racional
+- 📱 Totalmente responsivo (desktop, tablet, mobile)
+- ♿ Acessibilidade completa (ARIA, navegação por teclado)
+- ⚡ Performance otimizada
+- 🔍 SEO otimizado
+- 🎯 Navegação intuitiva com submenus
+
+## 🚀 Tecnologias
+
+- **HTML5** - Estrutura semântica
+- **CSS3** - Variáveis CSS, Grid, Flexbox, Animações
+- **JavaScript (Vanilla)** - Sem dependências externas
+- **Font Awesome 6.4.0** - Ícones
+- **Google Fonts** - Poppins e Playfair Display
 
 ## 📁 Estrutura do Projeto
 
 ```
 websitebrud/
-├── index.html          # Página principal
-├── styles.css          # Estilos com cores da Cultura Racional
-├── script.js           # Funcionalidades JavaScript
-├── README.md          # Documentação
-├── images/            # Pasta para imagens
-│   └── README.md      # Guia de imagens
-└── .gitignore        # Arquivos ignorados pelo Git
+├── index.html              # Página principal
+├── repertorio.html         # Repertório completo
+├── partituras.html         # Partituras para download
+├── eventos.html            # Eventos e shows
+├── letras-musicas.html     # Letras das músicas
+├── material-apoio.html     # Material de apoio
+├── sibelius-*.html         # Guias Sibelius
+│
+├── styles.css              # Estilos base
+├── styles-index.css        # Estilos homepage
+├── styles-repertorio.css  # Estilos repertório
+├── styles-*.css           # Outros estilos
+│
+├── script.js               # JavaScript principal
+├── repertorio.js           # JavaScript repertório
+├── partituras.js           # JavaScript partituras
+│
+├── images/                 # Imagens
+├── musicas/                # Arquivos de áudio
+└── partituras/             # Partituras (PDF, Sibelius)
 ```
 
-## 🎨 Cores da Cultura Racional
+## 🎨 Paleta de Cores
 
-O site utiliza a paleta de cores oficial da Cultura Racional:
+- **Dourado** (#FFD700) - Cor principal
+- **Azul Escuro** (#1E3A8A) - Cor secundária
+- **Branco** (#FFFFFF) - Textos claros
+- **Preto** (#000000) - Contraste
 
-- **Dourado/Amarelo** (#FFD700): Cor principal, representa a luz e elevação
-- **Azul** (#1E3A8A): Cor secundária, representa a espiritualidade
-- **Branco** (#FFFFFF): Textos e elementos claros
-- **Preto** (#000000): Contraste e profundidade
+## 📄 Páginas
 
-## 🚀 Como Usar
+1. **Homepage** - Hero, Sobre, Estatísticas, Agenda, Galeria, Contato
+2. **Repertório** - Lista completa de músicas com player de áudio
+3. **Partituras** - Download de partituras por instrumento
+4. **Eventos** - Shows e apresentações
+5. **Letras** - Letras das músicas
+6. **Material de Apoio** - Recursos para músicos
+7. **Guias Sibelius** - Instruções para computador, iOS e Android
 
-1. Abra o arquivo `index.html` em seu navegador
-2. Ou use um servidor local:
-   ```bash
-   # Com Python
-   python -m http.server 8000
-   
-   # Com Node.js (http-server)
-   npx http-server
-   ```
+## 🛠️ Como Usar
 
-## 📋 Seções do Site
+### Execução Local
 
-### 1. Hero (Início)
-Seção inicial impactante com título da banda e call-to-action
+```bash
+# Python 3
+python -m http.server 8000
 
-### 2. Sobre
-- História da Banda Racional
-- Missão e valores
-- Estatísticas animadas (Estados, Shows, Músicas, Músicos)
+# Node.js
+npx http-server
 
-### 3. Repertório
-- Player de áudio para cada música
-- Partituras para download (Fuzileiro, Atabaque, Caixa, Surdo)
-- Filtros por categoria (Hinos, Marchas, Outras)
-- Botão para baixar todas as partituras
+# PHP
+php -S localhost:8000
+```
 
-### 4. Agenda
-- Próximos shows da banda
-- Informações de data, local e horário
-- Descrição dos eventos
+Acesse: `http://localhost:8000`
 
-### 5. Galeria
-- Fotos da banda em apresentações
-- Efeito hover com overlay
-- Grid responsivo
+## 📱 Responsividade
 
-### 6. Contato
-- Formulário de contato completo
-- Informações de contato (Email, Telefone, WhatsApp)
-- Links para redes sociais
-- Validação de formulário
+- **Desktop** (1200px+): Layout completo
+- **Tablet** (768px - 1199px): Layout adaptado
+- **Mobile** (até 767px): Menu hambúrguer, layout em coluna
 
-## 🛠️ Personalização
+## ✅ Funcionalidades
+
+- ✅ Menu fixo com scroll effect
+- ✅ Menu hambúrguer para mobile
+- ✅ Submenus funcionais
+- ✅ Player de áudio para músicas
+- ✅ Sistema de filtros
+- ✅ Download de partituras
+- ✅ Formulário de contato com validação
+- ✅ Animações ao scroll
+- ✅ Contadores animados
+- ✅ Botão "Voltar ao topo"
+
+## 🎯 Sobre a BUR
+
+- **24 Bandas** em todo o Brasil
+- **811 Integrantes** aproximadamente
+- Músicos, balizas, porta-bandeiras e regentes
+- Bandas Racionais em várias capitais brasileiras
+
+## 📚 Documentação
+
+- `REFATORACAO_COMPLETA.md` - Documentação da refatoração
+- `OTIMIZACAO_IMAGEM_HERO.md` - Guia de otimização de imagens
+- `images/README.md` - Guia de organização de imagens
+- `musicas/README.md` - Guia de organização de áudio
+- `partituras/README.md` - Guia de organização de partituras
+
+## 🔧 Personalização
 
 ### Adicionar Músicas
-Para adicionar novas músicas, edite a seção de repertório no `index.html`:
 
-```html
-<div class="musica-card" data-category="hinos">
-    <!-- Conteúdo da música -->
-</div>
-```
+Edite `repertorio.js`:
 
-### Adicionar Shows
-Adicione novos shows na seção de agenda:
-
-```html
-<div class="show-card">
-    <!-- Informações do show -->
-</div>
+```javascript
+{
+    nome: "Nome da Música",
+    categoria: "hinos", // ou "marchas", "outras"
+    audio: "musicas/nome.mp3"
+}
 ```
 
 ### Personalizar Cores
-As cores podem ser ajustadas no arquivo `styles.css` através das variáveis CSS:
+
+Edite `styles.css`:
 
 ```css
 :root {
     --primary-gold: #FFD700;
     --primary-blue: #1E3A8A;
-    /* ... */
 }
 ```
-
-### Adicionar Imagens
-1. Coloque suas imagens na pasta `images/`
-2. Substitua os placeholders no HTML:
-   ```html
-   <img src="images/sua-imagem.jpg" alt="Descrição">
-   ```
-
-## 📱 Responsividade
-
-O site é totalmente responsivo e se adapta a:
-- **Desktop** (1200px+)
-- **Tablet** (768px - 1199px)
-- **Mobile** (até 767px)
 
 ## 🌐 Navegadores Suportados
 
@@ -141,51 +149,12 @@ O site é totalmente responsivo e se adapta a:
 - Safari (últimas versões)
 - Edge (últimas versões)
 
-## 📝 Funcionalidades Implementadas
-
-✅ Design com cores da Cultura Racional
-✅ Navegação fixa com efeito de scroll
-✅ Animações ao rolar a página
-✅ Contadores animados nas estatísticas
-✅ Menu hambúrguer para mobile
-✅ Player de áudio para músicas
-✅ Sistema de download de partituras
-✅ Filtros de músicas por categoria
-✅ Formulário de contato com validação
-✅ Galeria com efeito hover
-✅ Links para redes sociais
-✅ Performance otimizada
-✅ SEO otimizado
-
-## 🔄 Próximos Passos
-
-1. Adicionar imagens reais da banda
-2. Adicionar arquivos de áudio reais
-3. Adicionar arquivos PDF das partituras
-4. Integrar formulário com backend
-5. Adicionar mais músicas ao repertório
-6. Implementar lightbox para galeria
-7. Adicionar sistema de newsletter
-8. Integrar com APIs de redes sociais
-
 ## 📄 Licença
 
-Este projeto foi desenvolvido para a Banda Racional - Cultura Racional.
-
-## 👨‍💻 Tecnologias Utilizadas
-
-- **HTML5**: Estrutura semântica
-- **CSS3**: Estilos modernos com variáveis CSS, Grid e Flexbox
-- **JavaScript (Vanilla)**: Interatividade sem dependências
-- **Font Awesome**: Ícones
-- **Google Fonts**: Tipografia (Poppins e Playfair Display)
-
-## 🎯 Cultura Racional
-
-> "A verdadeira origem de tudo e de todos"
-
-Este site foi desenvolvido com dedicação para divulgar a música e os ensinamentos da Cultura Racional através da Banda Racional.
+Este projeto foi desenvolvido para a **Banda Racional Universo em Desencanto** - Cultura Racional.
 
 ---
 
 **Desenvolvido com ❤️ para a Cultura Racional**
+
+*Banda Racional Universo em Desencanto - Divulgando a música e a energia da Cultura Racional por todo o Brasil*

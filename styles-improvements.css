@@ -862,3 +862,76 @@ html {
     color: var(--text-secondary);
     opacity: 0.6;
 }
+
+/* ========================================================= */
+/* MELHORIAS DE ACESSIBILIDADE E UX PROFISSIONAL */
+/* ========================================================= */
+
+/* Skip Link para Acessibilidade */
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 0;
+    background: var(--primary-blue);
+    color: var(--white);
+    padding: 1rem 2rem;
+    text-decoration: none;
+    z-index: 10000;
+    font-weight: 600;
+    border-radius: 0 0 8px 0;
+    transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 3px solid var(--primary-gold);
+    outline-offset: 2px;
+}
+
+/* Melhorias de Acessibilidade - Foco Visível */
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 2px solid var(--primary-gold);
+    outline-offset: 2px;
+}
+
+/* Melhorias Semânticas - Logo */
+a.logo {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: inherit;
+}
+
+a.logo:hover,
+a.logo:focus {
+    text-decoration: none;
+}
+
+/* Mensagens de Erro do Formulário */
+.error-message {
+    display: none;
+    color: #ef4444;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+.form-group input:invalid:not(:placeholder-shown) ~ .error-message,
+.form-group textarea:invalid:not(:placeholder-shown) ~ .error-message,
+.form-group select:invalid:not(:placeholder-shown) ~ .error-message {
+    display: block;
+}
+
+/* Melhorias de Performance - Lazy Loading */
+img[loading="lazy"] {
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+img[loading="lazy"].loaded {
+    opacity: 1;
+}

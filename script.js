@@ -3,6 +3,49 @@ const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('navMenu');
 let navLinks = null;
 
+// Garantir que hamburger sempre fique visível no mobile
+function ensureHamburgerVisible() {
+    if (hamburger && window.innerWidth <= 768) {
+        hamburger.style.display = 'flex';
+        hamburger.style.visibility = 'visible';
+        hamburger.style.opacity = '1';
+        hamburger.style.position = 'relative';
+        // Forçar com !important via setProperty
+        hamburger.style.setProperty('display', 'flex', 'important');
+        hamburger.style.setProperty('visibility', 'visible', 'important');
+        hamburger.style.setProperty('opacity', '1', 'important');
+    }
+}
+
+// Verificar na inicialização
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+        ensureHamburgerVisible();
+        // Verificar novamente após um pequeno delay para garantir
+        setTimeout(ensureHamburgerVisible, 100);
+    });
+} else {
+    ensureHamburgerVisible();
+    setTimeout(ensureHamburgerVisible, 100);
+}
+
+// Verificar ao redimensionar a janela
+window.addEventListener('resize', function() {
+    ensureHamburgerVisible();
+});
+
+// Verificar periodicamente no mobile (fallback)
+if (window.innerWidth <= 768) {
+    setInterval(function() {
+        if (hamburger && window.innerWidth <= 768) {
+            const computedStyle = window.getComputedStyle(hamburger);
+            if (computedStyle.display === 'none' || computedStyle.visibility === 'hidden') {
+                ensureHamburgerVisible();
+            }
+        }
+    }, 500);
+}
+
 // Função para fechar o menu
 function closeMenu() {
     if (hamburger) hamburger.classList.remove('active');
@@ -100,8 +143,29 @@ window.addEventListener('scroll', () => {
         navbar.classList.remove('scrolled');
     }
     
+    // Garantir que o hamburger sempre fique visível no mobile
+    ensureHamburgerVisible();
+    
     lastScroll = currentScroll;
-});
+}, { passive: true });
+
+// Otimização de carregamento da imagem hero
+const heroImage = document.querySelector('.hero-background-image');
+if (heroImage) {
+    // Se a imagem já está carregada (cache do navegador)
+    if (heroImage.complete && heroImage.naturalHeight !== 0) {
+        heroImage.classList.add('loaded');
+    } else {
+        // Aguardar carregamento
+        heroImage.addEventListener('load', function() {
+            this.classList.add('loaded');
+        });
+        // Fallback caso o evento load não dispare
+        heroImage.addEventListener('error', function() {
+            this.style.opacity = '1'; // Mostrar mesmo se houver erro
+        });
+    }
+}
 
 // Smooth scroll for navigation links (apenas para links internos)
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
