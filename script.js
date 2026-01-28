@@ -184,13 +184,19 @@ window.addEventListener('scroll', () => {
 // Otimização de carregamento da imagem hero
 const heroImage = document.querySelector('.hero-background-image');
 if (heroImage) {
+    // Forçar visibilidade inicial
+    heroImage.style.opacity = '1';
+    heroImage.style.display = 'block';
+    
     // Se a imagem já está carregada (cache do navegador)
     if (heroImage.complete && heroImage.naturalHeight !== 0) {
         heroImage.classList.add('loaded');
+        heroImage.style.opacity = '1';
     } else {
         // Aguardar carregamento
         heroImage.addEventListener('load', function() {
             this.classList.add('loaded');
+            this.style.opacity = '1';
         });
         // Fallback caso o evento load não dispare
         heroImage.addEventListener('error', function() {

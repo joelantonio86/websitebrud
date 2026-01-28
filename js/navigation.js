@@ -179,25 +179,31 @@ window.addEventListener('scroll', () => {
     lastScroll = currentScroll;
 }, { passive: true });
 
-// Smooth scroll for navigation links
+// Smooth scroll for navigation links - apenas para links de âncora na mesma página
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         const href = this.getAttribute('href');
-        if (href.includes('index.html')) {
+        
+        // Ignorar se o link contém index.html ou aponta para outra página
+        if (href.includes('index.html') || href.includes('.html')) {
+            return;
+        }
+        
+        // Verificar se o elemento alvo existe na página atual
+        const target = document.querySelector(href);
+        
+        // Se o target não existe, deixar o comportamento padrão (não fazer nada)
+        if (!target) {
             return;
         }
         
         e.preventDefault();
-        const target = document.querySelector(href);
-        
-        if (target) {
-            const offsetTop = target.offsetTop - 80;
-            window.scrollTo({
-                top: offsetTop,
-                behavior: 'smooth'
-            });
-            closeMenu();
-        }
+        const offsetTop = target.offsetTop - 80;
+        window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+        });
+        closeMenu();
     });
 });
 

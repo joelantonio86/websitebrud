@@ -2,8 +2,8 @@
 // SERVICE WORKER - PWA Support
 // =========================================================
 
-const CACHE_NAME = 'banda-racional-v1';
-const RUNTIME_CACHE = 'banda-racional-runtime-v1';
+const CACHE_NAME = 'banda-racional-v2';
+const RUNTIME_CACHE = 'banda-racional-runtime-v2';
 
 // Recursos para cachear na instalação
 const PRECACHE_URLS = [

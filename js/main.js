@@ -181,6 +181,30 @@ document.addEventListener('DOMContentLoaded', function() {
     // Keyboard navigation support (já tratado em navigation.js)
     // Mantido para compatibilidade, mas a lógica principal está em navigation.js
     
+    // Hero image - garantir que apareça imediatamente
+    const heroImage = document.querySelector('.hero-background-image');
+    if (heroImage) {
+        // Forçar visibilidade
+        heroImage.style.opacity = '1';
+        heroImage.style.display = 'block';
+        
+        // Se já está carregada
+        if (heroImage.complete && heroImage.naturalHeight !== 0) {
+            heroImage.classList.add('loaded');
+            heroImage.style.opacity = '1';
+        } else {
+            // Quando carregar
+            heroImage.addEventListener('load', function() {
+                this.classList.add('loaded');
+                this.style.opacity = '1';
+            });
+            // Fallback
+            heroImage.addEventListener('error', function() {
+                this.style.opacity = '1';
+            });
+        }
+    }
+    
     // Lazy load images with IntersectionObserver
     if ('IntersectionObserver' in window) {
         const imageObserver = new IntersectionObserver((entries, observer) => {

@@ -89,6 +89,30 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+/* Garantir que main tenha conteúdo visível */
+main {
+    min-height: 50vh;
+    position: relative;
+    display: block !important;
+    visibility: visible !important;
+}
+
+/* Garantir que body e main estejam visíveis nas páginas específicas */
+html[data-page="calendarios"] body,
+html[data-page="galeria"] body,
+html[data-page="contato"] body {
+    background-color: var(--white) !important;
+    color: var(--text-primary) !important;
+}
+
+html[data-page="calendarios"] main,
+html[data-page="galeria"] main,
+html[data-page="contato"] main {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -416,6 +440,11 @@ section {
     position: relative;
 }
 
+/* Ajuste de espaçamento para seção agenda */
+.agenda {
+    padding: 4rem 0 2rem 0;
+}
+
 .repertorio-page {
     padding: 4rem 0;
     background: var(--white);
@@ -572,6 +601,9 @@ section {
 .sobre {
     background: linear-gradient(to bottom, var(--white) 0%, var(--dark-secondary) 100%);
     position: relative;
+    z-index: 1;
+    overflow: visible;
+    padding: 6rem 0;
 }
 
 .sobre::before {
@@ -1253,12 +1285,80 @@ section {
 /* Agenda Section */
 .agenda {
     background: linear-gradient(to bottom, var(--dark-secondary) 0%, var(--white) 100%);
+    padding: 4rem 0 2rem 0;
 }
 
-/* Calendários BRUD Section */
+/* Calendários BRUD Section - REMOVIDO DA HOME, APENAS EM calendarios.html */
 .calendarios {
     background: linear-gradient(to bottom, var(--white) 0%, var(--dark-secondary) 100%);
     position: relative;
+    z-index: 1;
+    padding: 8rem 0 4rem 0;
+    margin-top: 80px;
+    overflow: visible;
+    min-height: 60vh;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100%;
+}
+
+html[data-page="calendarios"] .calendarios {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* No styles.css, localize e substitua o bloco "html[data-page="index"]..." por: */
+
+/* Garante que as seções só apareçam em suas respectivas páginas ou se estiverem na home */
+section.calendarios, 
+section.galeria, 
+section.contato,
+.calendarios,
+.galeria,
+.contato {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    min-height: auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* Se quiser manter oculto na index.html especificamente: */
+[data-page="index"] .calendarios, 
+[data-page="index"] .galeria, 
+[data-page="index"] .contato {
+    display: none !important;
+}
+
+/* Garantir que as seções apareçam nas páginas corretas */
+html[data-page="calendarios"] section.calendarios,
+html[data-page="calendarios"] #calendarios,
+html[data-page="calendarios"] .calendarios {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    min-height: auto !important;
+}
+
+html[data-page="galeria"] section.galeria,
+html[data-page="galeria"] #galeria,
+html[data-page="galeria"] .galeria {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    min-height: auto !important;
+}
+
+html[data-page="contato"] section.contato,
+html[data-page="contato"] #contato,
+html[data-page="contato"] .contato {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    min-height: auto !important;
 }
 
 .calendarios::before {
@@ -1318,6 +1418,7 @@ section {
     opacity: 0;
     transition: opacity 0.4s ease;
     pointer-events: none;
+    z-index: -1;
 }
 
 .calendario-card:hover::after {
@@ -1401,9 +1502,15 @@ section {
 
 @media (max-width: 768px) {
     /* Calendários BRUD Mobile */
+    .calendarios {
+        padding: 3rem 0;
+        margin-top: 2rem;
+    }
+    
     .calendarios-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
+        margin-top: 2rem;
     }
     
     .brud-calendars-grid {
@@ -1418,6 +1525,11 @@ section {
     
     .calendario-card {
         padding: 2rem 1.5rem;
+        margin-bottom: 0;
+    }
+    
+    .calendario-card:hover {
+        transform: translateY(-4px) scale(1.01);
     }
     
     .calendario-actions {
@@ -1533,6 +1645,19 @@ section {
 .galeria {
     background: var(--white);
     position: relative;
+    padding: 8rem 0 4rem 0;
+    margin-top: 80px;
+    min-height: 60vh;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100%;
+}
+
+html[data-page="galeria"] .galeria {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 .galeria::before {
@@ -1617,6 +1742,23 @@ section {
 .contato {
     background: linear-gradient(to bottom, var(--white) 0%, var(--dark-secondary) 100%);
     position: relative;
+    padding: 8rem 0 4rem 0;
+    margin-top: 80px;
+    min-height: 60vh;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100%;
+}
+
+html[data-page="contato"] .contato {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 .contato::before {
@@ -2063,6 +2205,46 @@ section {
     .brud-calendars-grid {
         grid-template-columns: 1fr;
     }
+    
+    /* Galeria Mobile */
+    .galeria {
+        padding: 5rem 0 3rem 0;
+    }
+    
+    .galeria-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .galeria-item {
+        margin-bottom: 0;
+    }
+    
+    /* Contato Mobile */
+    .contato {
+        padding: 5rem 0 3rem 0;
+    }
+    
+    .contato-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .contato-info {
+        gap: 1.5rem;
+    }
+    
+    .info-item {
+        padding: 1.25rem;
+    }
+    
+    .social-links {
+        margin-top: 1.5rem;
+    }
+    
+    .social-icons {
+        justify-content: center;
+    }
 }
 
 @media (max-width: 768px) {
@@ -2124,6 +2306,13 @@ section {
     .galeria-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
+    }
+    
+    /* Calendários, Galeria e Contato - Mobile */
+    .calendarios,
+    .galeria,
+    .contato {
+        padding: 5rem 0 3rem 0;
     }
 
     .stats {
@@ -2271,6 +2460,19 @@ section {
     .galeria-grid {
         grid-template-columns: 1fr;
         gap: 0.75rem;
+    }
+    
+    /* Calendários, Galeria e Contato - Mobile Pequeno */
+    .calendarios,
+    .galeria,
+    .contato {
+        padding: 4rem 0 2rem 0;
+    }
+    
+    .calendario-card,
+    .galeria-item,
+    .info-item {
+        padding: 1.25rem;
     }
 
     .partituras-grid {
@@ -3050,4 +3252,36 @@ section {
         max-width: 90%;
         width: 90%;
     }
+}
+
+/* REGRAS FINAIS PARA GARANTIR VISIBILIDADE DAS PÁGINAS */
+/* Forçar visibilidade das seções nas páginas específicas */
+html[data-page="calendarios"] .calendarios,
+html[data-page="calendarios"] section.calendarios,
+html[data-page="calendarios"] #calendarios {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    min-height: 60vh !important;
+    width: 100% !important;
+}
+
+html[data-page="galeria"] .galeria,
+html[data-page="galeria"] section.galeria,
+html[data-page="galeria"] #galeria {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    min-height: 60vh !important;
+    width: 100% !important;
+}
+
+html[data-page="contato"] .contato,
+html[data-page="contato"] section.contato,
+html[data-page="contato"] #contato {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    min-height: 60vh !important;
+    width: 100% !important;
 }
