@@ -572,6 +572,123 @@
     <!-- Fallback para navegadores antigos -->
     <script nomodule src="script.js"></script>
     
+    <!-- Fallback inline para menu mobile - garantir funcionamento -->
+    <script>
+        // Garantir que o menu funcione mesmo se o módulo falhar
+        (function() {
+            function initMenuFallback() {
+                const hamburger = document.getElementById('hamburger');
+                const navMenu = document.getElementById('navMenu');
+                
+                if (!hamburger || !navMenu) return;
+                
+                // Remover listeners antigos
+                const newHamburger = hamburger.cloneNode(true);
+                hamburger.parentNode.replaceChild(newHamburger, hamburger);
+                
+                // Adicionar listener simples
+                newHamburger.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const menu = document.getElementById('navMenu');
+                    if (menu) {
+                        menu.classList.toggle('active');
+                        newHamburger.classList.toggle('active');
+                        newHamburger.setAttribute('aria-expanded', menu.classList.contains('active'));
+                        
+                        // Criar overlay se não existir
+                        let overlay = document.querySelector('.menu-overlay');
+                        if (!overlay) {
+                            overlay = document.createElement('div');
+                            overlay.className = 'menu-overlay';
+                            document.body.appendChild(overlay);
+                        }
+                        
+                        if (menu.classList.contains('active')) {
+                            overlay.classList.add('active');
+                            document.body.style.overflow = 'hidden';
+                            overlay.onclick = function() {
+                                menu.classList.remove('active');
+                                newHamburger.classList.remove('active');
+                                overlay.classList.remove('active');
+                                document.body.style.overflow = '';
+                            };
+                        } else {
+                            overlay.classList.remove('active');
+                            document.body.style.overflow = '';
+                        }
+                    }
+                });
+                
+                // Configurar submenus
+                document.querySelectorAll('.nav-menu > .has-submenu > .nav-link').forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        const href = this.getAttribute('href');
+                        if (href && href !== '#') return;
+                        
+                        e.preventDefault();
+                        e.stopPropagation();
+                        
+                        const parentLi = this.closest('li.has-submenu');
+                        if (!parentLi) return;
+                        
+                        const isActive = parentLi.classList.contains('active');
+                        
+                        if (isActive) {
+                            parentLi.classList.remove('active');
+                            this.setAttribute('aria-expanded', 'false');
+                        } else {
+                            // Fechar outros
+                            document.querySelectorAll('.nav-menu > .has-submenu').forEach(sib => {
+                                if (sib !== parentLi) {
+                                    sib.classList.remove('active');
+                                    const sibLink = sib.querySelector('.nav-link');
+                                    if (sibLink) sibLink.setAttribute('aria-expanded', 'false');
+                                }
+                            });
+                            parentLi.classList.add('active');
+                            this.setAttribute('aria-expanded', 'true');
+                        }
+                    });
+                });
+                
+                // Configurar sub-submenus
+                document.querySelectorAll('.submenu .has-submenu > .nav-link').forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        const href = this.getAttribute('href');
+                        if (href && href !== '#') return;
+                        
+                        e.preventDefault();
+                        e.stopPropagation();
+                        
+                        const parentLi = this.closest('li.has-submenu');
+                        if (!parentLi) return;
+                        
+                        const isActive = parentLi.classList.contains('active');
+                        
+                        if (isActive) {
+                            parentLi.classList.remove('active');
+                            this.setAttribute('aria-expanded', 'false');
+                        } else {
+                            parentLi.classList.add('active');
+                            this.setAttribute('aria-expanded', 'true');
+                        }
+                    }, true);
+                });
+            }
+            
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initMenuFallback);
+            } else {
+                initMenuFallback();
+            }
+            
+            window.addEventListener('load', function() {
+                setTimeout(initMenuFallback, 100);
+            });
+        })();
+    </script>
+    
     <!-- Inicialização dos contadores - Fallback adicional -->
     <script>
         // Fallback para garantir que os contadores funcionem
