@@ -80,13 +80,43 @@ function toggleMenu() {
     }
 }
 
-// Toggle do menu hamburger
-if (hamburger) {
-    hamburger.addEventListener('click', function(e) {
-        e.stopPropagation();
-        toggleMenu();
-    });
+// Toggle do menu hamburger - Garantir que funcione mesmo após DOM carregar
+let hamburgerInitialized = false;
+
+function initHamburger() {
+    const hamburgerEl = document.getElementById('hamburger');
+    if (hamburgerEl && !hamburgerInitialized) {
+        hamburgerInitialized = true;
+        
+        // Adicionar event listener
+        hamburgerEl.addEventListener('click', function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            toggleMenu();
+        });
+        
+        // Também adicionar via onclick como fallback
+        hamburgerEl.onclick = function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            toggleMenu();
+        };
+    }
 }
+
+// Inicializar quando DOM estiver pronto
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+        initHamburger();
+        setTimeout(initHamburger, 100);
+    });
+} else {
+    initHamburger();
+    setTimeout(initHamburger, 100);
+}
+
+// Também tentar inicializar após um pequeno delay (fallback)
+setTimeout(initHamburger, 500);
 
 // Submenu Toggle para Mobile e Desktop
 document.querySelectorAll('.has-submenu > .nav-link').forEach(link => {
