@@ -2070,9 +2070,9 @@ html[data-page="contato"] .contato {
         width: 80% !important;
         max-width: 320px !important;
         height: 100vh !important;
-        background: rgba(255, 255, 255, 0.98) !important;
+        background: #ffffff !important; /* Fundo branco sólido */
         backdrop-filter: blur(10px) !important;
-        box-shadow: 2px 0 20px rgba(0, 0, 0, 0.1) !important;
+        box-shadow: 2px 0 20px rgba(0, 0, 0, 0.15) !important;
         transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
         z-index: 1050 !important;
         overflow-y: auto !important;
@@ -2083,6 +2083,53 @@ html[data-page="contato"] .contato {
     body .nav-menu.active {
         left: 0 !important;
         transform: translateX(0) !important;
+    }
+    
+    /* CORRIGIR COR DO TEXTO NO MENU MOBILE */
+    body .nav-menu .nav-link {
+        color: #1a1a1a !important; /* Preto escuro para máximo contraste */
+        font-weight: 500 !important;
+        opacity: 1 !important;
+        cursor: pointer !important;
+        -webkit-tap-highlight-color: rgba(255, 215, 0, 0.3) !important;
+        touch-action: manipulation !important;
+        user-select: none !important;
+    }
+    
+    body .nav-menu .nav-link:hover,
+    body .nav-menu .nav-link:active,
+    body .nav-menu .nav-link:focus {
+        color: #000000 !important;
+        background-color: rgba(255, 215, 0, 0.1) !important;
+        outline: none !important;
+    }
+    
+    body .nav-menu .nav-link.active {
+        color: #000000 !important;
+        font-weight: 700 !important;
+        background-color: rgba(255, 215, 0, 0.15) !important;
+    }
+    
+    /* Garantir que os ícones também sejam visíveis */
+    body .nav-menu li.has-submenu > .nav-link::before {
+        color: #1a1a1a !important;
+        opacity: 1 !important;
+        font-size: 0.875rem !important;
+    }
+    
+    body .nav-menu li.has-submenu.active > .nav-link::before {
+        color: #000000 !important;
+    }
+    
+    /* Garantir que os itens do menu sejam clicáveis */
+    body .nav-menu li {
+        cursor: pointer !important;
+        -webkit-tap-highlight-color: rgba(255, 215, 0, 0.3) !important;
+    }
+    
+    /* Separadores visíveis */
+    body .nav-menu li:not(:last-child) {
+        border-bottom: 1px solid rgba(255, 215, 0, 0.3) !important;
     }
     
     .hamburger {
