@@ -2041,84 +2041,103 @@ html[data-page="contato"] .contato {
 
 /* Responsive Design */
 @media (max-width: 968px) {
-    /* UI MODERNA: Logo na esquerda, Hamburger na direita */
+    /* 1. HEADER: Logo na Esquerda, Hamburger na Direita */
     .nav-wrapper {
         display: flex !important;
         justify-content: space-between !important;
         align-items: center !important;
-        padding: 0 10px !important;
-        height: 70px;
+        padding: 0 15px !important;
+        height: 70px !important;
+        width: 100% !important;
     }
 
     .logo {
-        flex: 0 1 auto !important; /* Não deixa a logo empurrar o botão */
         margin-right: auto !important;
+        z-index: 1002; /* Mantém a logo acima do overlay se necessário */
     }
 
     .hamburger {
         display: flex !important;
-        margin-left: 15px !important;
-        border: none !important;
+        margin-left: 20px !important;
+        z-index: 1002; /* Botão sempre clicável acima de tudo */
         background: transparent !important;
+        border: none !important;
     }
 
-    /* MENU LATERAL (DRAWER) */
+    /* 2. MENU LATERAL (DRAWER) */
     .nav-menu {
-        position: fixed;
-        left: -100%;
-        top: 0;
-        height: 100vh;
-        width: 80%; /* 80% da tela */
-        background: var(--white);
-        z-index: 1000;
-        transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        padding-top: 80px;
-        box-shadow: 5px 0 15px rgba(0,0,0,0.1);
-        overflow-y: auto;
+        position: fixed !important;
+        left: -100% !important; /* Escondido */
+        top: 0 !important;
+        height: 100vh !important;
+        width: 80% !important;
+        background: #ffffff !important;
+        z-index: 1001 !important;
+        transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        padding: 80px 0 20px 0 !important;
+        box-shadow: 5px 0 15px rgba(0,0,0,0.1) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        overflow-y: auto !important; /* Permite rolar o menu se for longo */
     }
 
     .nav-menu.active {
-        left: 0;
+        left: 0 !important; /* Desliza para dentro da tela */
     }
 
-    /* OVERLAY (Fundo Escuro) */
+    /* 3. OVERLAY (Fundo Escuro) */
     .menu-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(2px);
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        z-index: 999;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        background: rgba(0, 0, 0, 0.6) !important;
+        backdrop-filter: blur(3px) !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        transition: all 0.3s ease !important;
+        z-index: 1000 !important;
     }
 
     .menu-overlay.active {
-        opacity: 1;
-        visibility: visible;
+        opacity: 1 !important;
+        visibility: visible !important;
     }
 
-    /* SUBMENUS ESTILIZADOS */
+    /* 4. LINKS E SUBMENUS */
+    .nav-link {
+        width: 100% !important;
+        padding: 15px 20px !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        border-bottom: 1px solid rgba(0,0,0,0.05) !important;
+        color: #333 !important;
+    }
+
     .nav-menu .submenu, 
     .nav-menu .sub-submenu {
-        display: none !important;
-        background: #f8f8f8 !important;
-        padding-left: 20px !important;
+        display: none !important; /* Escondido por padrão */
+        position: relative !important;
+        width: 100% !important;
+        background: #f9f9f9 !important;
+        padding-left: 15px !important;
+        left: 0 !important;
     }
 
+    /* Mostra o submenu quando o item pai (li) tem a classe .active */
     .nav-menu li.has-submenu.active > .submenu,
     .nav-menu li.has-submenu.active > .sub-submenu {
         display: block !important;
     }
 
+    /* Seta do Submenu */
     .has-submenu > .nav-link::after {
         content: '\f107';
         font-family: "Font Awesome 6 Free";
         font-weight: 900;
-        float: right;
+        transition: transform 0.3s ease;
     }
 
     .has-submenu.active > .nav-link::after {
