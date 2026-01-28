@@ -85,8 +85,13 @@ function toggleMenu() {
         elements.hamburger.classList.toggle('active');
         elements.navMenu.classList.toggle('active');
         
-        // Se está fechando o menu, fechar todos os submenus também
-        if (!elements.navMenu.classList.contains('active')) {
+        // Se está abrindo o menu, garantir que submenus estão configurados
+        if (elements.navMenu.classList.contains('active')) {
+            setTimeout(() => {
+                setupSubmenusScript();
+            }, 100);
+        } else {
+            // Se está fechando o menu, fechar todos os submenus também
             closeAllSubmenus();
         }
     }
@@ -206,58 +211,141 @@ document.addEventListener('visibilitychange', function() {
 });
 
 // Submenu Toggle para Mobile e Desktop
-document.querySelectorAll('.has-submenu > .nav-link').forEach(link => {
-    link.addEventListener('click', function(e) {
-        const parentLi = this.closest('li');
-        const href = this.getAttribute('href');
-        
-        // Se o link é apenas #, faz toggle do submenu
-        if (href === '#' || !href) {
-            e.preventDefault();
-            e.stopPropagation();
+function setupSubmenusScript() {
+    // Configurar listeners para submenus principais
+    document.querySelectorAll('.has-submenu > .nav-link').forEach(link => {
+        // Verificar se já tem listener configurado
+        if (!link.dataset.submenuConfigured) {
+            link.addEventListener('click', function(e) {
+                const parentLi = this.closest('li');
+                const href = this.getAttribute('href');
+                
+                // Se o link é apenas #, faz toggle do submenu
+                if (href === '#' || !href) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const isActive = parentLi.classList.contains('active');
+                    
+                    // Fechar todos os outros submenus primeiro
+                    closeAllSubmenus();
+                    
+                    // Toggle do submenu atual
+                    if (!isActive) {
+                        parentLi.classList.add('active');
+                        this.setAttribute('aria-expanded', 'true');
+                    } else {
+                        parentLi.classList.remove('active');
+                        this.setAttribute('aria-expanded', 'false');
+                    }
+                } else {
+                    // Se tem href válido, fecha todos os submenus e o menu
+                    closeAllSubmenus();
+                    setTimeout(() => {
+                        closeMenu();
+                    }, 100);
+                }
+            });
             
-            const isActive = parentLi.classList.contains('active');
-            
-            // Fechar todos os outros submenus primeiro
-            closeAllSubmenus();
-            
-            // Toggle do submenu atual
-            if (!isActive) {
-                parentLi.classList.add('active');
-                this.setAttribute('aria-expanded', 'true');
-            } else {
-                parentLi.classList.remove('active');
-                this.setAttribute('aria-expanded', 'false');
-            }
-        } else {
-            // Se tem href válido, fecha todos os submenus e o menu
-            closeAllSubmenus();
-            setTimeout(() => {
-                closeMenu();
-            }, 100);
+            link.dataset.submenuConfigured = 'true';
         }
     });
+    
+    // Configurar sub-submenus também
+    document.querySelectorAll('.submenu li.has-submenu > .nav-link').forEach(link => {
+        // Verificar se já tem listener configurado
+        if (!link.dataset.subsubmenuConfigured) {
+            link.addEventListener('click', function(e) {
+                const parentLi = this.closest('li');
+                const href = this.getAttribute('href');
+                
+                if (href === '#' || !href) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const isActive = parentLi.classList.contains('active');
+                    
+                    // Toggle do sub-submenu atual
+                    if (!isActive) {
+                        parentLi.classList.add('active');
+                        this.setAttribute('aria-expanded', 'true');
+                    } else {
+                        parentLi.classList.remove('active');
+                        this.setAttribute('aria-expanded', 'false');
+                    }
+                }
+            });
+            
+            link.dataset.subsubmenuConfigured = 'true';
+        }
+    });
+}
+
+// Inicializar submenus quando DOM estiver pronto
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+        setupSubmenusScript();
+        setTimeout(setupSubmenusScript, 300);
+    });
+} else {
+    setupSubmenusScript();
+    setTimeout(setupSubmenusScript, 300);
+}
+
+// Reinicializar submenus após navegação
+window.addEventListener('load', function() {
+    setTimeout(() => {
+        setupSubmenusScript();
+    }, 200);
 });
 
 // Fechar menu ao clicar em links de navegação (exceto submenu toggle)
-document.addEventListener('DOMContentLoaded', function() {
+function setupNavLinksScript() {
     navLinks = document.querySelectorAll('.nav-link');
     
     navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            const parentLi = this.closest('li');
-            const isSubmenuToggle = parentLi && parentLi.classList.contains('has-submenu') && (href === '#' || !href);
-            
-            // Se não é um toggle de submenu e tem href válido, fecha o menu
-            if (!isSubmenuToggle && href && href !== '#') {
-                // Pequeno delay para permitir navegação
-                setTimeout(() => {
-                    closeMenu();
-                }, 100);
+        // Não remover listeners de links com submenu (eles são tratados separadamente)
+        const parentLi = link.closest('li');
+        const isSubmenuToggle = parentLi && parentLi.classList.contains('has-submenu');
+        const isSubmenuLink = link.closest('.submenu, .sub-submenu');
+        
+        // Apenas configurar listeners para links que não são submenu toggles e não estão dentro de submenus
+        if (!isSubmenuToggle && !isSubmenuLink) {
+            // Verificar se já tem listener configurado
+            if (!link.dataset.navLinkConfigured) {
+                link.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    
+                    if (href && href !== '#') {
+                        // Fechar menu antes de navegar
+                        closeMenu();
+                    }
+                });
+                
+                link.dataset.navLinkConfigured = 'true';
             }
-        });
+        }
     });
+    
+    // Após configurar links, garantir que submenus também estão configurados
+    setTimeout(() => {
+        setupSubmenusScript();
+    }, 100);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    setupNavLinksScript();
+    setupSubmenusScript();
+    setTimeout(setupNavLinksScript, 300);
+    setTimeout(setupSubmenusScript, 300);
+});
+
+// Reinicializar após navegação
+window.addEventListener('load', function() {
+    setTimeout(() => {
+        setupNavLinksScript();
+        setupSubmenusScript();
+    }, 200);
 });
 
 // Fechar menu e submenus ao clicar fora

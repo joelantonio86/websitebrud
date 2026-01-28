@@ -87,8 +87,13 @@ function toggleMenu() {
         elements.hamburger.classList.toggle('active');
         elements.navMenu.classList.toggle('active');
         
-        // Se está fechando o menu, fechar todos os submenus também
-        if (!elements.navMenu.classList.contains('active')) {
+        // Se está abrindo o menu, garantir que submenus estão configurados
+        if (elements.navMenu.classList.contains('active')) {
+            setTimeout(() => {
+                setupSubmenus();
+            }, 100);
+        } else {
+            // Se está fechando o menu, fechar todos os submenus também
             closeAllSubmenus();
         }
     }
@@ -266,70 +271,179 @@ setInterval(function() {
 }, 2000);
 
 // Submenu Toggle para Mobile e Desktop
-document.querySelectorAll('.has-submenu > .nav-link').forEach(link => {
-    link.addEventListener('click', function(e) {
-        const parentLi = this.closest('li');
-        const href = this.getAttribute('href');
-        
-        if (href === '#' || !href) {
-            e.preventDefault();
-            e.stopPropagation();
+function setupSubmenus() {
+    // Configurar listeners para submenus principais
+    document.querySelectorAll('.has-submenu > .nav-link').forEach(link => {
+        // Verificar se já tem listener configurado
+        if (!link.dataset.submenuConfigured) {
+            link.addEventListener('click', function(e) {
+                const parentLi = this.closest('li');
+                const href = this.getAttribute('href');
+                
+                if (href === '#' || !href) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const isActive = parentLi.classList.contains('active');
+                    
+                    // Fechar todos os outros submenus primeiro
+                    closeAllSubmenus();
+                    
+                    // Toggle do submenu atual
+                    if (!isActive) {
+                        parentLi.classList.add('active');
+                        this.setAttribute('aria-expanded', 'true');
+                    } else {
+                        parentLi.classList.remove('active');
+                        this.setAttribute('aria-expanded', 'false');
+                    }
+                } else {
+                    // Se tem href válido, fecha todos os submenus e o menu
+                    closeAllSubmenus();
+                    setTimeout(() => {
+                        closeMenu();
+                    }, 100);
+                }
+            });
             
-            const isActive = parentLi.classList.contains('active');
-            
-            // Fechar todos os outros submenus primeiro
-            closeAllSubmenus();
-            
-            // Toggle do submenu atual
-            if (!isActive) {
-                parentLi.classList.add('active');
-                this.setAttribute('aria-expanded', 'true');
-            } else {
-                parentLi.classList.remove('active');
-                this.setAttribute('aria-expanded', 'false');
-            }
-        } else {
-            // Se tem href válido, fecha todos os submenus e o menu
-            closeAllSubmenus();
-            setTimeout(() => {
-                closeMenu();
-            }, 100);
+            link.dataset.submenuConfigured = 'true';
         }
     });
+    
+    // Configurar sub-submenus também
+    document.querySelectorAll('.submenu li.has-submenu > .nav-link').forEach(link => {
+        // Verificar se já tem listener configurado
+        if (!link.dataset.subsubmenuConfigured) {
+            link.addEventListener('click', function(e) {
+                const parentLi = this.closest('li');
+                const href = this.getAttribute('href');
+                
+                if (href === '#' || !href) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const isActive = parentLi.classList.contains('active');
+                    
+                    // Toggle do sub-submenu atual
+                    if (!isActive) {
+                        parentLi.classList.add('active');
+                        this.setAttribute('aria-expanded', 'true');
+                    } else {
+                        parentLi.classList.remove('active');
+                        this.setAttribute('aria-expanded', 'false');
+                    }
+                }
+            });
+            
+            link.dataset.subsubmenuConfigured = 'true';
+        }
+    });
+}
+
+// Inicializar submenus quando DOM estiver pronto
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+        setupSubmenus();
+        setTimeout(setupSubmenus, 300);
+    });
+} else {
+    setupSubmenus();
+    setTimeout(setupSubmenus, 300);
+}
+
+// Reinicializar submenus após navegação
+window.addEventListener('load', function() {
+    setTimeout(() => {
+        setupSubmenus();
+    }, 200);
 });
+
+// Observar mudanças no DOM para reinicializar submenus
+if (typeof MutationObserver !== 'undefined') {
+    const submenuObserver = new MutationObserver(function(mutations) {
+        const hasSubmenuLinks = document.querySelectorAll('.has-submenu > .nav-link');
+        if (hasSubmenuLinks.length > 0) {
+            // Verificar se algum link não tem listener
+            let needsReinit = false;
+            hasSubmenuLinks.forEach(link => {
+                if (!link.dataset.submenuConfigured) {
+                    needsReinit = true;
+                }
+            });
+            
+            if (needsReinit) {
+                setTimeout(() => {
+                    setupSubmenus();
+                }, 100);
+            }
+        }
+    });
+    
+    const navMenu = document.getElementById('navMenu');
+    if (navMenu) {
+        submenuObserver.observe(navMenu, {
+            childList: true,
+            subtree: true
+        });
+    }
+}
+
+// Verificar periodicamente se os submenus precisam ser configurados
+setInterval(function() {
+    const hasSubmenuLinks = document.querySelectorAll('.has-submenu > .nav-link');
+    let needsSetup = false;
+    
+    hasSubmenuLinks.forEach(link => {
+        if (!link.dataset.submenuConfigured) {
+            needsSetup = true;
+        }
+    });
+    
+    if (needsSetup) {
+        setupSubmenus();
+    }
+}, 3000);
 
 // Fechar menu ao clicar em links de navegação
 function setupNavLinks() {
     navLinks = document.querySelectorAll('.nav-link');
     
     navLinks.forEach(link => {
-        // Remover listeners antigos se existirem
-        const newLink = link.cloneNode(true);
-        link.parentNode.replaceChild(newLink, link);
+        // Não remover listeners de links com submenu (eles são tratados separadamente)
+        const parentLi = link.closest('li');
+        const isSubmenuToggle = parentLi && parentLi.classList.contains('has-submenu');
+        const isSubmenuLink = link.closest('.submenu, .sub-submenu');
         
-        // Obter referência atualizada
-        const currentLink = document.querySelector(`.nav-link[href="${newLink.getAttribute('href')}"]`);
-        if (!currentLink) return;
-        
-        currentLink.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            const parentLi = this.closest('li');
-            const isSubmenuToggle = parentLi && parentLi.classList.contains('has-submenu') && (href === '#' || !href);
-            
-            if (!isSubmenuToggle && href && href !== '#') {
-                // Fechar menu antes de navegar
-                closeMenu();
+        // Apenas configurar listeners para links que não são submenu toggles e não estão dentro de submenus
+        if (!isSubmenuToggle && !isSubmenuLink) {
+            // Verificar se já tem listener configurado
+            if (!link.dataset.navLinkConfigured) {
+                link.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    
+                    if (href && href !== '#') {
+                        // Fechar menu antes de navegar
+                        closeMenu();
+                        
+                        // Se é um link para outra página, reinicializar o hamburger após navegação
+                        if (href.includes('.html') || href.startsWith('http')) {
+                            // Marcar para reinicialização
+                            setTimeout(() => {
+                                window.dispatchEvent(new Event('reinitHamburger'));
+                            }, 500);
+                        }
+                    }
+                });
                 
-                // Se é um link para outra página, reinicializar o hamburger após navegação
-                if (href.includes('.html') || href.startsWith('http')) {
-                    // Marcar para reinicialização
-                    setTimeout(() => {
-                        window.dispatchEvent(new Event('reinitHamburger'));
-                    }, 500);
-                }
+                link.dataset.navLinkConfigured = 'true';
             }
-        });
+        }
     });
+    
+    // Após configurar links, garantir que submenus também estão configurados
+    setTimeout(() => {
+        setupSubmenus();
+    }, 100);
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -346,6 +460,7 @@ if (typeof MutationObserver !== 'undefined') {
         if (currentNavLinks.length > 0 && (!navLinks || currentNavLinks.length !== navLinks.length)) {
             setTimeout(() => {
                 setupNavLinks();
+                setupSubmenus(); // Garantir que submenus também sejam configurados
             }, 100);
         }
     });
