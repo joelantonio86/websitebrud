@@ -2192,10 +2192,31 @@ html[data-page="contato"] .contato {
         grid-template-columns: 1fr;
         text-align: center;
         padding: 1.5rem;
+        gap: 1.5rem;
     }
 
     .show-date {
         margin: 0 auto 1rem;
+        width: 100%;
+        max-width: 120px;
+    }
+
+    .show-info {
+        text-align: center;
+    }
+
+    .show-info h3 {
+        font-size: 1.25rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .show-action {
+        width: 100%;
+    }
+
+    .show-action .btn {
+        width: 100%;
+        justify-content: center;
     }
 
     /* Footer Mobile */
@@ -2324,13 +2345,63 @@ html[data-page="contato"] .contato {
         gap: 1rem;
     }
 
-    /* Agenda */
-    .agenda-list {
-        gap: 1rem;
+    /* Agenda / Próximos Eventos */
+    .agenda {
+        padding: 3rem 0 2rem 0;
+    }
+
+    .agenda .section-header {
+        margin-bottom: 2.5rem;
+    }
+
+    .agenda .section-title {
+        font-size: 2rem;
+    }
+
+    .shows-list {
+        gap: 1.25rem;
     }
 
     .show-card {
+        padding: 1.5rem;
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+
+    .show-date {
+        margin: 0 auto;
+        width: 100%;
+        max-width: 100px;
         padding: 1.25rem;
+    }
+
+    .show-info {
+        text-align: center;
+    }
+
+    .show-info h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .show-location,
+    .show-time {
+        justify-content: center;
+        margin-bottom: 0.5rem;
+    }
+
+    .show-description {
+        font-size: 0.9rem;
+        margin-top: 0.75rem;
+    }
+
+    .show-action {
+        width: 100%;
+    }
+
+    .show-action .btn {
+        width: 100%;
+        justify-content: center;
     }
 
     /* Contato */
@@ -2485,13 +2556,68 @@ html[data-page="contato"] .contato {
 
     /* Stats já está definido acima no @media (max-width: 480px) - removendo duplicação */
 
-    /* Agenda */
+    /* Agenda / Próximos Eventos Mobile Pequeno */
+    .agenda {
+        padding: 2.5rem 0 1.5rem 0;
+    }
+
+    .agenda .section-header {
+        margin-bottom: 2rem;
+    }
+
+    .agenda .section-title {
+        font-size: 1.75rem;
+    }
+
+    .agenda .section-subtitle {
+        font-size: 0.95rem;
+    }
+
+    .shows-list {
+        gap: 1rem;
+    }
+
     .show-card {
-        padding: 1rem;
+        padding: 1.25rem;
+        gap: 1rem;
     }
 
     .show-date {
         padding: 1rem;
+        max-width: 90px;
+    }
+
+    .date-day {
+        font-size: 2rem;
+    }
+
+    .date-month {
+        font-size: 0.9rem;
+    }
+
+    .date-year {
+        font-size: 0.8rem;
+    }
+
+    .show-info h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .show-location,
+    .show-time {
+        font-size: 0.9rem;
+        margin-bottom: 0.4rem;
+    }
+
+    .show-description {
+        font-size: 0.85rem;
+        margin-top: 0.5rem;
+    }
+
+    .show-action .btn {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.85rem;
     }
 
     /* Footer */

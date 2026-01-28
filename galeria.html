@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FFD700">
-    <meta name="description" content="Galeria da Banda Racional - Momentos especiais e apresentações da Banda Racional Universo em Desencanto">
+    <meta name="description" content="Galeria da Banda Racional - Apresentações e ensaios das 24 bandas da Cultura Racional">
     <title>Galeria - Banda Racional</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="styles-improvements.css">
     <link rel="stylesheet" href="styles-menu-submenu.css">
     <link rel="stylesheet" href="styles-index.css">
+    <link rel="stylesheet" href="styles-galeria.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
@@ -47,7 +48,13 @@
                             <li role="none"><a href="letras-musicas.html" class="nav-link" role="menuitem">Letra das Músicas</a></li>
                         </ul>
                     </li>
-                    <li role="none"><a href="eventos.html" class="nav-link" role="menuitem">Eventos</a></li>
+                    <li class="has-submenu" role="none">
+                        <a href="#" class="nav-link" role="menuitem" aria-haspopup="true" aria-expanded="false">Eventos</a>
+                        <ul class="submenu" role="menu">
+                            <li role="none"><a href="eventos.html" class="nav-link" role="menuitem">Histórico de Apresentações</a></li>
+                            <li role="none"><a href="proximos-eventos.html" class="nav-link" role="menuitem">Próximos Eventos</a></li>
+                        </ul>
+                    </li>
                     <li role="none"><a href="calendarios.html" class="nav-link" role="menuitem">Calendários BRUD</a></li>
                     <li role="none"><a href="galeria.html" class="nav-link active" role="menuitem">Galeria</a></li>
                     <li role="none"><a href="contato.html" class="nav-link" role="menuitem">Contato</a></li>
@@ -67,76 +74,26 @@
         <section id="galeria" class="galeria fade-in-section" aria-labelledby="galeria-title">
             <div class="container">
                 <header class="section-header">
-                    <h2 class="section-title" id="galeria-title">Galeria</h2>
-                    <p class="section-subtitle">Momentos especiais da Banda Racional</p>
+                    <h2 class="section-title" id="galeria-title">Galeria de Apresentações e Ensaios</h2>
+                    <p class="section-subtitle">Fotos e vídeos das 24 bandas da Cultura Racional • Atualizado todo domingo</p>
+                    <div class="galeria-contador">0 fotos • 0 vídeos</div>
                 </header>
-                <div class="galeria-grid">
-                    <div class="galeria-item">
-                        <div class="galeria-image">
-                            <div class="image-placeholder">
-                                <i class="fas fa-image"></i>
-                            </div>
-                            <div class="galeria-overlay">
-                                <i class="fas fa-search-plus"></i>
-                                <p>Apresentação em São Paulo</p>
-                            </div>
-                        </div>
+
+                <!-- Filtros de Banda -->
+                <div class="galeria-filtros-wrapper">
+                    <div class="galeria-filtros" role="tablist" aria-label="Filtrar por banda">
+                        <!-- Botões serão inseridos via JavaScript -->
                     </div>
-                    <div class="galeria-item">
-                        <div class="galeria-image">
-                            <div class="image-placeholder">
-                                <i class="fas fa-image"></i>
-                            </div>
-                            <div class="galeria-overlay">
-                                <i class="fas fa-search-plus"></i>
-                                <p>Ensaio da Banda</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="galeria-item">
-                        <div class="galeria-image">
-                            <div class="image-placeholder">
-                                <i class="fas fa-image"></i>
-                            </div>
-                            <div class="galeria-overlay">
-                                <i class="fas fa-search-plus"></i>
-                                <p>Evento da Cultura Racional</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="galeria-item">
-                        <div class="galeria-image">
-                            <div class="image-placeholder">
-                                <i class="fas fa-image"></i>
-                            </div>
-                            <div class="galeria-overlay">
-                                <i class="fas fa-search-plus"></i>
-                                <p>Performance ao Vivo</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="galeria-item">
-                        <div class="galeria-image">
-                            <div class="image-placeholder">
-                                <i class="fas fa-image"></i>
-                            </div>
-                            <div class="galeria-overlay">
-                                <i class="fas fa-search-plus"></i>
-                                <p>Festival Racional</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="galeria-item">
-                        <div class="galeria-image">
-                            <div class="image-placeholder">
-                                <i class="fas fa-image"></i>
-                            </div>
-                            <div class="galeria-overlay">
-                                <i class="fas fa-search-plus"></i>
-                                <p>Membros da Banda</p>
-                            </div>
-                        </div>
-                    </div>
+                </div>
+
+                <!-- Conteúdo da Galeria -->
+                <div class="galeria-conteudo">
+                    <!-- Conteúdo será inserido via JavaScript -->
+                </div>
+
+                <!-- Paginação -->
+                <div class="galeria-paginacao">
+                    <!-- Controles de paginação serão inseridos via JavaScript -->
                 </div>
             </div>
         </section>
@@ -163,7 +120,7 @@
                         <li><a href="index.html#sobre">Sobre</a></li>
                         <li><a href="repertorio.html">Repertório</a></li>
                         <li><a href="partituras.html">Partituras</a></li>
-                        <li><a href="index.html#agenda">Agenda</a></li>
+                        <li><a href="proximos-eventos.html">Próximos Eventos</a></li>
                         <li><a href="calendarios.html">Calendários BRUD</a></li>
                         <li><a href="galeria.html">Galeria</a></li>
                         <li><a href="contato.html">Contato</a></li>
@@ -205,6 +162,12 @@
 
     <!-- JavaScript Modular -->
     <script type="module" src="js/main.js"></script>
+    <script type="module">
+        import { initGaleria } from './js/galeria.js';
+        document.addEventListener('DOMContentLoaded', () => {
+            initGaleria();
+        });
+    </script>
     <!-- Fallback para navegadores antigos -->
     <script nomodule src="script.js"></script>
 </body>

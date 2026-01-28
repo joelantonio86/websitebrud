@@ -4,7 +4,7 @@
 
 // Importar módulos
 import { closeMenu, toggleMenu, ensureHamburgerVisible, navLinks } from './navigation.js';
-import { animateCounter, observer } from './animations.js';
+import { animateCounter, observer, statsObserver } from './animations.js';
 import { setupFormValidation } from './forms.js';
 import { log } from './utils.js';
 import './analytics.js'; // Inicializar analytics

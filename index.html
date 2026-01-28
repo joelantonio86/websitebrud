@@ -74,7 +74,13 @@
                             <li role="none"><a href="letras-musicas.html" class="nav-link" role="menuitem">Letra das Músicas</a></li>
                         </ul>
                     </li>
-                    <li role="none"><a href="eventos.html" class="nav-link" role="menuitem">Eventos</a></li>
+                    <li class="has-submenu" role="none">
+                        <a href="#" class="nav-link" role="menuitem" aria-haspopup="true" aria-expanded="false">Eventos</a>
+                        <ul class="submenu" role="menu">
+                            <li role="none"><a href="eventos.html" class="nav-link" role="menuitem">Histórico de Apresentações</a></li>
+                            <li role="none"><a href="proximos-eventos.html" class="nav-link" role="menuitem">Próximos Eventos</a></li>
+                        </ul>
+                    </li>
                     <li role="none"><a href="calendarios.html" class="nav-link" role="menuitem">Calendários BRUD</a></li>
                     <li role="none"><a href="galeria.html" class="nav-link" role="menuitem">Galeria</a></li>
                     <li role="none"><a href="contato.html" class="nav-link" role="menuitem">Contato</a></li>
@@ -497,117 +503,6 @@
         </div>
     </section>
 
-    <!-- Agenda Section -->
-    <section id="agenda" class="agenda fade-in-section" aria-labelledby="agenda-title">
-        <div class="container">
-            <header class="section-header">
-                <h2 class="section-title" id="agenda-title">Agenda de Eventos</h2>
-                <p class="section-subtitle">Próximas apresentações da Banda Racional</p>
-            </header>
-            <div class="shows-list" role="list">
-                <article class="show-card" role="listitem">
-                    <div class="show-date" aria-label="Data do evento: 15 de março de 2026">
-                        <div class="date-day">15</div>
-                        <div class="date-month">MAR</div>
-                        <div class="date-year">2026</div>
-                    </div>
-                    <div class="show-info">
-                        <h3>Dia da Cultura Racional em São Paulo</h3>
-                        <p class="show-location">
-                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i> 
-                            <span>São Paulo, SP - Centro Cultural Racional</span>
-                        </p>
-                        <p class="show-time">
-                            <i class="fas fa-clock" aria-hidden="true"></i> 
-                            <span>19:00</span>
-                        </p>
-                        <p class="show-description">
-                            Apresentação especial da Banda Racional com repertório completo da Cultura Racional.
-                        </p>
-                    </div>
-                    <div class="show-action">
-                        <a href="contato.html" class="btn btn-small" aria-label="Mais informações sobre o evento em São Paulo">Mais Informações</a>
-                    </div>
-                </article>
-
-                <article class="show-card" role="listitem">
-                    <div class="show-date" aria-label="Data do evento: 22 de março de 2026">
-                        <div class="date-day">22</div>
-                        <div class="date-month">MAR</div>
-                        <div class="date-year">2026</div>
-                    </div>
-                    <div class="show-info">
-                        <h3>Dia da Cultura Racional no Rio de Janeiro</h3>
-                        <p class="show-location">
-                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i> 
-                            <span>Rio de Janeiro, RJ - Teatro Municipal</span>
-                        </p>
-                        <p class="show-time">
-                            <i class="fas fa-clock" aria-hidden="true"></i> 
-                            <span>20:00</span>
-                        </p>
-                        <p class="show-description">
-                            Grande festival da Cultura Racional com participação especial da Banda Racional.
-                        </p>
-                    </div>
-                    <div class="show-action">
-                        <a href="contato.html" class="btn btn-small" aria-label="Mais informações sobre o evento no Rio de Janeiro">Mais Informações</a>
-                    </div>
-                </article>
-
-                <article class="show-card" role="listitem">
-                    <div class="show-date" aria-label="Data do evento: 5 de abril de 2026">
-                        <div class="date-day">05</div>
-                        <div class="date-month">ABR</div>
-                        <div class="date-year">2026</div>
-                    </div>
-                    <div class="show-info">
-                        <h3>Dia da Cultura Racional em Belo Horizonte</h3>
-                        <p class="show-location">
-                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i> 
-                            <span>Belo Horizonte, MG - Centro de Convenções</span>
-                        </p>
-                        <p class="show-time">
-                            <i class="fas fa-clock" aria-hidden="true"></i> 
-                            <span>19:30</span>
-                        </p>
-                        <p class="show-description">
-                            Encontro regional da Cultura Racional com apresentação da Banda Racional.
-                        </p>
-                    </div>
-                    <div class="show-action">
-                        <a href="contato.html" class="btn btn-small" aria-label="Mais informações sobre o evento em Belo Horizonte">Mais Informações</a>
-                    </div>
-                </article>
-
-                <article class="show-card" role="listitem">
-                    <div class="show-date" aria-label="Data do evento: 12 de abril de 2026">
-                        <div class="date-day">12</div>
-                        <div class="date-month">ABR</div>
-                        <div class="date-year">2026</div>
-                    </div>
-                    <div class="show-info">
-                        <h3>Dia da Cultura Racional em Brasília</h3>
-                        <p class="show-location">
-                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i> 
-                            <span>Brasília, DF - Praça da Cultura Racional</span>
-                        </p>
-                        <p class="show-time">
-                            <i class="fas fa-clock" aria-hidden="true"></i> 
-                            <span>18:00</span>
-                        </p>
-                        <p class="show-description">
-                            Celebração especial da Cultura Racional com apresentação ao ar livre.
-                        </p>
-                    </div>
-                    <div class="show-action">
-                        <a href="contato.html" class="btn btn-small" aria-label="Mais informações sobre o evento em Brasília">Mais Informações</a>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
-
     </main>
 
     <!-- Footer -->
@@ -631,7 +526,7 @@
                         <li><a href="index.html#sobre">Sobre</a></li>
                         <li><a href="repertorio.html">Repertório</a></li>
                         <li><a href="partituras.html">Partituras</a></li>
-                        <li><a href="index.html#agenda">Agenda</a></li>
+                        <li><a href="proximos-eventos.html">Próximos Eventos</a></li>
                         <li><a href="calendarios.html">Calendários BRUD</a></li>
                         <li><a href="galeria.html">Galeria</a></li>
                         <li><a href="contato.html">Contato</a></li>
@@ -642,7 +537,8 @@
                     <ul>
                         <li><a href="repertorio.html">Músicas</a></li>
                         <li><a href="partituras.html">Partituras</a></li>
-                        <li><a href="index.html#agenda">Eventos</a></li>
+                        <li><a href="eventos.html">Histórico</a></li>
+                        <li><a href="proximos-eventos.html">Próximos Eventos</a></li>
                         <li><a href="https://www.culturaracional.com.br" target="_blank">Cultura Racional</a></li>
                     </ul>
                 </div>
@@ -675,6 +571,90 @@
     <script type="module" src="js/main.js"></script>
     <!-- Fallback para navegadores antigos -->
     <script nomodule src="script.js"></script>
+    
+    <!-- Inicialização dos contadores - Fallback adicional -->
+    <script>
+        // Fallback para garantir que os contadores funcionem
+        (function() {
+            function animateCounterFallback(element, target, duration, delay) {
+                if (!element || !target || isNaN(target)) return;
+                
+                setTimeout(() => {
+                    element.textContent = '0';
+                    let start = 0;
+                    const startTime = Date.now();
+                    let lastValue = 0;
+                    
+                    const easeOutQuart = (t) => 1 - Math.pow(1 - t, 4);
+                    
+                    const updateCounter = () => {
+                        const currentTime = Date.now();
+                        const elapsed = currentTime - startTime;
+                        const progress = Math.min(elapsed / duration, 1);
+                        const easedProgress = easeOutQuart(progress);
+                        const current = Math.floor(start + (target - start) * easedProgress);
+                        
+                        if (current !== lastValue) {
+                            element.textContent = current;
+                            lastValue = current;
+                        }
+                        
+                        if (progress < 1) {
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            element.textContent = target;
+                            element.classList.add('finished');
+                            setTimeout(() => element.classList.remove('finished'), 600);
+                        }
+                    };
+                    
+                    updateCounter();
+                }, delay);
+            }
+            
+            function initStatsFallback() {
+                const statsSection = document.querySelector('.stats');
+                if (!statsSection) return;
+                
+                const statNumbers = statsSection.querySelectorAll('.stat-number');
+                if (statNumbers.length === 0) return;
+                
+                statNumbers.forEach((stat, index) => {
+                    const targetAttr = stat.getAttribute('data-target');
+                    const target = parseInt(targetAttr);
+                    const currentValue = parseInt(stat.textContent) || 0;
+                    
+                    // Se ainda não foi animado E o valor ainda é 0
+                    if (!stat.classList.contains('animated') && target && !isNaN(target) && target > 0 && currentValue === 0) {
+                        setTimeout(() => {
+                            if (!stat.classList.contains('animated') && parseInt(stat.textContent) === 0) {
+                                stat.classList.add('animated');
+                                const delay = index * 150 + 300;
+                                animateCounterFallback(stat, target, 2500, delay);
+                            }
+                        }, index * 150 + 500);
+                    }
+                });
+            }
+            
+            // Executar quando DOM estiver pronto
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', () => {
+                    setTimeout(initStatsFallback, 500);
+                });
+            } else {
+                setTimeout(initStatsFallback, 500);
+            }
+            
+            // Também executar no load
+            window.addEventListener('load', () => {
+                setTimeout(initStatsFallback, 800);
+            });
+            
+            // Fallback final após 2 segundos
+            setTimeout(initStatsFallback, 2000);
+        })();
+    </script>
     
     <!-- Registrar Service Worker para PWA -->
     <script>

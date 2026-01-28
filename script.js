@@ -319,11 +319,13 @@ const observer = new IntersectionObserver((entries) => {
             if (entry.target.classList.contains('stats')) {
                 const statNumbers = entry.target.querySelectorAll('.stat-number');
                 statNumbers.forEach((stat, index) => {
-                    const target = parseInt(stat.getAttribute('data-target'));
-                    if (!stat.classList.contains('animated')) {
+                    const targetAttr = stat.getAttribute('data-target');
+                    const target = parseInt(targetAttr);
+                    
+                    if (!stat.classList.contains('animated') && target && !isNaN(target) && target > 0) {
                         stat.classList.add('animated');
-                        // Adicionar delay progressivo para efeito cascata (100ms entre cada)
-                        const delay = index * 150;
+                        // Adicionar delay progressivo para efeito cascata
+                        const delay = index * 150 + 300;
                         animateCounter(stat, target, 2500, delay);
                     }
                 });
@@ -339,37 +341,64 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(section);
     });
     
-    // Observar elementos individuais
-    const fadeElements = document.querySelectorAll('.sobre-content, .musica-card, .show-card, .galeria-item, .contato-content, .stats');
+    // Observar elementos individuais (exceto .stats que tem observer próprio)
+    const fadeElements = document.querySelectorAll('.sobre-content, .musica-card, .show-card, .galeria-item, .contato-content');
     fadeElements.forEach(el => {
         el.classList.add('fade-in');
         observer.observe(el);
     });
     
-    // Iniciar animação dos contadores se a seção já estiver visível
-    const statsSection = document.querySelector('.stats');
-    if (statsSection) {
-        // Verificar se a seção já está visível na viewport
-        const rect = statsSection.getBoundingClientRect();
-        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+    // Iniciar animação dos contadores - versão robusta
+    const initStatsCountersScript = () => {
+        const statsSection = document.querySelector('.stats');
+        if (!statsSection) return;
         
-        if (isVisible) {
-            // Se já estiver visível, iniciar animação imediatamente
-            const statNumbers = statsSection.querySelectorAll('.stat-number');
+        const statNumbers = statsSection.querySelectorAll('.stat-number');
+        if (statNumbers.length === 0) return;
+        
+        // Função para animar os contadores
+        const animateStats = () => {
             statNumbers.forEach((stat, index) => {
-                const target = parseInt(stat.getAttribute('data-target'));
-                if (!stat.classList.contains('animated')) {
+                const targetAttr = stat.getAttribute('data-target');
+                const target = parseInt(targetAttr);
+                
+                if (!stat.classList.contains('animated') && target && !isNaN(target) && target > 0) {
                     stat.classList.add('animated');
-                    // Pequeno delay para garantir que a página carregou completamente
                     const delay = index * 150 + 300;
                     animateCounter(stat, target, 2500, delay);
                 }
             });
-        } else {
-            // Se não estiver visível, observar normalmente
-            observer.observe(statsSection);
-        }
-    }
+        };
+        
+        // Verificar se já está visível
+        const checkVisibility = () => {
+            const rect = statsSection.getBoundingClientRect();
+            const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+            const isVisible = rect.top < viewportHeight && rect.bottom > 0;
+            
+            if (isVisible) {
+                animateStats();
+            } else {
+                // Se não estiver visível, observar com o observer
+                observer.observe(statsSection);
+            }
+        };
+        
+        // Verificar múltiplas vezes
+        setTimeout(checkVisibility, 100);
+        setTimeout(checkVisibility, 500);
+        setTimeout(checkVisibility, 1000);
+        
+        // Também observar para quando entrar na viewport
+        observer.observe(statsSection);
+    };
+    
+    initStatsCountersScript();
+    
+    // Também executar no load como fallback
+    window.addEventListener('load', () => {
+        setTimeout(initStatsCountersScript, 200);
+    });
     
     // Botão Voltar ao Topo
     const backToTopButton = document.createElement('a');
