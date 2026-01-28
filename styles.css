@@ -443,6 +443,8 @@ section {
 /* Ajuste de espaçamento para seção agenda */
 .agenda {
     padding: 4rem 0 2rem 0;
+    position: relative;
+    z-index: 1;
 }
 
 .repertorio-page {
@@ -601,9 +603,9 @@ section {
 .sobre {
     background: linear-gradient(to bottom, var(--white) 0%, var(--dark-secondary) 100%);
     position: relative;
-    z-index: 1;
+    z-index: 0;
     overflow: visible;
-    padding: 6rem 0;
+    padding: 6rem 0 2rem 0;
 }
 
 .sobre::before {
@@ -1286,6 +1288,8 @@ section {
 .agenda {
     background: linear-gradient(to bottom, var(--dark-secondary) 0%, var(--white) 100%);
     padding: 4rem 0 2rem 0;
+    position: relative;
+    z-index: 1;
 }
 
 /* Calendários BRUD Section - REMOVIDO DA HOME, APENAS EM calendarios.html */

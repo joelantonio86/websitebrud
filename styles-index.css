@@ -860,9 +860,9 @@
 
 .destaques-section {
     margin-top: 4rem;
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
     position: relative;
-    z-index: 1;
+    z-index: 0;
     overflow: visible;
 }
 
@@ -906,7 +906,7 @@
     max-width: 900px;
     margin: 0 auto;
     padding: 2rem 0 0.5rem 0;
-    z-index: 1;
+    z-index: 0;
     overflow: visible;
 }
 
@@ -1187,8 +1187,8 @@
     
     .destaques-section {
         margin-top: 3rem;
-        margin-bottom: 2rem;
-        padding-bottom: 1rem;
+        margin-bottom: 0.5rem;
+        padding-bottom: 0;
     }
     
     .destaques-timeline {
@@ -1318,11 +1318,38 @@
     transform: translateY(40px);
     transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
                 transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    visibility: visible;
+    display: block;
 }
 
 .fade-in-section.visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* Garantir que a seção agenda seja sempre visível e não seja coberta */
+.agenda.fade-in-section {
+    position: relative;
+    z-index: 2;
+    min-height: 400px;
+}
+
+/* Fallback: mostrar a seção agenda após um pequeno delay mesmo sem JavaScript */
+.agenda.fade-in-section:not(.visible) {
+    animation: fadeInAgendaFallback 0.8s ease 0.3s forwards;
+}
+
+@keyframes fadeInAgendaFallback {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Se já tiver a classe visible, aplicar imediatamente */
+.agenda.fade-in-section.visible {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
 }
 
 /* 2. SEPARADORES ELEGANTES ENTRE SEÃ‡Ã•ES */
