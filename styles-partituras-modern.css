@@ -1,92 +1,401 @@
 :root {
     --navy: #1e293b;
-    --gold: #facc15;
-    --pdf-red: #e11d48;
-    --sib-purple: #7c3aed;
+    --gold: #FFD700;
+    --gold-dark: #DAA520;
+    --primary-blue: #1E3A8A;
+    
+    /* Paleta Profissional - PDF */
+    --pdf-red: #DC2626;
+    --pdf-red-light: #EF4444;
+    --pdf-red-dark: #B91C1C;
+    
+    /* Paleta Profissional - SIB */
+    --sib-blue: #2563EB;
+    --sib-blue-light: #3B82F6;
+    --sib-blue-dark: #1E40AF;
+    
+    /* Neutros */
     --slate-bg: #f8fafc;
+    --border-color: #e2e8f0;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
 }
 
 .pr-widget {
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--border-color);
     border-radius: 12px;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     background: #fff;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08),
+                0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.pr-widget:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12),
+                0 2px 6px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
 }
 
 .pr-header {
-    padding: 15px 25px;
+    padding: 1.25rem 1.75rem;
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 1rem;
     cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 12px 12px 0 0;
+}
+
+.pr-header:hover {
+    background: var(--slate-bg);
 }
 
 .pr-widget.open .pr-header {
-    background: var(--slate-bg);
-    border-bottom: 2px solid var(--navy);
+    background: linear-gradient(135deg, var(--slate-bg) 0%, #ffffff 100%);
+    border-bottom: 2px solid var(--primary-blue);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.pr-title { flex: 1; font-size: 1.1rem; color: var(--navy); margin: 0; }
+.pr-title { 
+    flex: 1; 
+    font-size: 1.125rem; 
+    font-weight: 600;
+    color: var(--text-primary); 
+    margin: 0;
+    letter-spacing: -0.01em;
+}
 
-.pr-icon { transition: 0.3s; color: var(--gold); }
-.pr-widget.open .pr-icon { transform: rotate(90deg); }
+.pr-icon { 
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+    color: var(--gold);
+    font-size: 0.875rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+}
 
-.pr-input { padding: 8px; border: 1px solid #ddd; border-radius: 6px; width: 150px; }
+.pr-widget.open .pr-icon { 
+    transform: rotate(90deg);
+    color: var(--primary-blue);
+}
 
-/* Botões Profissionais */
-.pr-btn-all { background: var(--navy); color: #fff; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; font-weight: 600; }
-@media (max-width: 768px) { .pr-btn-all { display: none !important; } }
+.pr-input { 
+    padding: 0.625rem 0.875rem; 
+    border: 1px solid var(--border-color); 
+    border-radius: 8px; 
+    width: 150px;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+    background: #fff;
+}
+
+.pr-input:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+}
+
+.pr-input::placeholder {
+    color: var(--text-secondary);
+}
+
+/* Botão Baixar Todos */
+.pr-btn-all { 
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, var(--primary-blue) 0%, #2563EB 100%);
+    color: #fff !important; 
+    border: none; 
+    padding: 0.625rem 1.25rem; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    font-weight: 600;
+    font-size: 0.875rem;
+    letter-spacing: 0.025em;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(30, 58, 138, 0.25);
+}
+
+.pr-btn-all:hover {
+    background: linear-gradient(135deg, #2563EB 0%, var(--primary-blue) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(30, 58, 138, 0.35);
+}
+
+.pr-btn-all:active {
+    transform: translateY(0);
+}
+
+.pr-btn-all i {
+    font-size: 0.875rem;
+}
+
+@media (max-width: 768px) { 
+    .pr-btn-all { 
+        display: none !important; 
+    } 
+}
 
 .pr-item {
-    padding: 15px 25px;
+    padding: 1.125rem 1.75rem;
     border-bottom: 1px solid #f1f5f9;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
+    gap: 1.5rem;
+    transition: all 0.2s ease;
 }
 
-.pr-name { font-weight: 600; color: #334155; min-width: 150px; }
+.pr-item:hover {
+    background: linear-gradient(90deg, rgba(255, 215, 0, 0.03) 0%, transparent 100%);
+    border-left: 3px solid var(--gold);
+    padding-left: calc(1.75rem - 3px);
+}
 
-/* Botões PDF e SIB com Gradiente conforme pedido */
+.pr-item:last-child {
+    border-bottom: none;
+}
+
+.pr-name { 
+    font-weight: 600; 
+    color: var(--text-primary); 
+    min-width: 150px;
+    font-size: 0.9375rem;
+    letter-spacing: -0.01em;
+}
+
+/* ========================================================= */
+/* BOTÕES PDF E SIB - DESIGN PROFISSIONAL */
+/* ========================================================= */
+
 .pr-btn-file {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
     text-decoration: none;
-    padding: 6px 15px;
-    border-radius: 6px;
-    font-size: 12px;
-    font-weight: 800;
-    transition: 0.2s;
+    padding: 0.625rem 1.25rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    min-width: 90px;
 }
 
-.pr-pdf { 
-    background: linear-gradient(180deg, #ff4d4d, #e11d48); 
-    color: #000 !important; 
-    border: 1px solid #be123c; 
+.pr-btn-file::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
 }
 
-.pr-sib { 
-    background: linear-gradient(180deg, #a78bfa, #7c3aed); 
-    color: #fff !important; 
-    border: 1px solid #5b21b6; 
+.pr-btn-file:hover::before {
+    left: 100%;
 }
 
+.pr-btn-file i {
+    font-size: 0.875rem;
+    transition: transform 0.3s ease;
+}
+
+.pr-btn-file:hover i {
+    transform: scale(1.1);
+}
+
+/* Botão PDF - Vermelho Profissional */
+.pr-pdf {
+    background: linear-gradient(135deg, var(--pdf-red-light) 0%, var(--pdf-red) 50%, var(--pdf-red-dark) 100%);
+    color: #ffffff !important;
+    box-shadow: 0 2px 8px rgba(220, 38, 38, 0.25),
+                0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.pr-pdf:hover {
+    background: linear-gradient(135deg, var(--pdf-red) 0%, var(--pdf-red-dark) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.35),
+                0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.pr-pdf:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(220, 38, 38, 0.25);
+}
+
+/* Botão SIB - Azul Profissional */
+.pr-sib {
+    background: linear-gradient(135deg, var(--sib-blue-light) 0%, var(--sib-blue) 50%, var(--sib-blue-dark) 100%);
+    color: #ffffff !important;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25),
+                0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.pr-sib:hover {
+    background: linear-gradient(135deg, var(--sib-blue) 0%, var(--sib-blue-dark) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35),
+                0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.pr-sib:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.25);
+}
+
+/* Estados de foco para acessibilidade */
+.pr-btn-file:focus {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+}
+
+.pr-pdf:focus {
+    outline-color: var(--pdf-red-light);
+}
+
+.pr-sib:focus {
+    outline-color: var(--sib-blue-light);
+}
+
+/* Botão MP3 - Dourado Profissional */
 .pr-btn-mp3 {
-    background: var(--gold);
-    color: var(--navy);
-    padding: 8px 15px;
-    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+    color: var(--text-primary) !important;
+    padding: 0.625rem 1.25rem;
+    border-radius: 8px;
     text-decoration: none;
-    font-weight: 700;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.25),
+                0 1px 3px rgba(0, 0, 0, 0.1);
+    border: none;
+    cursor: pointer;
 }
 
-.pr-full-row { background: #fffef2; border-left: 5px solid var(--gold); }
+.pr-btn-mp3:hover {
+    background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.35),
+                0 2px 6px rgba(0, 0, 0, 0.15);
+}
 
-audio { height: 32px; flex: 1; max-width: 250px; }
+.pr-btn-mp3:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(255, 215, 0, 0.25);
+}
+
+.pr-btn-mp3 i {
+    font-size: 0.875rem;
+}
+
+.pr-btn-mp3:focus {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+}
+
+.pr-full-row { 
+    background: linear-gradient(90deg, rgba(255, 215, 0, 0.08) 0%, rgba(255, 215, 0, 0.03) 100%); 
+    border-left: 4px solid var(--gold);
+    padding-left: calc(1.75rem - 4px);
+    font-weight: 600;
+}
+
+.pr-full-row:hover {
+    background: linear-gradient(90deg, rgba(255, 215, 0, 0.12) 0%, rgba(255, 215, 0, 0.05) 100%);
+    border-left-color: var(--gold-dark);
+}
+
+/* Player de áudio */
+audio, .pr-audio-player {
+    height: 40px;
+    flex: 1;
+    max-width: 250px;
+    min-width: 200px;
+    display: block;
+}
+
+/* Placeholder quando não tem áudio */
+.pr-audio-placeholder {
+    flex: 1;
+    min-width: 200px;
+}
 
 @media (max-width: 600px) {
-    .pr-item { flex-direction: column; align-items: stretch; }
-    audio { max-width: 100%; }
-    .pr-links { display: flex; gap: 10px; }
-    .pr-btn-file { flex: 1; text-align: center; }
+    .pr-item { 
+        flex-direction: column; 
+        align-items: stretch;
+        gap: 1rem;
+        padding: 1rem 1.25rem;
+    }
+    
+    .pr-name {
+        min-width: auto;
+        margin-bottom: 0;
+        width: 100%;
+    }
+    
+    /* Garantir que o áudio apareça no mobile */
+    audio, .pr-audio-player { 
+        max-width: 100% !important; 
+        width: 100% !important;
+        height: 40px !important;
+        display: block !important;
+        flex: none !important;
+        margin: 0.5rem 0;
+        order: 2;
+    }
+    
+    /* Placeholder quando não tem áudio - esconder no mobile */
+    .pr-audio-placeholder {
+        display: none !important;
+    }
+    
+    .pr-links { 
+        display: flex; 
+        gap: 0.75rem; 
+        width: 100%;
+        order: 3;
+        margin-top: 0.5rem;
+    }
+    
+    .pr-btn-file { 
+        flex: 1; 
+        text-align: center;
+        min-width: auto;
+    }
+    
+    .pr-header {
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        padding: 1rem 1.25rem;
+    }
+    
+    .pr-input {
+        width: 100%;
+        order: 3;
+    }
+    
+    .pr-btn-all {
+        width: 100%;
+        order: 4;
+    }
 }

@@ -1,0 +1,26 @@
+{
+  "name": "Banda Racional Universo em Desencanto",
+  "short_name": "Banda Racional",
+  "description": "Site oficial da Banda União Racional - Cultura Racional",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#FFD700",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/images/logo-nova.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/logo-nova.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["music", "education"],
+  "lang": "pt-BR"
+}

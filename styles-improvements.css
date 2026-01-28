@@ -912,18 +912,67 @@ a.logo:focus {
     text-decoration: none;
 }
 
-/* Mensagens de Erro do Formulário */
+/* Mensagens de Erro do Formulário - Melhoradas */
 .error-message {
     display: none;
     color: #ef4444;
     font-size: 0.875rem;
-    margin-top: 0.25rem;
+    margin-top: 0.5rem;
+    padding-left: 0.5rem;
+    animation: slideDown 0.3s ease;
 }
 
 .form-group input:invalid:not(:placeholder-shown) ~ .error-message,
 .form-group textarea:invalid:not(:placeholder-shown) ~ .error-message,
-.form-group select:invalid:not(:placeholder-shown) ~ .error-message {
+.form-group select:invalid:not(:placeholder-shown) ~ .error-message,
+.form-group input.error ~ .error-message,
+.form-group textarea.error ~ .error-message,
+.form-group select.error ~ .error-message {
     display: block;
+}
+
+/* Estados de validação visual */
+.form-group input.error,
+.form-group textarea.error,
+.form-group select.error {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.form-group input.success,
+.form-group textarea.success,
+.form-group select.success {
+    border-color: #10b981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+/* Mensagem de sucesso */
+.success-message {
+    display: none;
+    background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    animation: slideDown 0.3s ease;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+.success-message i {
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Melhorias de Performance - Lazy Loading */

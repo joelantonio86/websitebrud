@@ -46,14 +46,23 @@ if (window.innerWidth <= 768) {
     }, 500);
 }
 
+// Função para fechar todos os submenus
+function closeAllSubmenus() {
+    document.querySelectorAll('.has-submenu').forEach(li => {
+        li.classList.remove('active');
+        const link = li.querySelector('.nav-link');
+        if (link) {
+            link.setAttribute('aria-expanded', 'false');
+        }
+    });
+}
+
 // Função para fechar o menu
 function closeMenu() {
     if (hamburger) hamburger.classList.remove('active');
     if (navMenu) navMenu.classList.remove('active');
     // Fechar todos os submenus também
-    document.querySelectorAll('.has-submenu').forEach(li => {
-        li.classList.remove('active');
-    });
+    closeAllSubmenus();
 }
 
 // Função para abrir/fechar o menu
@@ -61,6 +70,11 @@ function toggleMenu() {
     if (hamburger && navMenu) {
         hamburger.classList.toggle('active');
         navMenu.classList.toggle('active');
+        
+        // Se está fechando o menu, fechar todos os submenus também
+        if (!navMenu.classList.contains('active')) {
+            closeAllSubmenus();
+        }
     }
 }
 
@@ -82,9 +96,23 @@ document.querySelectorAll('.has-submenu > .nav-link').forEach(link => {
         if (href === '#' || !href) {
             e.preventDefault();
             e.stopPropagation();
-            parentLi.classList.toggle('active');
+            
+            const isActive = parentLi.classList.contains('active');
+            
+            // Fechar todos os outros submenus primeiro
+            closeAllSubmenus();
+            
+            // Toggle do submenu atual
+            if (!isActive) {
+                parentLi.classList.add('active');
+                this.setAttribute('aria-expanded', 'true');
+            } else {
+                parentLi.classList.remove('active');
+                this.setAttribute('aria-expanded', 'false');
+            }
         } else {
-            // Se tem href válido, fecha o menu após navegar
+            // Se tem href válido, fecha todos os submenus e o menu
+            closeAllSubmenus();
             setTimeout(() => {
                 closeMenu();
             }, 100);
@@ -113,22 +141,26 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Fechar menu ao clicar fora dele (mobile e desktop)
+// Fechar menu e submenus ao clicar fora
 document.addEventListener('click', function(e) {
     if (!navMenu || !hamburger) return;
     
-    // Verificar se o clique foi dentro do menu ou no hamburger
     const isClickInsideMenu = navMenu.contains(e.target);
     const isClickOnHamburger = hamburger.contains(e.target);
     const isClickOnSubmenuToggle = e.target.closest('.has-submenu > .nav-link[href="#"]');
+    const isClickOnSubmenu = e.target.closest('.submenu, .sub-submenu');
     
-    // Se o menu está aberto e clicou fora, fecha
-    if (navMenu.classList.contains('active')) {
-        if (!isClickInsideMenu && !isClickOnHamburger && !isClickOnSubmenuToggle) {
+    // Se clicou fora do menu e não é o hamburger ou toggle de submenu
+    if (!isClickInsideMenu && !isClickOnHamburger && !isClickOnSubmenuToggle && !isClickOnSubmenu) {
+        // Fechar todos os submenus (mesmo se o menu hamburger não estiver aberto)
+        closeAllSubmenus();
+        
+        // Fechar menu hamburger se estiver aberto
+        if (navMenu.classList.contains('active')) {
             closeMenu();
         }
     }
-}, true); // Usar capture phase para garantir que seja executado primeiro
+}, true);
 
 // Navbar scroll effect
 const navbar = document.getElementById('navbar');
@@ -534,10 +566,23 @@ window.addEventListener('load', () => {
     }
 });
 
-// Keyboard navigation support
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && navMenu && navMenu.classList.contains('active')) {
-        closeMenu();
+// Keyboard navigation support - ESC fecha submenus e menu
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        // Fechar submenus abertos
+        const openSubmenus = document.querySelectorAll('.has-submenu.active');
+        if (openSubmenus.length > 0) {
+            closeAllSubmenus();
+            e.preventDefault();
+            e.stopPropagation();
+            return;
+        }
+        
+        // Se não há submenus abertos, fechar menu hamburger
+        if (navMenu && navMenu.classList.contains('active')) {
+            closeMenu();
+            e.preventDefault();
+        }
     }
 });
 

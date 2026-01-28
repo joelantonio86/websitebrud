@@ -1,6 +1,82 @@
 // Dados das Partituras - Baseado no sistema PHP
 // Todas as músicas ordenadas: Racionais (r01-r37), Diversas (d01-d42), Apresentações (a01-a14), Toques de Fanfarra (tf01-tf21), Hinos (h01-h27)
 
+// =========================================================
+// LISTAGEM DE MÚSICAS E INSTRUMENTOS COM PLAYERS MP3
+// =========================================================
+// Esta lista define quais músicas e instrumentos têm arquivos MP3 disponíveis
+// Atualize esta lista conforme o presidente da banda enviar novos players
+// Formato: 'codigo_musica': ['instrumento1', 'instrumento2', ...]
+
+const MP3_INSTRUMENTS_BY_MUSIC = {
+    'a10': ['fuzileiro', 'atabaque', 'caixa', 'surdo', 'prato', 'lirac', 'saxaltoeb', 'saxtenorbb', 'saxsopranobb', 'clarinetebb', 'trompetebb', 'trombonebb', 'bombardinobb', 'tubabb', 'tubaeb'],
+    'r01': ['atabaque', 'caixa', 'lirac', 'surdo'],
+    'r02': ['atabaque', 'caixa', 'surdo', 'lirac', 'saxaltoeb', 'saxsopranobb', 'clarinetebb', 'trompetebb', 'trombonebb', 'bombardinobb', 'tubabb', 'tubaeb'],
+    'r03': ['atabaque', 'caixa', 'surdo', 'lirac', 'saxaltoeb', 'saxsopranobb', 'clarinetebb', 'trompetebb', 'trombonebb', 'bombardinobb', 'tubabb', 'tubaeb'],
+    'r04': ['atabaque', 'caixa', 'surdo', 'lirac', 'saxaltoeb', 'saxsopranobb', 'clarinetebb', 'trompetebb', 'trombonebb', 'bombardinobb', 'tubabb', 'tubaeb'],
+    'r05': ['atabaque', 'caixa', 'surdo', 'prato', 'lirac', 'saxaltoeb', 'saxsopranobb', 'clarinetebb', 'trompetebb', 'trombonebb', 'bombardinobb', 'tubabb', 'tubaeb'],
+    'r06': ['atabaque', 'caixa', 'surdo', 'lirac', 'saxaltoeb', 'saxsopranobb', 'clarinetebb', 'saxtenorbb', 'trompetebb', 'trombonebb', 'bombardinobb', 'tubabb', 'tubaeb'],
+    'r07': ['atabaque', 'caixa', 'lirac'],
+    'r08': ['atabaque', 'caixa', 'surdo', 'lirac', 'saxaltoeb', 'saxsopranobb', 'clarinetebb', 'saxtenorbb', 'trompetebb', 'trombonebb', 'bombardinobb', 'tubabb', 'tubaeb'],
+    'r09': ['atabaque', 'caixa', 'surdo', 'lirac', 'saxaltoeb', 'saxsopranobb', 'clarinetebb', 'saxtenorbb', 'trompetebb', 'trombonebb', 'bombardinobb', 'tubabb', 'tubaeb'],
+    'r10': ['atabaque', 'caixa', 'surdo', 'lirac', 'saxaltoeb', 'saxsopranobb', 'clarinetebb', 'saxtenorbb', 'trompetebb', 'trombonebb', 'bombardinobb', 'tubabb', 'tubaeb'],
+    'r11': ['fuzileiro', 'atabaque', 'caixa', 'surdo', 'prato', 'lirac', 'saxaltoeb', 'saxsopranobb', 'clarinetebb', 'saxtenorbb', 'trompetebb', 'trompetec', 'trombonebb', 'trombonec', 'bombardinobb', 'trombonebaixoc', 'tubabb', 'tubaeb'],
+    'r12': ['fuzileiro', 'atabaque', 'caixa', 'surdo', 'prato', 'lirac', 'saxaltoeb', 'saxsopranobb', 'clarinetebb', 'saxtenorbb', 'trompetebb', 'trompetec', 'trombonebb', 'trombonec', 'bombardinobb', 'trombonebaixoc', 'tubabb', 'tubaeb'],
+    'r13': ['fuzileiro', 'atabaque', 'caixa', 'surdo', 'prato', 'lirac', 'flautimc', 'saxaltoeb', 'saxsopranobb', 'clarinetebb', 'saxtenorbb', 'trompetebb', 'trompabb', 'trompetec', 'trombonebb', 'trombonec', 'bombardinobb', 'trombonebaixoc', 'tubabb', 'tubaeb'],
+    'r14': ['fuzileiro', 'atabaque', 'caixa', 'surdo', 'prato', 'lirac', 'flautimc', 'saxaltoeb', 'saxsopranobb', 'clarinetebb', 'saxtenorbb', 'trompetebb', 'trompetec', 'trompabb', 'trombonebb', 'trombonec', 'bombardinobb', 'trombonebaixoc', 'tubabb', 'tubaeb'],
+    'r15': ['fuzileiro', 'atabaque', 'caixa', 'surdo', 'prato', 'lirac', 'flautimc', 'saxaltoeb', 'saxsopranobb', 'clarinetebb', 'saxtenorbb', 'trompetebb', 'trompetec', 'trompabb', 'trombonebb', 'trombonec', 'bombardinobb', 'trombonebaixoc', 'tubabb', 'tubaeb'],
+    'r16': ['fuzileiro', 'atabaque', 'caixa', 'surdo', 'prato', 'lirac', 'flautimc', 'saxaltoeb', 'saxsopranobb', 'clarinetebb', 'saxtenorbb', 'trompetebb', 'trompetec', 'trompabb', 'trombonebb', 'trombonec', 'bombardinobb', 'trombonebaixoc', 'tubabb', 'tubaeb'],
+    'r17': ['fuzileiro', 'atabaque', 'caixa', 'surdo', 'prato', 'lirac', 'flautimc', 'saxaltoeb', 'saxsopranobb', 'clarinetebb', 'saxtenorbb', 'trompetebb', 'trompetec', 'trompabb', 'trombonebb', 'trombonec', 'bombardinobb', 'trombonebaixoc', 'tubabb', 'tubaeb'],
+    'r18': ['fuzileiro', 'atabaque', 'caixa', 'surdo', 'prato', 'lirac', 'flautimc', 'saxaltoeb', 'saxsopranobb', 'clarinetebb', 'saxtenorbb', 'trompetebb', 'trompetec', 'trompabb', 'trombonebb', 'trombonec', 'bombardinobb', 'trombonebaixoc', 'tubabb', 'tubaeb'],
+    'r19': ['fuzileiro', 'atabaque', 'caixa', 'surdo', 'prato', 'lirac', 'flautimc', 'saxaltoeb', 'saxsopranobb', 'clarinetebb', 'saxtenorbb', 'trompetebb', 'trompetec', 'trompabb', 'trombonebb', 'trombonec', 'bombardinobb', 'trombonebaixoc', 'tubabb', 'tubaeb'],
+    'r20': ['fuzileiro', 'atabaque', 'caixa', 'surdo', 'prato', 'lirac', 'flautimc', 'saxaltoeb', 'saxsopranobb', 'clarinetebb', 'saxtenorbb', 'trompetebb', 'trompetec', 'trompabb', 'trombonebb', 'trombonec', 'bombardinobb', 'trombonebaixoc', 'tubabb', 'tubaeb'],
+    'r21': ['fuzileiro', 'atabaque', 'caixa', 'surdo', 'prato', 'lirac', 'flautimc', 'saxaltoeb', 'saxsopranobb', 'clarinetebb', 'saxtenorbb', 'trompetebb', 'trompetec', 'trompabb', 'trombonebb', 'trombonec', 'bombardinobb', 'trombonebaixoc', 'tubabb', 'tubaeb'],
+    'r22': ['fuzileiro', 'atabaque', 'caixa', 'surdo', 'prato', 'lirac', 'flautimc', 'saxaltoeb', 'saxsopranobb', 'clarinetebb', 'saxtenorbb', 'trompetebb', 'trompetec', 'trompabb', 'trombonebb', 'trombonec', 'bombardinobb', 'trombonebaixoc', 'tubabb', 'tubaeb'],
+    'r23': ['fuzileiro', 'atabaque', 'caixa', 'surdo', 'prato', 'lirac', 'flautimc', 'saxaltoeb', 'saxsopranobb', 'clarinetebb', 'saxtenorbb', 'trompetebb', 'trompetec', 'trompabb', 'trombonebb', 'trombonec', 'bombardinobb', 'trombonebaixoc', 'tubabb', 'tubaeb'],
+    'r24': ['fuzileiro', 'atabaque', 'caixa', 'surdo', 'prato', 'lirac', 'flautimc', 'saxaltoeb', 'saxsopranobb', 'clarinetebb', 'saxtenorbb', 'trompetebb', 'trompetec', 'trompabb', 'trombonebb', 'trombonec', 'bombardinobb', 'trombonebaixoc', 'tubabb', 'tubaeb'],
+    'r25': ['fuzileiro', 'atabaque', 'caixa', 'surdo', 'prato', 'lirac', 'flautimc', 'saxaltoeb', 'saxsopranobb', 'clarinetebb', 'saxtenorbb', 'trompetebb', 'trompetec', 'trompabb', 'trombonebb', 'trombonec', 'bombardinobb', 'trombonebaixoc', 'tubabb', 'tubaeb'],
+    'r26': ['fuzileiro', 'atabaque', 'caixa', 'surdo', 'prato', 'lirac', 'flautimc', 'saxaltoeb', 'saxsopranobb', 'clarinetebb', 'saxtenorbb', 'trompetebb', 'trompetec', 'trompabb', 'trombonebb', 'trombonec', 'bombardinobb', 'trombonebaixoc', 'tubabb', 'tubaeb'],
+    'r27': ['fuzileiro', 'atabaque', 'caixa', 'surdo', 'prato', 'lirac', 'flautimc', 'saxaltoeb', 'saxsopranobb', 'clarinetebb', 'saxtenorbb', 'trompetebb', 'trompetec', 'trompabb', 'trombonebb', 'trombonec', 'bombardinobb', 'trombonebaixoc', 'tubabb', 'tubaeb'],
+    'r28': ['fuzileiro', 'atabaque', 'caixa', 'surdo', 'prato', 'lirac', 'flautimc', 'saxaltoeb', 'saxsopranobb', 'clarinetebb', 'saxtenorbb', 'trompetebb', 'trompetec', 'trompabb', 'trombonebb', 'trombonec', 'bombardinobb', 'trombonebaixoc', 'tubabb', 'tubaeb'],
+    'r29': ['fuzileiro', 'atabaque', 'caixa', 'surdo', 'prato', 'lirac', 'flautimc', 'saxaltoeb', 'saxsopranobb', 'clarinetebb', 'saxtenorbb', 'trompetebb', 'trompetec', 'trompabb', 'trombonebb', 'trombonec', 'bombardinobb', 'trombonebaixoc', 'tubabb', 'tubaeb'],
+    'r30': ['fuzileiro', 'atabaque', 'caixa', 'surdo', 'prato', 'lirac', 'flautimc', 'saxaltoeb', 'saxsopranobb', 'clarinetebb', 'saxtenorbb', 'trompetebb', 'trompetec', 'trompabb', 'trombonebb', 'trombonec', 'bombardinobb', 'trombonebaixoc', 'tubabb', 'tubaeb'],
+    'r31': ['fuzileiro', 'atabaque', 'caixa', 'surdo', 'prato', 'lirac', 'flautimc', 'saxaltoeb', 'saxtenorbb', 'saxsopranobb', 'clarinetebb', 'trompetebb', 'trompetec', 'trompabb', 'trombonebb', 'trombonec', 'bombardinobb', 'trombonebaixoc', 'tubabb', 'tubaeb'],
+    'r32': ['fuzileiro', 'atabaque', 'caixa', 'surdo', 'prato', 'lirac', 'flautimc', 'saxaltoeb', 'saxtenorbb', 'saxsopranobb', 'clarinetebb', 'trompetebb', 'trompetec', 'trompabb', 'trombonebb', 'trombonec', 'bombardinobb', 'trombonebaixoc', 'tubabb', 'tubaeb'],
+    'r33': ['fuzileiro', 'atabaque', 'caixa', 'surdo', 'prato', 'lirac', 'flautimc', 'saxaltoeb', 'saxtenorbb', 'saxsopranobb', 'clarinetebb', 'trompetebb', 'trompetec', 'trompabb', 'trombonebb', 'trombonec', 'bombardinobb', 'trombonebaixoc', 'tubabb', 'tubaeb'],
+    'r34': ['fuzileiro', 'atabaque', 'caixa', 'surdo', 'prato', 'lirac', 'flautimc', 'saxaltoeb', 'saxtenorbb', 'saxsopranobb', 'clarinetebb', 'trompetebb', 'trompetec', 'trompabb', 'trombonebb', 'trombonec', 'bombardinobb', 'trombonebaixoc', 'tubabb', 'tubaeb'],
+    'r35': ['fuzileiro', 'atabaque', 'caixa', 'surdo', 'prato', 'lirac', 'flautimc', 'saxaltoeb', 'saxtenorbb', 'saxsopranobb', 'clarinetebb', 'trompetebb', 'trompetec', 'trompabb', 'trombonebb', 'trombonec', 'bombardinobb', 'trombonebaixoc', 'tubabb', 'tubaeb'],
+    'r36': ['fuzileiro', 'atabaque', 'caixa', 'surdo', 'prato', 'lirac', 'flautimc', 'saxaltoeb', 'saxtenorbb', 'saxsopranobb', 'clarinetebb', 'trompetebb', 'trompetec', 'trompabb', 'trombonebb', 'trombonec', 'bombardinobb', 'trombonebaixoc', 'tubabb', 'tubaeb'],
+    'r37': ['fuzileiro', 'atabaque', 'caixa', 'surdo', 'prato', 'lirac', 'flautimc', 'saxaltoeb', 'saxtenorbb', 'saxsopranobb', 'clarinetebb', 'trompetebb', 'trompetec', 'trompabb', 'trombonebb', 'trombonec', 'bombardinobb', 'trombonebaixoc', 'tubabb', 'tubaeb'],
+    'd17': ['atabaque', 'lirac', 'caixa'],
+    'd18': ['atabaque', 'lirac', 'caixa'],
+    'd33': ['atabaque', 'lirac', 'caixa'],
+    'd35': ['fuzileiro', 'atabaque', 'caixa', 'surdo', 'prato', 'lirac', 'saxaltoeb', 'saxtenorbb', 'saxsopranobb', 'clarinetebb', 'trompetebb', 'trompabb', 'trombonebb', 'trombonebaixoc', 'bombardinobb', 'tubabb', 'tubaeb']
+};
+
+// Função auxiliar para verificar se uma música tem MP3 disponível
+function hasMP3ForMusic(musicCode) {
+    return MP3_INSTRUMENTS_BY_MUSIC.hasOwnProperty(musicCode.toLowerCase());
+}
+
+// Função auxiliar para verificar se um instrumento específico tem MP3 para uma música
+function hasMP3ForInstrument(musicCode, instrumentKey) {
+    const musicMP3s = MP3_INSTRUMENTS_BY_MUSIC[musicCode.toLowerCase()];
+    if (!musicMP3s) return false;
+    
+    // Normalizar a chave do instrumento (remover acentos, espaços, números)
+    let normalizedKey = instrumentKey.toLowerCase().replace(/[ áéíóúãç]/g, m => {
+        const map = {' ': '', 'á': 'a', 'é': 'e', 'í': 'i', 'ó': 'o', 'ú': 'u', 'ã': 'a', 'ç': 'c'};
+        return map[m] || '';
+    }).replace(/[123]/g, '');
+    
+    // Tratamento especial para lira (lira1, lira2, lirac -> lirac)
+    if (normalizedKey === 'lira1' || normalizedKey === 'lira2' || normalizedKey === 'lira') {
+        normalizedKey = 'lirac';
+    }
+    
+    return musicMP3s.includes(normalizedKey);
+}
+
 // Função auxiliar para obter instrumentos padrão Sibelius
 function getSibeliusInstrumentos(mp3List) {
     const instrumentMap = {
@@ -34,27 +110,35 @@ const instrumentosRacionaisCompletos = ['fuzileiro', 'atabaque', 'caixa', 'surdo
 
 // Função auxiliar para criar entrada de música racional padrão
 function criarRacional(folder, title) {
+    // Verificar se a música tem MP3 na lista configurada
+    const hasMP3 = hasMP3ForMusic(folder);
+    const mp3Instruments = hasMP3 ? MP3_INSTRUMENTS_BY_MUSIC[folder.toLowerCase()] : [];
+    
     return {
         folder: folder,
         category: 'r',
         title: title,
         instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos),
-        hasMP3: true,
+        hasMP3: hasMP3,
         isSibelius: true,
-        mp3Instruments: instrumentosRacionaisCompletos
+        mp3Instruments: mp3Instruments
     };
 }
 
 // Função auxiliar para criar entrada padrão para todas as categorias (mesmos instrumentos das Racionais)
 function criarMusicaPadrao(folder, category, title) {
+    // Verificar se a música tem MP3 na lista configurada
+    const hasMP3 = hasMP3ForMusic(folder);
+    const mp3Instruments = hasMP3 ? MP3_INSTRUMENTS_BY_MUSIC[folder.toLowerCase()] : [];
+    
     return {
         folder: folder,
         category: category,
         title: title,
         instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos),
-        hasMP3: true,
+        hasMP3: hasMP3,
         isSibelius: true,
-        mp3Instruments: instrumentosRacionaisCompletos
+        mp3Instruments: mp3Instruments
     };
 }
 
@@ -69,50 +153,50 @@ const partiturasData = {
         folder: 'r01', 
         category: 'r', 
         title: 'R01 - Apoteose Racional', 
-        instrumentos: getSibeliusInstrumentos(['fuzileiro', 'atabaque', 'caixa', 'surdo', 'prato', 'lirac', 'flautimc', 'saxaltoeb', 'saxsopranobb', 'clarinetebb', 'saxtenorbb', 'trompetebb', 'trompetec', 'trompabb', 'trombonebb', 'trombonec', 'bombardinobb', 'trombonebaixoc', 'tubabb', 'tubaeb']), 
-        hasMP3: true, 
+        instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), 
+        hasMP3: hasMP3ForMusic('r01'), 
         isSibelius: true, 
-        mp3Instruments: ['fuzileiro', 'atabaque', 'caixa', 'surdo', 'prato', 'lirac', 'flautimc', 'saxaltoeb', 'saxsopranobb', 'clarinetebb', 'saxtenorbb', 'trompetebb', 'trompetec', 'trompabb', 'trombonebb', 'trombonec', 'bombardinobb', 'trombonebaixoc', 'tubabb', 'tubaeb'] 
+        mp3Instruments: hasMP3ForMusic('r01') ? MP3_INSTRUMENTS_BY_MUSIC['r01'] : [] 
     },
-    r02: { folder: 'r02', category: 'r', title: 'R02 - Brasil Racional', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: true, isSibelius: true, mp3Instruments: instrumentosRacionaisCompletos },
-    r03: { folder: 'r03', category: 'r', title: 'R03 - Hino Racional', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: true, isSibelius: true, mp3Instruments: instrumentosRacionaisCompletos },
-    r04: { folder: 'r04', category: 'r', title: 'R04 - Menino Rei', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: true, isSibelius: true, mp3Instruments: instrumentosRacionaisCompletos },
-    r05: { folder: 'r05', category: 'r', title: 'R05 - Jubileu de Ouro', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: true, isSibelius: true, mp3Instruments: instrumentosRacionaisCompletos },
-    r06: { folder: 'r06', category: 'r', title: 'R06 - O Grande Missionário', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: true, isSibelius: true, mp3Instruments: instrumentosRacionaisCompletos },
-    r07: { folder: 'r07', category: 'r', title: 'R07 - Os Guerreiros', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: true, isSibelius: true, mp3Instruments: instrumentosRacionaisCompletos },
-    r08: { folder: 'r08', category: 'r', title: 'R08 - Três Poderes', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: true, isSibelius: true, mp3Instruments: instrumentosRacionaisCompletos },
-    r09: { folder: 'r09', category: 'r', title: 'R09 - Parabéns Racional', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: true, isSibelius: true, mp3Instruments: instrumentosRacionaisCompletos },
-    r10: { folder: 'r10', category: 'r', title: 'R10 - Os Sete Reinos', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: true, isSibelius: true, mp3Instruments: instrumentosRacionaisCompletos },
-    r11: { folder: 'r11', category: 'r', title: 'R11 - De Onde Viemos e Para Onde Vamos', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: true, isSibelius: true, mp3Instruments: instrumentosRacionaisCompletos },
-    r12: { folder: 'r12', category: 'r', title: 'R12 - Alegria', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: true, isSibelius: true, mp3Instruments: instrumentosRacionaisCompletos },
-    r13: { folder: 'r13', category: 'r', title: 'R13 - Manoel Jacintho Coelho', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: true, isSibelius: true, mp3Instruments: instrumentosRacionaisCompletos },
-    r14: { folder: 'r14', category: 'r', title: 'R14 - M.J.C.', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: true, isSibelius: true, mp3Instruments: instrumentosRacionaisCompletos },
-    r15: { folder: 'r15', category: 'r', title: 'R15 - Naturaleza (Hom. a Atna Jacintho Coelho)', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: true, isSibelius: true, mp3Instruments: instrumentosRacionaisCompletos },
-    r16: { folder: 'r16', category: 'r', title: 'R16 - Caravana Racional', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: true, isSibelius: true, mp3Instruments: instrumentosRacionaisCompletos },
-    r17: { folder: 'r17', category: 'r', title: 'R17 - Imunização Racional', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: true, isSibelius: true, mp3Instruments: instrumentosRacionaisCompletos },
-    r18: { folder: 'r18', category: 'r', title: 'R18 - Cavaleiro da Concórdia', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: true, isSibelius: true, mp3Instruments: instrumentosRacionaisCompletos },
-    r19: { folder: 'r19', category: 'r', title: 'R19 - Nosso Pai Verdadeiro', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: true, isSibelius: true, mp3Instruments: instrumentosRacionaisCompletos },
-    r20: { folder: 'r20', category: 'r', title: 'R20 - Obrigado Meu Pai', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: true, isSibelius: true, mp3Instruments: instrumentosRacionaisCompletos },
-    r21: { folder: 'r21', category: 'r', title: 'R21 - Alvas Serras', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: true, isSibelius: true, mp3Instruments: instrumentosRacionaisCompletos },
-    r22: { folder: 'r22', category: 'r', title: 'R22 - A Solução da Vida', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: true, isSibelius: true, mp3Instruments: instrumentosRacionaisCompletos },
-    r23: { folder: 'r23', category: 'r', title: 'R23 - Raciocínio/Tudo Pela Paz', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: true, isSibelius: true, mp3Instruments: instrumentosRacionaisCompletos },
-    r24: { folder: 'r24', category: 'r', title: 'R24 - Praça das Nações', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: true, isSibelius: true, mp3Instruments: instrumentosRacionaisCompletos },
-    r25: { folder: 'r25', category: 'r', title: 'R25 - Enfim o Raciocínio', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: true, isSibelius: true, mp3Instruments: instrumentosRacionaisCompletos },
-    r26: { folder: 'r26', category: 'r', title: 'R26 - Centenário M.J.C.', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: true, isSibelius: true, mp3Instruments: instrumentosRacionaisCompletos },
-    r27: { folder: 'r27', category: 'r', title: 'R27 - Imunização Racional (Que Beleza!)', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: true, isSibelius: true, mp3Instruments: instrumentosRacionaisCompletos },
-    r28: { folder: 'r28', category: 'r', title: 'R28 - Salve os Protetores', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: true, isSibelius: true, mp3Instruments: instrumentosRacionaisCompletos },
-    r29: { folder: 'r29', category: 'r', title: 'R29 - Dia dos Guerreiros', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: true, isSibelius: true, mp3Instruments: instrumentosRacionaisCompletos },
-    r30: { folder: 'r30', category: 'r', title: 'R30 - Voltando a Origem', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: true, isSibelius: true, mp3Instruments: instrumentosRacionaisCompletos },
-    r31: { folder: 'r31', category: 'r', title: 'R31 - Natureza', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: true, isSibelius: true, mp3Instruments: instrumentosRacionaisCompletos },
-    r32: { folder: 'r32', category: 'r', title: 'R32 - Vem Ver a Banda Passar', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: true, isSibelius: true, mp3Instruments: instrumentosRacionaisCompletos },
-    r33: { folder: 'r33', category: 'r', title: 'R33 - Francisco de Assis', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: true, isSibelius: true, mp3Instruments: instrumentosRacionaisCompletos },
-    r34: { folder: 'r34', category: 'r', title: 'R34 - Salve o Retiro Racional', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: true, isSibelius: true, mp3Instruments: instrumentosRacionaisCompletos },
-    r35: { folder: 'r35', category: 'r', title: 'R35 - Até Me Imunizar', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: true, isSibelius: true, mp3Instruments: instrumentosRacionaisCompletos },
-    r36: { folder: 'r36', category: 'r', title: 'R36 - Oxigênio', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: true, isSibelius: true, mp3Instruments: instrumentosRacionaisCompletos },
-    r37: { folder: 'r37', category: 'r', title: 'R37 - Hino dos Caravaneiros', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: true, isSibelius: true, mp3Instruments: instrumentosRacionaisCompletos },
+    r02: { folder: 'r02', category: 'r', title: 'R02 - Brasil Racional', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: hasMP3ForMusic('r02'), isSibelius: true, mp3Instruments: hasMP3ForMusic('r02') ? MP3_INSTRUMENTS_BY_MUSIC['r02'] : [] },
+    r03: { folder: 'r03', category: 'r', title: 'R03 - Hino Racional', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: hasMP3ForMusic('r03'), isSibelius: true, mp3Instruments: hasMP3ForMusic('r03') ? MP3_INSTRUMENTS_BY_MUSIC['r03'] : [] },
+    r04: { folder: 'r04', category: 'r', title: 'R04 - Menino Rei', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: hasMP3ForMusic('r04'), isSibelius: true, mp3Instruments: hasMP3ForMusic('r04') ? MP3_INSTRUMENTS_BY_MUSIC['r04'] : [] },
+    r05: { folder: 'r05', category: 'r', title: 'R05 - Jubileu de Ouro', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: hasMP3ForMusic('r05'), isSibelius: true, mp3Instruments: hasMP3ForMusic('r05') ? MP3_INSTRUMENTS_BY_MUSIC['r05'] : [] },
+    r06: { folder: 'r06', category: 'r', title: 'R06 - O Grande Missionário', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: hasMP3ForMusic('r06'), isSibelius: true, mp3Instruments: hasMP3ForMusic('r06') ? MP3_INSTRUMENTS_BY_MUSIC['r06'] : [] },
+    r07: { folder: 'r07', category: 'r', title: 'R07 - Os Guerreiros', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: hasMP3ForMusic('r07'), isSibelius: true, mp3Instruments: hasMP3ForMusic('r07') ? MP3_INSTRUMENTS_BY_MUSIC['r07'] : [] },
+    r08: { folder: 'r08', category: 'r', title: 'R08 - Três Poderes', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: hasMP3ForMusic('r08'), isSibelius: true, mp3Instruments: hasMP3ForMusic('r08') ? MP3_INSTRUMENTS_BY_MUSIC['r08'] : [] },
+    r09: { folder: 'r09', category: 'r', title: 'R09 - Parabéns Racional', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: hasMP3ForMusic('r09'), isSibelius: true, mp3Instruments: hasMP3ForMusic('r09') ? MP3_INSTRUMENTS_BY_MUSIC['r09'] : [] },
+    r10: { folder: 'r10', category: 'r', title: 'R10 - Os Sete Reinos', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: hasMP3ForMusic('r10'), isSibelius: true, mp3Instruments: hasMP3ForMusic('r10') ? MP3_INSTRUMENTS_BY_MUSIC['r10'] : [] },
+    r11: { folder: 'r11', category: 'r', title: 'R11 - De Onde Viemos e Para Onde Vamos', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: hasMP3ForMusic('r11'), isSibelius: true, mp3Instruments: hasMP3ForMusic('r11') ? MP3_INSTRUMENTS_BY_MUSIC['r11'] : [] },
+    r12: { folder: 'r12', category: 'r', title: 'R12 - Alegria', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: hasMP3ForMusic('r12'), isSibelius: true, mp3Instruments: hasMP3ForMusic('r12') ? MP3_INSTRUMENTS_BY_MUSIC['r12'] : [] },
+    r13: { folder: 'r13', category: 'r', title: 'R13 - Manoel Jacintho Coelho', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: hasMP3ForMusic('r13'), isSibelius: true, mp3Instruments: hasMP3ForMusic('r13') ? MP3_INSTRUMENTS_BY_MUSIC['r13'] : [] },
+    r14: { folder: 'r14', category: 'r', title: 'R14 - M.J.C.', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: hasMP3ForMusic('r14'), isSibelius: true, mp3Instruments: hasMP3ForMusic('r14') ? MP3_INSTRUMENTS_BY_MUSIC['r14'] : [] },
+    r15: { folder: 'r15', category: 'r', title: 'R15 - Naturaleza (Hom. a Atna Jacintho Coelho)', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: hasMP3ForMusic('r15'), isSibelius: true, mp3Instruments: hasMP3ForMusic('r15') ? MP3_INSTRUMENTS_BY_MUSIC['r15'] : [] },
+    r16: { folder: 'r16', category: 'r', title: 'R16 - Caravana Racional', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: hasMP3ForMusic('r16'), isSibelius: true, mp3Instruments: hasMP3ForMusic('r16') ? MP3_INSTRUMENTS_BY_MUSIC['r16'] : [] },
+    r17: { folder: 'r17', category: 'r', title: 'R17 - Imunização Racional', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: hasMP3ForMusic('r17'), isSibelius: true, mp3Instruments: hasMP3ForMusic('r17') ? MP3_INSTRUMENTS_BY_MUSIC['r17'] : [] },
+    r18: { folder: 'r18', category: 'r', title: 'R18 - Cavaleiro da Concórdia', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: hasMP3ForMusic('r18'), isSibelius: true, mp3Instruments: hasMP3ForMusic('r18') ? MP3_INSTRUMENTS_BY_MUSIC['r18'] : [] },
+    r19: { folder: 'r19', category: 'r', title: 'R19 - Nosso Pai Verdadeiro', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: hasMP3ForMusic('r19'), isSibelius: true, mp3Instruments: hasMP3ForMusic('r19') ? MP3_INSTRUMENTS_BY_MUSIC['r19'] : [] },
+    r20: { folder: 'r20', category: 'r', title: 'R20 - Obrigado Meu Pai', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: hasMP3ForMusic('r20'), isSibelius: true, mp3Instruments: hasMP3ForMusic('r20') ? MP3_INSTRUMENTS_BY_MUSIC['r20'] : [] },
+    r21: { folder: 'r21', category: 'r', title: 'R21 - Alvas Serras', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: hasMP3ForMusic('r21'), isSibelius: true, mp3Instruments: hasMP3ForMusic('r21') ? MP3_INSTRUMENTS_BY_MUSIC['r21'] : [] },
+    r22: { folder: 'r22', category: 'r', title: 'R22 - A Solução da Vida', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: hasMP3ForMusic('r22'), isSibelius: true, mp3Instruments: hasMP3ForMusic('r22') ? MP3_INSTRUMENTS_BY_MUSIC['r22'] : [] },
+    r23: { folder: 'r23', category: 'r', title: 'R23 - Raciocínio/Tudo Pela Paz', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: hasMP3ForMusic('r23'), isSibelius: true, mp3Instruments: hasMP3ForMusic('r23') ? MP3_INSTRUMENTS_BY_MUSIC['r23'] : [] },
+    r24: { folder: 'r24', category: 'r', title: 'R24 - Praça das Nações', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: hasMP3ForMusic('r24'), isSibelius: true, mp3Instruments: hasMP3ForMusic('r24') ? MP3_INSTRUMENTS_BY_MUSIC['r24'] : [] },
+    r25: { folder: 'r25', category: 'r', title: 'R25 - Enfim o Raciocínio', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: hasMP3ForMusic('r25'), isSibelius: true, mp3Instruments: hasMP3ForMusic('r25') ? MP3_INSTRUMENTS_BY_MUSIC['r25'] : [] },
+    r26: { folder: 'r26', category: 'r', title: 'R26 - Centenário M.J.C.', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: hasMP3ForMusic('r26'), isSibelius: true, mp3Instruments: hasMP3ForMusic('r26') ? MP3_INSTRUMENTS_BY_MUSIC['r26'] : [] },
+    r27: { folder: 'r27', category: 'r', title: 'R27 - Imunização Racional (Que Beleza!)', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: hasMP3ForMusic('r27'), isSibelius: true, mp3Instruments: hasMP3ForMusic('r27') ? MP3_INSTRUMENTS_BY_MUSIC['r27'] : [] },
+    r28: { folder: 'r28', category: 'r', title: 'R28 - Salve os Protetores', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: hasMP3ForMusic('r28'), isSibelius: true, mp3Instruments: hasMP3ForMusic('r28') ? MP3_INSTRUMENTS_BY_MUSIC['r28'] : [] },
+    r29: { folder: 'r29', category: 'r', title: 'R29 - Dia dos Guerreiros', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: hasMP3ForMusic('r29'), isSibelius: true, mp3Instruments: hasMP3ForMusic('r29') ? MP3_INSTRUMENTS_BY_MUSIC['r29'] : [] },
+    r30: { folder: 'r30', category: 'r', title: 'R30 - Voltando a Origem', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: hasMP3ForMusic('r30'), isSibelius: true, mp3Instruments: hasMP3ForMusic('r30') ? MP3_INSTRUMENTS_BY_MUSIC['r30'] : [] },
+    r31: { folder: 'r31', category: 'r', title: 'R31 - Natureza', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: hasMP3ForMusic('r31'), isSibelius: true, mp3Instruments: hasMP3ForMusic('r31') ? MP3_INSTRUMENTS_BY_MUSIC['r31'] : [] },
+    r32: { folder: 'r32', category: 'r', title: 'R32 - Vem Ver a Banda Passar', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: hasMP3ForMusic('r32'), isSibelius: true, mp3Instruments: hasMP3ForMusic('r32') ? MP3_INSTRUMENTS_BY_MUSIC['r32'] : [] },
+    r33: { folder: 'r33', category: 'r', title: 'R33 - Francisco de Assis', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: hasMP3ForMusic('r33'), isSibelius: true, mp3Instruments: hasMP3ForMusic('r33') ? MP3_INSTRUMENTS_BY_MUSIC['r33'] : [] },
+    r34: { folder: 'r34', category: 'r', title: 'R34 - Salve o Retiro Racional', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: hasMP3ForMusic('r34'), isSibelius: true, mp3Instruments: hasMP3ForMusic('r34') ? MP3_INSTRUMENTS_BY_MUSIC['r34'] : [] },
+    r35: { folder: 'r35', category: 'r', title: 'R35 - Até Me Imunizar', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: hasMP3ForMusic('r35'), isSibelius: true, mp3Instruments: hasMP3ForMusic('r35') ? MP3_INSTRUMENTS_BY_MUSIC['r35'] : [] },
+    r36: { folder: 'r36', category: 'r', title: 'R36 - Oxigênio', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: hasMP3ForMusic('r36'), isSibelius: true, mp3Instruments: hasMP3ForMusic('r36') ? MP3_INSTRUMENTS_BY_MUSIC['r36'] : [] },
+    r37: { folder: 'r37', category: 'r', title: 'R37 - Hino dos Caravaneiros', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: hasMP3ForMusic('r37'), isSibelius: true, mp3Instruments: hasMP3ForMusic('r37') ? MP3_INSTRUMENTS_BY_MUSIC['r37'] : [] },
     
     // Músicas Diversas (d01 até d42) - ORDENADAS - TODAS COM MESMOS INSTRUMENTOS DAS RACIONAIS
-    d01: { folder: 'd01', category: 'd', title: 'D01 – Canção do Soldado', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: true, isSibelius: true, mp3Instruments: instrumentosRacionaisCompletos },
+    d01: { folder: 'd01', category: 'd', title: 'D01 – Canção do Soldado', instrumentos: getSibeliusInstrumentos(instrumentosRacionaisCompletos), hasMP3: hasMP3ForMusic('d01'), isSibelius: true, mp3Instruments: hasMP3ForMusic('d01') ? MP3_INSTRUMENTS_BY_MUSIC['d01'] : [] },
     d02: criarMusicaPadrao('d02', 'd', 'D02 – Cidade Maravilhosa'),
     d03: criarMusicaPadrao('d03', 'd', 'D03 – Retirada da Laguna'),
     d04: criarMusicaPadrao('d04', 'd', 'D04 – Dois Corações'),
@@ -223,6 +307,11 @@ const partiturasData = {
     h26: criarMusicaPadrao('h26', 'h', 'H26 – Hino do Vaticano'),
     h27: criarMusicaPadrao('h27', 'h', 'H27 – Hino de Uberlândia')
 };
+
+// Exportar funções e dados para uso global
+window.hasMP3ForMusic = hasMP3ForMusic;
+window.hasMP3ForInstrument = hasMP3ForInstrument;
+window.MP3_INSTRUMENTS_BY_MUSIC = MP3_INSTRUMENTS_BY_MUSIC;
 
 // Função para sanitizar nome do instrumento (baseado no PHP)
 function sanitizeInstrumentName(name, isSibelius = true) {
