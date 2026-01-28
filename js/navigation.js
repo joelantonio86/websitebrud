@@ -12,6 +12,9 @@
     let navMenu = null;
     let overlay = null;
     let isInitialized = false;
+    let escHandler = null;
+    let resizeHandler = null;
+    let mutationObserver = null;
 
     // =========================================================
     // FUNÇÕES AUXILIARES
@@ -31,12 +34,16 @@
      * Cria o overlay (fundo escuro) se não existir
      */
     function createOverlay() {
+        // Verificar se já existe no DOM
+        overlay = document.querySelector('.menu-overlay');
+        
         if (!overlay) {
             overlay = document.createElement('div');
             overlay.className = 'menu-overlay';
             overlay.setAttribute('aria-hidden', 'true');
             document.body.appendChild(overlay);
         }
+        
         return overlay;
     }
 
@@ -72,23 +79,8 @@
         const elements = getElements();
         if (!elements.hamburger || !elements.navMenu) return;
 
-        const isOpen = forceClose ? false : navMenu.classList.contains('active');
-        const shouldOpen = !isOpen;
-
-        if (shouldOpen) {
-            // Abrir menu
-            navMenu.classList.add('active');
-            hamburger.classList.add('active');
-            hamburger.setAttribute('aria-expanded', 'true');
-            
-            // Criar e mostrar overlay
-            const overlayEl = createOverlay();
-            overlayEl.classList.add('active');
-            overlayEl.setAttribute('aria-hidden', 'false');
-            
-            // Travar scroll do body
-            document.body.style.overflow = 'hidden';
-        } else {
+        // Se forceClose for true, sempre fechar
+        if (forceClose) {
             // Fechar menu
             navMenu.classList.remove('active');
             hamburger.classList.remove('active');
@@ -105,6 +97,42 @@
             
             // Fechar todos os submenus
             closeAllSubmenus();
+            return;
+        }
+
+        // Caso contrário, fazer toggle normal
+        const isOpen = navMenu.classList.contains('active');
+        
+        if (isOpen) {
+            // Fechar menu
+            navMenu.classList.remove('active');
+            hamburger.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+            
+            // Esconder overlay
+            if (overlay) {
+                overlay.classList.remove('active');
+                overlay.setAttribute('aria-hidden', 'true');
+            }
+            
+            // Liberar scroll do body
+            document.body.style.overflow = '';
+            
+            // Fechar todos os submenus
+            closeAllSubmenus();
+        } else {
+            // Abrir menu
+            navMenu.classList.add('active');
+            hamburger.classList.add('active');
+            hamburger.setAttribute('aria-expanded', 'true');
+            
+            // Criar e mostrar overlay
+            const overlayEl = createOverlay();
+            overlayEl.classList.add('active');
+            overlayEl.setAttribute('aria-hidden', 'false');
+            
+            // Travar scroll do body
+            document.body.style.overflow = 'hidden';
         }
     }
 
@@ -114,6 +142,8 @@
 
     /**
      * Configura os event listeners para submenus principais (Repertório, Eventos)
+     * No mobile: funciona com clique
+     * No desktop: funciona com hover (CSS)
      */
     function setupMainSubmenus() {
         const mainSubmenuLinks = document.querySelectorAll('.nav-menu > .has-submenu > .nav-link');
@@ -123,16 +153,31 @@
             const newLink = link.cloneNode(true);
             link.parentNode.replaceChild(newLink, link);
             
-            // Adicionar novo listener
+            // Adicionar novo listener (funciona tanto no mobile quanto no desktop)
             newLink.addEventListener('click', function(e) {
                 const href = this.getAttribute('href');
                 
                 // Se não for link vazio, permitir navegação normal
                 if (href && href !== '#') {
+                    // No mobile, fechar menu após navegação
+                    if (isMobile()) {
+                        setTimeout(() => toggleMenu(true), 100);
+                    }
                     return; // Deixar navegação normal acontecer
                 }
                 
+                // Prevenir comportamento padrão de links vazios (evitar scroll para topo)
+                // No desktop, o hover CSS já cuida da visualização
+                // No mobile, fazer toggle do submenu
                 e.preventDefault();
+                
+                if (!isMobile()) {
+                    // No desktop, apenas prevenir scroll, hover CSS já funciona
+                    e.stopPropagation();
+                    return;
+                }
+                
+                // No mobile, fazer toggle
                 e.stopPropagation();
                 
                 const parentLi = this.closest('li.has-submenu');
@@ -140,32 +185,36 @@
                 
                 const isActive = parentLi.classList.contains('active');
                 
-                // Fechar outros submenus principais no mesmo nível
-                document.querySelectorAll('.nav-menu > .has-submenu').forEach(sibling => {
-                    if (sibling !== parentLi) {
-                        sibling.classList.remove('active');
-                        const siblingLink = sibling.querySelector('.nav-link');
-                        if (siblingLink) {
-                            siblingLink.setAttribute('aria-expanded', 'false');
-                        }
-                        // Fechar sub-submenus também
-                        sibling.querySelectorAll('.has-submenu').forEach(subLi => {
-                            subLi.classList.remove('active');
-                            const subLink = subLi.querySelector('.nav-link');
-                            if (subLink) {
-                                subLink.setAttribute('aria-expanded', 'false');
+                // Fechar outros submenus principais no mesmo nível (apenas no mobile)
+                if (isMobile()) {
+                    document.querySelectorAll('.nav-menu > .has-submenu').forEach(sibling => {
+                        if (sibling !== parentLi) {
+                            sibling.classList.remove('active');
+                            const siblingLink = sibling.querySelector('.nav-link');
+                            if (siblingLink) {
+                                siblingLink.setAttribute('aria-expanded', 'false');
                             }
-                        });
-                    }
-                });
+                            // Fechar sub-submenus também
+                            sibling.querySelectorAll('.has-submenu').forEach(subLi => {
+                                subLi.classList.remove('active');
+                                const subLink = subLi.querySelector('.nav-link');
+                                if (subLink) {
+                                    subLink.setAttribute('aria-expanded', 'false');
+                                }
+                            });
+                        }
+                    });
+                }
                 
-                // Toggle do submenu atual
-                if (isActive) {
-                    parentLi.classList.remove('active');
-                    this.setAttribute('aria-expanded', 'false');
-                } else {
-                    parentLi.classList.add('active');
-                    this.setAttribute('aria-expanded', 'true');
+                // Toggle do submenu atual (apenas no mobile)
+                if (isMobile()) {
+                    if (isActive) {
+                        parentLi.classList.remove('active');
+                        this.setAttribute('aria-expanded', 'false');
+                    } else {
+                        parentLi.classList.add('active');
+                        this.setAttribute('aria-expanded', 'true');
+                    }
                 }
             });
         });
@@ -173,6 +222,8 @@
 
     /**
      * Configura os event listeners para sub-submenus (Sibelius > Computador/iOS/Android)
+     * No mobile: funciona com clique
+     * No desktop: funciona com hover (CSS)
      */
     function setupSubSubmenus() {
         const subSubmenuLinks = document.querySelectorAll('.submenu .has-submenu > .nav-link');
@@ -195,7 +246,19 @@
                     return;
                 }
                 
+                // Prevenir comportamento padrão de links vazios (evitar scroll para topo)
+                // No desktop, o hover CSS já cuida da visualização
+                // No mobile, fazer toggle do sub-submenu
                 e.preventDefault();
+                
+                if (!isMobile()) {
+                    // No desktop, apenas prevenir scroll, hover CSS já funciona
+                    e.stopPropagation();
+                    e.stopImmediatePropagation();
+                    return;
+                }
+                
+                // No mobile, fazer toggle
                 e.stopPropagation();
                 e.stopImmediatePropagation();
                 
@@ -204,13 +267,15 @@
                 
                 const isActive = parentLi.classList.contains('active');
                 
-                // Toggle do sub-submenu atual
-                if (isActive) {
-                    parentLi.classList.remove('active');
-                    this.setAttribute('aria-expanded', 'false');
-                } else {
-                    parentLi.classList.add('active');
-                    this.setAttribute('aria-expanded', 'true');
+                // Toggle do sub-submenu atual (apenas no mobile)
+                if (isMobile()) {
+                    if (isActive) {
+                        parentLi.classList.remove('active');
+                        this.setAttribute('aria-expanded', 'false');
+                    } else {
+                        parentLi.classList.add('active');
+                        this.setAttribute('aria-expanded', 'true');
+                    }
                 }
             }, true); // Usar capture phase para garantir prioridade
         });
@@ -262,28 +327,40 @@
         });
         
         // Fechar menu ao clicar em links normais (sem submenu)
+        // Remover listeners antigos primeiro para evitar duplicação
         const regularLinks = document.querySelectorAll('.nav-link:not(.has-submenu > .nav-link):not(.submenu .has-submenu > .nav-link)');
         regularLinks.forEach(link => {
-            link.addEventListener('click', function() {
+            // Clonar para remover listeners antigos
+            const newLink = link.cloneNode(true);
+            link.parentNode.replaceChild(newLink, link);
+            
+            // Adicionar novo listener
+            newLink.addEventListener('click', function() {
                 if (isMobile() && navMenu && navMenu.classList.contains('active')) {
                     setTimeout(() => toggleMenu(true), 100);
                 }
             });
         });
         
-        // Fechar menu com tecla ESC
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && navMenu && navMenu.classList.contains('active')) {
-                toggleMenu(true);
-            }
-        });
+        // Fechar menu com tecla ESC (usar uma função nomeada para poder remover depois)
+        if (!escHandler) {
+            escHandler = function(e) {
+                if (e.key === 'Escape' && navMenu && navMenu.classList.contains('active')) {
+                    toggleMenu(true);
+                }
+            };
+            document.addEventListener('keydown', escHandler);
+        }
         
-        // Fechar menu ao redimensionar para desktop
-        window.addEventListener('resize', function() {
-            if (!isMobile() && navMenu && navMenu.classList.contains('active')) {
-                toggleMenu(true);
-            }
-        });
+        // Fechar menu ao redimensionar para desktop (usar uma função nomeada)
+        if (!resizeHandler) {
+            resizeHandler = function() {
+                if (!isMobile() && navMenu && navMenu.classList.contains('active')) {
+                    toggleMenu(true);
+                }
+            };
+            window.addEventListener('resize', resizeHandler);
+        }
     }
 
     // =========================================================
@@ -361,12 +438,21 @@
     });
 
     // Observar mudanças no DOM para reinicializar se necessário
-    if ('MutationObserver' in window) {
-        const observer = new MutationObserver(function(mutations) {
+    if ('MutationObserver' in window && !mutationObserver) {
+        mutationObserver = new MutationObserver(function(mutations) {
             let shouldReinit = false;
             mutations.forEach(function(mutation) {
-                if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-                    shouldReinit = true;
+                // Só reinicializar se elementos importantes foram adicionados/removidos
+                if (mutation.type === 'childList') {
+                    mutation.addedNodes.forEach(function(node) {
+                        if (node.nodeType === 1 && (
+                            node.id === 'hamburger' || 
+                            node.id === 'navMenu' || 
+                            node.querySelector && (node.querySelector('#hamburger') || node.querySelector('#navMenu'))
+                        )) {
+                            shouldReinit = true;
+                        }
+                    });
                 }
             });
             if (shouldReinit) {
@@ -374,7 +460,7 @@
             }
         });
         
-        observer.observe(document.body, {
+        mutationObserver.observe(document.body, {
             childList: true,
             subtree: true
         });
