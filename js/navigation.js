@@ -100,7 +100,12 @@ function toggleMenu() {
         if (elements.navMenu.classList.contains('active')) {
             setTimeout(() => {
                 setupSubmenus();
-            }, 100);
+                // Forçar configuração de sub-submenus também
+                setupSubmenus();
+            }, 50);
+            setTimeout(() => {
+                setupSubmenus();
+            }, 200);
         } else {
             // Se está fechando o menu, fechar todos os submenus também
             closeAllSubmenus();
@@ -279,54 +284,52 @@ setInterval(function() {
     }
 }, 2000);
 
+// Função para fechar apenas submenus principais (não sub-submenus)
+function closeMainSubmenus() {
+    // Fechar apenas submenus principais (não os que estão dentro de .submenu)
+    document.querySelectorAll('.nav-menu > .has-submenu').forEach(li => {
+        li.classList.remove('active');
+        const link = li.querySelector('.nav-link');
+        if (link) {
+            link.setAttribute('aria-expanded', 'false');
+        }
+        // Fechar sub-submenus dentro deste submenu também
+        li.querySelectorAll('.has-submenu').forEach(subLi => {
+            subLi.classList.remove('active');
+            const subLink = subLi.querySelector('.nav-link');
+            if (subLink) {
+                subLink.setAttribute('aria-expanded', 'false');
+            }
+        });
+    });
+}
+
 // Submenu Toggle para Mobile e Desktop
 function setupSubmenus() {
-    // Configurar listeners para submenus principais
-    document.querySelectorAll('.has-submenu > .nav-link').forEach(link => {
-        // Verificar se já tem listener configurado
-        if (!link.dataset.submenuConfigured) {
-            link.addEventListener('click', function(e) {
-                const parentLi = this.closest('li');
-                const href = this.getAttribute('href');
-                
-                if (href === '#' || !href) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    const isActive = parentLi.classList.contains('active');
-                    
-                    // Fechar todos os outros submenus primeiro
-                    closeAllSubmenus();
-                    
-                    // Toggle do submenu atual
-                    if (!isActive) {
-                        parentLi.classList.add('active');
-                        this.setAttribute('aria-expanded', 'true');
-                    } else {
-                        parentLi.classList.remove('active');
-                        this.setAttribute('aria-expanded', 'false');
-                    }
-                } else {
-                    // Se tem href válido, fecha todos os submenus e o menu
-                    closeAllSubmenus();
-                    setTimeout(() => {
-                        closeMenu();
-                    }, 100);
-                }
-            });
-            
-            link.dataset.submenuConfigured = 'true';
+    // PRIMEIRO: Configurar sub-submenus (Sibelius) ANTES dos submenus principais
+    // Isso garante que os sub-submenus tenham prioridade no capture phase
+    const subSubmenuLinks = document.querySelectorAll('.submenu .has-submenu > .nav-link');
+    
+    subSubmenuLinks.forEach(link => {
+        // Remover listener antigo se existir
+        const newLink = link.cloneNode(true);
+        const parent = link.parentNode;
+        if (parent) {
+            parent.replaceChild(newLink, link);
         }
     });
     
-    // Configurar sub-submenus também (Sibelius dentro de Repertório)
+    // Configurar novos listeners para sub-submenus
     document.querySelectorAll('.submenu .has-submenu > .nav-link').forEach(link => {
         // Verificar se já tem listener configurado
         if (!link.dataset.subsubmenuConfigured) {
-            link.addEventListener('click', function(e) {
+            const clickHandler = function(e) {
                 e.stopPropagation(); // Importante: não propagar para o submenu pai
+                e.stopImmediatePropagation(); // Parar todos os outros listeners também
                 
                 const parentLi = this.closest('li');
+                if (!parentLi) return false;
+                
                 const href = this.getAttribute('href');
                 
                 if (href === '#' || !href) {
@@ -334,7 +337,7 @@ function setupSubmenus() {
                     
                     const isActive = parentLi.classList.contains('active');
                     
-                    // Toggle do sub-submenu atual (não fechar outros submenus, apenas este)
+                    // Toggle do sub-submenu atual (não fechar outros submenus)
                     if (!isActive) {
                         parentLi.classList.add('active');
                         this.setAttribute('aria-expanded', 'true');
@@ -350,9 +353,67 @@ function setupSubmenus() {
                         closeMenu();
                     }, 100);
                 }
-            });
+                
+                return false;
+            };
+            
+            // Adicionar múltiplos tipos de eventos
+            link.addEventListener('click', clickHandler, { capture: true, passive: false });
+            link.addEventListener('touchend', clickHandler, { capture: true, passive: false });
+            link.onclick = clickHandler;
             
             link.dataset.subsubmenuConfigured = 'true';
+        }
+    });
+    
+    // DEPOIS: Configurar listeners para submenus principais (Repertório, Eventos)
+    document.querySelectorAll('.nav-menu > .has-submenu > .nav-link').forEach(link => {
+        // Verificar se já tem listener configurado
+        if (!link.dataset.submenuConfigured) {
+            link.addEventListener('click', function(e) {
+                // Verificar se o clique veio de um sub-submenu
+                if (e.target.closest('.sub-submenu')) {
+                    return; // Deixar o sub-submenu tratar
+                }
+                
+                const parentLi = this.closest('li');
+                const href = this.getAttribute('href');
+                
+                if (href === '#' || !href) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const isActive = parentLi.classList.contains('active');
+                    
+                    // Fechar todos os outros submenus principais primeiro (mas manter sub-submenus abertos se o pai estiver aberto)
+                    closeMainSubmenus();
+                    
+                    // Toggle do submenu atual
+                    if (!isActive) {
+                        parentLi.classList.add('active');
+                        this.setAttribute('aria-expanded', 'true');
+                    } else {
+                        parentLi.classList.remove('active');
+                        this.setAttribute('aria-expanded', 'false');
+                        // Fechar sub-submenus deste submenu também
+                        parentLi.querySelectorAll('.has-submenu').forEach(subLi => {
+                            subLi.classList.remove('active');
+                            const subLink = subLi.querySelector('.nav-link');
+                            if (subLink) {
+                                subLink.setAttribute('aria-expanded', 'false');
+                            }
+                        });
+                    }
+                } else {
+                    // Se tem href válido, fecha todos os submenus e o menu
+                    closeAllSubmenus();
+                    setTimeout(() => {
+                        closeMenu();
+                    }, 100);
+                }
+            }, true); // Usar capture phase para garantir que execute primeiro
+            
+            link.dataset.submenuConfigured = 'true';
         }
     });
 }
@@ -408,6 +469,7 @@ if (typeof MutationObserver !== 'undefined') {
 // Verificar periodicamente se os submenus precisam ser configurados
 setInterval(function() {
     const hasSubmenuLinks = document.querySelectorAll('.has-submenu > .nav-link');
+    const hasSubSubmenuLinks = document.querySelectorAll('.submenu .has-submenu > .nav-link');
     let needsSetup = false;
     
     hasSubmenuLinks.forEach(link => {
@@ -416,10 +478,16 @@ setInterval(function() {
         }
     });
     
+    hasSubSubmenuLinks.forEach(link => {
+        if (!link.dataset.subsubmenuConfigured) {
+            needsSetup = true;
+        }
+    });
+    
     if (needsSetup) {
         setupSubmenus();
     }
-}, 3000);
+}, 2000);
 
 // Fechar menu ao clicar em links de navegação
 function setupNavLinks() {

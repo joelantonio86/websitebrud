@@ -220,6 +220,7 @@
     .nav-menu li.has-submenu.active > .submenu {
         max-height: 1000px;
         padding: 0.5rem 0;
+        display: block !important;
     }
 
     .submenu .nav-link {
@@ -234,28 +235,42 @@
 
     /* Sub-submenu no Mobile */
     .sub-submenu {
-        position: static;
-        opacity: 1;
-        visibility: visible;
-        transform: none;
+        position: static !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
         box-shadow: none;
         border: none;
         margin: 0;
         padding: 0;
-        max-height: 0;
+        max-height: 0 !important;
         overflow: hidden;
         transition: max-height 0.3s ease;
         background: rgba(255, 215, 0, 0.08);
         border-left: 3px solid var(--primary-gold);
         margin-left: 1rem;
+        display: block !important;
     }
 
+    /* Quando o submenu pai está ativo E o sub-submenu está ativo */
     .submenu li.has-submenu.active > .sub-submenu,
-    .submenu .has-submenu.active > .sub-submenu {
-        max-height: 1000px;
-        padding: 0.5rem 0;
+    .submenu .has-submenu.active > .sub-submenu,
+    .submenu li.has-submenu.active .sub-submenu {
+        max-height: 1000px !important;
+        padding: 0.5rem 0 !important;
         display: block !important;
         visibility: visible !important;
+        opacity: 1 !important;
+    }
+    
+    /* Garantir que sub-submenu seja visível quando o pai está ativo */
+    .nav-menu li.has-submenu.active .submenu .has-submenu.active > .sub-submenu,
+    .nav-menu li.has-submenu.active .submenu li.has-submenu.active > .sub-submenu {
+        max-height: 1000px !important;
+        padding: 0.5rem 0 !important;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
 
     .sub-submenu .nav-link {
