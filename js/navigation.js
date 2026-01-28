@@ -3,20 +3,31 @@
 // =========================================================
 
 // Navigation Toggle
-const hamburger = document.getElementById('hamburger');
-const navMenu = document.getElementById('navMenu');
+let hamburger = null;
+let navMenu = null;
 export let navLinks = null;
+
+// Função para obter referências atualizadas
+function getNavElements() {
+    hamburger = document.getElementById('hamburger');
+    navMenu = document.getElementById('navMenu');
+    return { hamburger, navMenu };
+}
+
+// Inicializar referências
+getNavElements();
 
 // Garantir que hamburger sempre fique visível no mobile
 function ensureHamburgerVisible() {
-    if (hamburger && window.innerWidth <= 768) {
-        hamburger.style.display = 'flex';
-        hamburger.style.visibility = 'visible';
-        hamburger.style.opacity = '1';
-        hamburger.style.position = 'relative';
-        hamburger.style.setProperty('display', 'flex', 'important');
-        hamburger.style.setProperty('visibility', 'visible', 'important');
-        hamburger.style.setProperty('opacity', '1', 'important');
+    const elements = getNavElements();
+    if (elements.hamburger && window.innerWidth <= 768) {
+        elements.hamburger.style.display = 'flex';
+        elements.hamburger.style.visibility = 'visible';
+        elements.hamburger.style.opacity = '1';
+        elements.hamburger.style.position = 'relative';
+        elements.hamburger.style.setProperty('display', 'flex', 'important');
+        elements.hamburger.style.setProperty('visibility', 'visible', 'important');
+        elements.hamburger.style.setProperty('opacity', '1', 'important');
     }
 }
 
@@ -39,8 +50,9 @@ window.addEventListener('resize', function() {
 // Verificar periodicamente no mobile (fallback)
 if (window.innerWidth <= 768) {
     setInterval(function() {
-        if (hamburger && window.innerWidth <= 768) {
-            const computedStyle = window.getComputedStyle(hamburger);
+        const elements = getNavElements();
+        if (elements.hamburger && window.innerWidth <= 768) {
+            const computedStyle = window.getComputedStyle(elements.hamburger);
             if (computedStyle.display === 'none' || computedStyle.visibility === 'hidden') {
                 ensureHamburgerVisible();
             }
@@ -61,62 +73,78 @@ function closeAllSubmenus() {
 
 // Função para fechar o menu
 function closeMenu() {
-    if (hamburger) hamburger.classList.remove('active');
-    if (navMenu) navMenu.classList.remove('active');
+    const elements = getNavElements();
+    if (elements.hamburger) elements.hamburger.classList.remove('active');
+    if (elements.navMenu) elements.navMenu.classList.remove('active');
     // Fechar todos os submenus também
     closeAllSubmenus();
 }
 
 // Função para abrir/fechar o menu
 function toggleMenu() {
-    if (hamburger && navMenu) {
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
+    const elements = getNavElements();
+    if (elements.hamburger && elements.navMenu) {
+        elements.hamburger.classList.toggle('active');
+        elements.navMenu.classList.toggle('active');
         
         // Se está fechando o menu, fechar todos os submenus também
-        if (!navMenu.classList.contains('active')) {
+        if (!elements.navMenu.classList.contains('active')) {
             closeAllSubmenus();
         }
     }
 }
 
 // Toggle do menu hamburger - Garantir que funcione mesmo após DOM carregar
-let hamburgerInitialized = false;
-
 function initHamburger() {
     const hamburgerEl = document.getElementById('hamburger');
-    if (hamburgerEl && !hamburgerInitialized) {
-        hamburgerInitialized = true;
-        
-        // Adicionar event listener
-        hamburgerEl.addEventListener('click', function(e) {
-            e.stopPropagation();
-            e.preventDefault();
-            toggleMenu();
-        });
-        
-        // Também adicionar via onclick como fallback
-        hamburgerEl.onclick = function(e) {
-            e.stopPropagation();
-            e.preventDefault();
-            toggleMenu();
-        };
-    }
+    if (!hamburgerEl) return;
+    
+    // Remover listeners antigos se existirem
+    const newHamburger = hamburgerEl.cloneNode(true);
+    hamburgerEl.parentNode.replaceChild(newHamburger, hamburgerEl);
+    
+    // Obter referência atualizada
+    const currentHamburger = document.getElementById('hamburger');
+    if (!currentHamburger) return;
+    
+    // Adicionar event listener principal
+    currentHamburger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        toggleMenu();
+    }, { passive: false });
+    
+    // Também adicionar via onclick como fallback
+    currentHamburger.onclick = function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        toggleMenu();
+        return false;
+    };
+    
+    // Garantir que está visível no mobile
+    ensureHamburgerVisible();
 }
 
 // Inicializar quando DOM estiver pronto
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() {
-        initHamburger();
-        setTimeout(initHamburger, 100);
-    });
-} else {
+function setupHamburgerMenu() {
     initHamburger();
+    
+    // Tentar múltiplas vezes para garantir
     setTimeout(initHamburger, 100);
+    setTimeout(initHamburger, 300);
+    setTimeout(initHamburger, 500);
+    setTimeout(initHamburger, 1000);
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupHamburgerMenu);
+} else {
+    setupHamburgerMenu();
 }
 
 // Também tentar inicializar após um pequeno delay (fallback)
-setTimeout(initHamburger, 500);
+setTimeout(setupHamburgerMenu, 2000);
 
 // Submenu Toggle para Mobile e Desktop
 document.querySelectorAll('.has-submenu > .nav-link').forEach(link => {
@@ -172,10 +200,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Fechar menu e submenus ao clicar fora
 document.addEventListener('click', function(e) {
-    if (!navMenu || !hamburger) return;
+    const elements = getNavElements();
+    if (!elements.navMenu || !elements.hamburger) return;
     
-    const isClickInsideMenu = navMenu.contains(e.target);
-    const isClickOnHamburger = hamburger.contains(e.target);
+    const isClickInsideMenu = elements.navMenu.contains(e.target);
+    const isClickOnHamburger = elements.hamburger.contains(e.target);
     const isClickOnSubmenuToggle = e.target.closest('.has-submenu > .nav-link[href="#"]');
     const isClickOnSubmenu = e.target.closest('.submenu, .sub-submenu');
     
@@ -185,7 +214,7 @@ document.addEventListener('click', function(e) {
         closeAllSubmenus();
         
         // Fechar menu hamburger se estiver aberto
-        if (navMenu.classList.contains('active')) {
+        if (elements.navMenu.classList.contains('active')) {
             closeMenu();
         }
     }
@@ -250,7 +279,8 @@ document.addEventListener('keydown', function(e) {
         }
         
         // Se não há submenus abertos, fechar menu hamburger
-        if (navMenu && navMenu.classList.contains('active')) {
+        const elements = getNavElements();
+        if (elements.navMenu && elements.navMenu.classList.contains('active')) {
             closeMenu();
             e.preventDefault();
         }
