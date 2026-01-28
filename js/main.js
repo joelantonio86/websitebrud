@@ -3,24 +3,13 @@
 // =========================================================
 
 // Importar módulos
-import { closeMenu, toggleMenu, ensureHamburgerVisible, navLinks } from './navigation.js';
 import { animateCounter, observer, statsObserver } from './animations.js';
 import { setupFormValidation } from './forms.js';
 import { log } from './utils.js';
 import './analytics.js'; // Inicializar analytics
 
-// Garantir que o menu hambúrguer seja reinicializado após navegação
-window.addEventListener('load', function() {
-    setTimeout(() => {
-        // Forçar reinicialização do menu hambúrguer
-        const hamburger = document.getElementById('hamburger');
-        if (hamburger) {
-            hamburger.dataset.initialized = 'false';
-            // Disparar evento customizado para reinicializar
-            window.dispatchEvent(new Event('reinitHamburger'));
-        }
-    }, 300);
-});
+// Importar módulo de navegação
+import './navigation.js';
 
 // Inicializar quando DOM estiver pronto
 document.addEventListener('DOMContentLoaded', function() {
@@ -263,7 +252,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Exportar para uso global se necessário
 window.BandaRacional = {
-    closeMenu,
-    toggleMenu,
-    ensureHamburgerVisible
+    // Funções de navegação estão disponíveis via window.Navigation
 };
