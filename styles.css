@@ -2052,12 +2052,13 @@ html[data-page="contato"] .contato {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
-    backdrop-filter: blur(2px);
+    pointer-events: none;
 }
 
 .menu-overlay.active {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
 }
 
 @media (max-width: 968px) {
@@ -2071,19 +2072,31 @@ html[data-page="contato"] .contato {
         max-width: 320px !important;
         height: 100vh !important;
         background: #ffffff !important;
-        box-shadow: 2px 0 20px rgba(0, 0, 0, 0.15) !important;
+        box-shadow: 2px 0 20px rgba(0, 0, 0, 0.2) !important;
         transition: left 0.3s ease !important;
         z-index: 1050 !important;
         overflow-y: auto !important;
         padding: 1rem 0 !important;
         margin: 0 !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
     }
 
     body .nav-menu.active {
         left: 0 !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
     }
     
-    /* Texto legível */
+    /* Texto totalmente legível e clicável */
+    body .nav-menu,
+    body .nav-menu * {
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    
     body .nav-menu .nav-link {
         color: #000000 !important;
         font-weight: 500 !important;
@@ -2093,12 +2106,16 @@ html[data-page="contato"] .contato {
         touch-action: manipulation !important;
         display: block !important;
         width: 100% !important;
+        pointer-events: auto !important;
+        user-select: none !important;
     }
     
     body .nav-menu .nav-link:hover,
-    body .nav-menu .nav-link:active {
+    body .nav-menu .nav-link:active,
+    body .nav-menu .nav-link:focus {
         color: #000000 !important;
-        background-color: rgba(255, 215, 0, 0.15) !important;
+        background-color: #FFD700 !important;
+        opacity: 1 !important;
     }
     
     body .nav-menu li.has-submenu > .nav-link::before {
@@ -2109,6 +2126,13 @@ html[data-page="contato"] .contato {
     body .nav-menu li {
         cursor: pointer !important;
         width: 100% !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+    }
+    
+    body .nav-menu li * {
+        pointer-events: auto !important;
+        opacity: 1 !important;
     }
     
     .hamburger {
@@ -2117,18 +2141,26 @@ html[data-page="contato"] .contato {
         opacity: 1 !important;
         z-index: 1051 !important;
         position: relative !important;
+        pointer-events: auto !important;
+    }
+    
+    .hamburger span {
+        opacity: 1 !important;
+        pointer-events: none !important;
     }
     
     .hamburger.active span:nth-child(1) {
         transform: rotate(45deg) translate(5px, 5px);
+        opacity: 1 !important;
     }
     
     .hamburger.active span:nth-child(2) {
-        opacity: 0;
+        opacity: 0 !important;
     }
     
     .hamburger.active span:nth-child(3) {
         transform: rotate(-45deg) translate(7px, -6px);
+        opacity: 1 !important;
     }
 }
 

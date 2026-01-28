@@ -190,25 +190,29 @@
     }
 
     .nav-link {
-        display: block;
-        padding: 1rem 1.5rem;
-        width: 100%;
-        color: #1a1a1a !important; /* Preto escuro para máximo contraste */
+        display: block !important;
+        padding: 1rem 1.5rem !important;
+        width: 100% !important;
+        color: #000000 !important;
         font-weight: 500 !important;
         opacity: 1 !important;
+        pointer-events: auto !important;
+        cursor: pointer !important;
     }
     
     .nav-link:hover,
     .nav-link:active,
     .nav-link:focus {
         color: #000000 !important;
-        background-color: rgba(255, 215, 0, 0.1) !important;
+        background-color: #FFD700 !important;
+        opacity: 1 !important;
     }
     
     .nav-link.active {
         color: #000000 !important;
         font-weight: 700 !important;
-        background-color: rgba(255, 215, 0, 0.15) !important;
+        background-color: #FFD700 !important;
+        opacity: 1 !important;
     }
 
     .nav-menu li.has-submenu > .nav-link::before {
@@ -217,20 +221,21 @@
 
     /* Submenu no Mobile */
     .submenu {
-        position: static;
-        opacity: 1;
-        visibility: visible;
-        transform: none;
-        box-shadow: none;
-        border: none;
-        margin: 0;
-        padding: 0;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease;
-        background: rgba(255, 215, 0, 0.05);
-        border-left: 3px solid var(--primary-gold);
-        margin-left: 1rem;
+        position: static !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        box-shadow: none !important;
+        border: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        max-height: 0 !important;
+        overflow: hidden !important;
+        transition: max-height 0.3s ease !important;
+        background: #ffffff !important;
+        border-left: 3px solid #FFD700 !important;
+        margin-left: 1rem !important;
+        pointer-events: auto !important;
     }
 
     .nav-menu li.has-submenu.active > .submenu {
@@ -255,17 +260,18 @@
         opacity: 1 !important;
         visibility: visible !important;
         transform: none !important;
-        box-shadow: none;
-        border: none;
-        margin: 0;
-        padding: 0;
+        box-shadow: none !important;
+        border: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
         max-height: 0 !important;
-        overflow: hidden;
-        transition: max-height 0.3s ease;
-        background: rgba(255, 215, 0, 0.08);
-        border-left: 3px solid var(--primary-gold);
-        margin-left: 1rem;
+        overflow: hidden !important;
+        transition: max-height 0.3s ease !important;
+        background: #ffffff !important;
+        border-left: 3px solid #FFD700 !important;
+        margin-left: 1rem !important;
         display: block !important;
+        pointer-events: auto !important;
     }
 
     /* Quando o submenu pai está ativo E o sub-submenu está ativo */
@@ -290,26 +296,30 @@
     }
 
     .sub-submenu .nav-link {
-        padding-left: 3.5rem;
-        border-left: none;
-        color: #1a1a1a !important; /* Preto escuro para máximo contraste */
+        padding-left: 3.5rem !important;
+        border-left: none !important;
+        color: #000000 !important;
         font-weight: 500 !important;
         opacity: 1 !important;
+        pointer-events: auto !important;
+        cursor: pointer !important;
     }
 
     .sub-submenu .nav-link:hover,
     .sub-submenu .nav-link:active,
     .sub-submenu .nav-link:focus {
-        padding-left: 3.75rem;
-        border-left: none;
+        padding-left: 3.75rem !important;
+        border-left: none !important;
         color: #000000 !important;
-        background-color: rgba(255, 215, 0, 0.15) !important;
+        background-color: #FFD700 !important;
+        opacity: 1 !important;
     }
     
     .sub-submenu .nav-link.active {
         color: #000000 !important;
         font-weight: 600 !important;
-        background-color: rgba(255, 215, 0, 0.2) !important;
+        background-color: #FFD700 !important;
+        opacity: 1 !important;
     }
 }
 
