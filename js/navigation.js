@@ -305,12 +305,11 @@ function closeMainSubmenus() {
 }
 
 // Submenu Toggle para Mobile e Desktop
+// SUBSTITUA A FUNÇÃO setupSubmenus POR ESTA:
 function setupSubmenus() {
-    // Seleciona todos os links que possuem submenu (principais e sub-submenus)
     const allSubmenuLinks = document.querySelectorAll('.has-submenu > .nav-link');
     
     allSubmenuLinks.forEach(link => {
-        // Evita duplicar listeners se a função for chamada múltiplas vezes
         if (link.dataset.submenuConfigured === 'true') return;
 
         link.addEventListener('click', function(e) {
@@ -318,43 +317,74 @@ function setupSubmenus() {
             const href = this.getAttribute('href');
             const isMobile = window.innerWidth <= 968;
 
-            // Se estiver no mobile ou o link for apenas um marcador (#)
             if (isMobile || href === '#' || !href) {
                 const isActive = parentLi.classList.contains('active');
                 
-                // Se o link for '#' ou se o menu ainda não estiver aberto, impede a navegação
+                // Se for '#' ou se o menu estiver fechado no mobile, não navega, apenas abre
                 if (href === '#' || !isActive) {
                     e.preventDefault();
                     e.stopPropagation();
                 }
 
-                // Lógica de Acordeão: Fecha outros menus irmãos no mesmo nível
+                // Lógica de Acordeão: Fecha outros menus irmãos
                 const siblings = parentLi.parentElement.querySelectorAll(':scope > .has-submenu');
                 siblings.forEach(sibling => {
-                    if (sibling !== parentLi) {
-                        sibling.classList.remove('active');
-                        const siblingLink = sibling.querySelector('.nav-link');
-                        if (siblingLink) siblingLink.setAttribute('aria-expanded', 'false');
-                    }
+                    if (sibling !== parentLi) sibling.classList.remove('active');
                 });
 
-                // Alterna o estado do menu atual
-                if (!isActive) {
-                    parentLi.classList.add('active');
-                    this.setAttribute('aria-expanded', 'true');
-                } else {
-                    // Se já estava aberto e clicou de novo em um link '#', ele fecha
-                    if (href === '#' || !href) {
-                        parentLi.classList.remove('active');
-                        this.setAttribute('aria-expanded', 'false');
-                    }
-                }
+                parentLi.classList.toggle('active');
             }
         });
-
         link.dataset.submenuConfigured = 'true';
     });
 }
+
+// ADICIONE ESTA LÓGICA DE OVERLAY E CLIQUE FORA:
+function toggleMenu() {
+    const navMenu = document.getElementById('navMenu');
+    const hamburger = document.getElementById('hamburger');
+    
+    // Criar overlay se não existir
+    let overlay = document.querySelector('.menu-overlay');
+    if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.className = 'menu-overlay';
+        document.body.appendChild(overlay);
+        
+        // Fechar ao clicar no overlay
+        overlay.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            hamburger.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+    }
+
+    const isOpen = navMenu.classList.toggle('active');
+    hamburger.classList.toggle('active');
+    overlay.classList.toggle('active');
+    
+    if (isOpen) {
+        setupSubmenus();
+    } else {
+        // Limpa submenus abertos ao fechar o principal
+        document.querySelectorAll('.has-submenu').forEach(li => li.classList.remove('active'));
+    }
+}
+
+// Garante que o clique fora do menu (no overlay) funcione
+document.addEventListener('click', function(e) {
+    const navMenu = document.getElementById('navMenu');
+    const hamburger = document.getElementById('hamburger');
+    const overlay = document.querySelector('.menu-overlay');
+    
+    if (navMenu && navMenu.classList.contains('active')) {
+        if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) {
+            navMenu.classList.remove('active');
+            hamburger.classList.remove('active');
+            if (overlay) overlay.classList.remove('active');
+        }
+    }
+}, true);
 
 // Inicializar submenus quando DOM estiver pronto
 if (document.readyState === 'loading') {
@@ -499,25 +529,29 @@ if (typeof MutationObserver !== 'undefined') {
 
 // Fechar menu e submenus ao clicar fora
 document.addEventListener('click', function(e) {
-    const elements = getNavElements();
-    if (!elements.navMenu || !elements.hamburger) return;
+    const navMenu = document.getElementById('navMenu');
+    const hamburger = document.getElementById('hamburger');
     
-    const isClickInsideMenu = elements.navMenu.contains(e.target);
-    const isClickOnHamburger = elements.hamburger.contains(e.target);
-    const isClickOnSubmenuToggle = e.target.closest('.has-submenu > .nav-link[href="#"]');
-    const isClickOnSubmenu = e.target.closest('.submenu, .sub-submenu');
-    
-    // Se clicou fora do menu e não é o hamburger ou toggle de submenu
-    if (!isClickInsideMenu && !isClickOnHamburger && !isClickOnSubmenuToggle && !isClickOnSubmenu) {
-        // Fechar todos os submenus (mesmo se o menu hamburger não estiver aberto)
-        closeAllSubmenus();
-        
-        // Fechar menu hamburger se estiver aberto
-        if (elements.navMenu.classList.contains('active')) {
-            closeMenu();
+    // Se o menu estiver aberto
+    if (navMenu && navMenu.classList.contains('active')) {
+        // Verifica se o clique NÃO foi dentro do menu e NÃO foi no botão hamburger
+        const isClickInsideMenu = navMenu.contains(e.target);
+        const isClickOnHamburger = hamburger.contains(e.target);
+
+        if (!isClickInsideMenu && !isClickOnHamburger) {
+            // Fecha o menu principal
+            navMenu.classList.remove('active');
+            hamburger.classList.remove('active');
+            
+            // Fecha todos os submenus para a próxima vez que abrir estar limpo
+            document.querySelectorAll('.has-submenu').forEach(li => {
+                li.classList.remove('active');
+                const link = li.querySelector('.nav-link');
+                if (link) link.setAttribute('aria-expanded', 'false');
+            });
         }
     }
-}, true);
+}, true); // O 'true' garante que capturemos o clique antes de outros eventos
 
 // Navbar scroll effect - NÃO esconder o navbar ao rolar
 const navbar = document.getElementById('navbar');
