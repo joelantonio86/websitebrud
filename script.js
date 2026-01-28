@@ -93,56 +93,117 @@ function toggleMenu() {
 }
 
 // Toggle do menu hamburger - Garantir que funcione mesmo após DOM carregar
+let hamburgerClickHandlerScript = null;
+let hamburgerInitializedScript = false;
+
 function initHamburger() {
-    const hamburgerEl = document.getElementById('hamburger');
-    if (!hamburgerEl) return;
+    const elements = getNavElements();
+    const hamburgerEl = elements.hamburger;
+    
+    if (!hamburgerEl) {
+        return false;
+    }
+    
+    // Se já foi inicializado neste elemento, não reinicializar
+    if (hamburgerEl.dataset.initialized === 'true' && hamburgerInitializedScript) {
+        return true;
+    }
     
     // Remover listeners antigos se existirem
-    const newHamburger = hamburgerEl.cloneNode(true);
-    hamburgerEl.parentNode.replaceChild(newHamburger, hamburgerEl);
+    if (hamburgerClickHandlerScript) {
+        hamburgerEl.removeEventListener('click', hamburgerClickHandlerScript);
+        hamburgerEl.removeEventListener('touchend', hamburgerClickHandlerScript);
+        hamburgerEl.onclick = null;
+    }
     
-    // Obter referência atualizada
-    const currentHamburger = document.getElementById('hamburger');
-    if (!currentHamburger) return;
-    
-    // Adicionar event listener principal
-    currentHamburger.addEventListener('click', function(e) {
+    // Criar novo handler
+    hamburgerClickHandlerScript = function(e) {
         e.stopPropagation();
         e.preventDefault();
-        toggleMenu();
-    }, { passive: false });
-    
-    // Também adicionar via onclick como fallback
-    currentHamburger.onclick = function(e) {
-        e.stopPropagation();
-        e.preventDefault();
+        
         toggleMenu();
         return false;
     };
     
+    // Adicionar múltiplos tipos de eventos
+    hamburgerEl.addEventListener('click', hamburgerClickHandlerScript, { passive: false });
+    hamburgerEl.addEventListener('touchend', hamburgerClickHandlerScript, { passive: false });
+    hamburgerEl.onclick = hamburgerClickHandlerScript;
+    
+    // Marcar como inicializado
+    hamburgerEl.dataset.initialized = 'true';
+    hamburgerInitializedScript = true;
+    
     // Garantir que está visível no mobile
     ensureHamburgerVisible();
+    
+    return true;
+}
+
+// Função para reinicializar após navegação
+function reinitHamburgerAfterNavigationScript() {
+    hamburgerInitializedScript = false;
+    const elements = getNavElements();
+    if (elements.hamburger) {
+        elements.hamburger.dataset.initialized = 'false';
+    }
+    setupHamburgerMenu();
 }
 
 // Inicializar quando DOM estiver pronto
 function setupHamburgerMenu() {
-    initHamburger();
+    // Resetar flag quando tentar inicializar novamente
+    const elements = getNavElements();
+    if (elements.hamburger && !elements.hamburger.dataset.initialized) {
+        hamburgerInitializedScript = false;
+    }
     
-    // Tentar múltiplas vezes para garantir
-    setTimeout(initHamburger, 100);
-    setTimeout(initHamburger, 300);
-    setTimeout(initHamburger, 500);
-    setTimeout(initHamburger, 1000);
+    let initialized = initHamburger();
+    
+    // Se não inicializou, tentar novamente
+    if (!initialized) {
+        setTimeout(() => initHamburger(), 100);
+        setTimeout(() => initHamburger(), 300);
+        setTimeout(() => initHamburger(), 500);
+        setTimeout(() => initHamburger(), 1000);
+    }
 }
 
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', setupHamburgerMenu);
+    document.addEventListener('DOMContentLoaded', function() {
+        setupHamburgerMenu();
+        setTimeout(setupHamburgerMenu, 200);
+        setTimeout(setupHamburgerMenu, 500);
+    });
 } else {
     setupHamburgerMenu();
+    setTimeout(setupHamburgerMenu, 200);
+    setTimeout(setupHamburgerMenu, 500);
 }
+
+// Reinicializar após navegação
+window.addEventListener('load', function() {
+    setTimeout(() => {
+        reinitHamburgerAfterNavigationScript();
+    }, 100);
+});
 
 // Também tentar inicializar após um pequeno delay (fallback)
 setTimeout(setupHamburgerMenu, 2000);
+
+// Escutar evento customizado para reinicializar
+window.addEventListener('reinitHamburger', function() {
+    reinitHamburgerAfterNavigationScript();
+});
+
+// Reinicializar quando a página fica visível novamente
+document.addEventListener('visibilitychange', function() {
+    if (!document.hidden) {
+        setTimeout(() => {
+            reinitHamburgerAfterNavigationScript();
+        }, 100);
+    }
+});
 
 // Submenu Toggle para Mobile e Desktop
 document.querySelectorAll('.has-submenu > .nav-link').forEach(link => {
