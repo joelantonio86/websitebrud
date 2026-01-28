@@ -5,7 +5,7 @@
 // Navigation Toggle
 let hamburger = null;
 let navMenu = null;
-export let navLinks = null;
+let navLinks = null;
 
 // Função para obter referências atualizadas
 function getNavElements() {
@@ -95,52 +95,94 @@ function toggleMenu() {
 }
 
 // Toggle do menu hamburger - Garantir que funcione mesmo após DOM carregar
+let hamburgerClickHandler = null;
+
 function initHamburger() {
-    const hamburgerEl = document.getElementById('hamburger');
-    if (!hamburgerEl) return;
+    const elements = getNavElements();
+    const hamburgerEl = elements.hamburger;
     
-    // Remover listeners antigos se existirem
-    const newHamburger = hamburgerEl.cloneNode(true);
-    hamburgerEl.parentNode.replaceChild(newHamburger, hamburgerEl);
+    if (!hamburgerEl) {
+        return false;
+    }
     
-    // Obter referência atualizada
-    const currentHamburger = document.getElementById('hamburger');
-    if (!currentHamburger) return;
+    // Remover listener antigo se existir
+    if (hamburgerClickHandler) {
+        hamburgerEl.removeEventListener('click', hamburgerClickHandler);
+        hamburgerEl.onclick = null;
+    }
     
-    // Adicionar event listener principal
-    currentHamburger.addEventListener('click', function(e) {
+    // Criar novo handler
+    hamburgerClickHandler = function(e) {
         e.stopPropagation();
         e.preventDefault();
-        toggleMenu();
-    }, { passive: false });
-    
-    // Também adicionar via onclick como fallback
-    currentHamburger.onclick = function(e) {
-        e.stopPropagation();
-        e.preventDefault();
+        e.stopImmediatePropagation();
+        
+        // Prevenir qualquer comportamento de arrastar
+        if (e.type === 'touchstart' || e.type === 'touchmove') {
+            e.preventDefault();
+        }
+        
         toggleMenu();
         return false;
     };
     
+    // Adicionar múltiplos tipos de eventos para garantir
+    hamburgerEl.addEventListener('click', hamburgerClickHandler, { passive: false, capture: true });
+    hamburgerEl.addEventListener('touchend', hamburgerClickHandler, { passive: false, capture: true });
+    
+    // Também adicionar via onclick como fallback
+    hamburgerEl.onclick = hamburgerClickHandler;
+    
+    // Prevenir arrastar
+    hamburgerEl.addEventListener('touchstart', function(e) {
+        e.stopPropagation();
+    }, { passive: false });
+    
+    hamburgerEl.addEventListener('touchmove', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }, { passive: false });
+    
     // Garantir que está visível no mobile
     ensureHamburgerVisible();
+    
+    return true;
 }
 
 // Inicializar quando DOM estiver pronto
 function setupHamburgerMenu() {
-    initHamburger();
+    let initialized = false;
     
-    // Tentar múltiplas vezes para garantir
-    setTimeout(initHamburger, 100);
-    setTimeout(initHamburger, 300);
-    setTimeout(initHamburger, 500);
-    setTimeout(initHamburger, 1000);
+    // Tentar inicializar imediatamente
+    initialized = initHamburger();
+    
+    // Se não inicializou, tentar novamente
+    if (!initialized) {
+        setTimeout(() => {
+            initHamburger();
+        }, 100);
+        setTimeout(() => {
+            initHamburger();
+        }, 300);
+        setTimeout(() => {
+            initHamburger();
+        }, 500);
+        setTimeout(() => {
+            initHamburger();
+        }, 1000);
+    }
 }
 
+// Inicializar quando DOM estiver pronto
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', setupHamburgerMenu);
+    document.addEventListener('DOMContentLoaded', function() {
+        setupHamburgerMenu();
+        // Tentar novamente após um pequeno delay
+        setTimeout(setupHamburgerMenu, 200);
+    });
 } else {
     setupHamburgerMenu();
+    setTimeout(setupHamburgerMenu, 200);
 }
 
 // Também tentar inicializar após um pequeno delay (fallback)
@@ -220,17 +262,28 @@ document.addEventListener('click', function(e) {
     }
 }, true);
 
-// Navbar scroll effect
+// Navbar scroll effect - NÃO esconder o navbar ao rolar
 const navbar = document.getElementById('navbar');
 let lastScroll = 0;
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
     
-    if (currentScroll > 100) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
+    // Apenas adicionar classe scrolled para mudanças visuais, mas SEMPRE manter visível
+    if (navbar) {
+        if (currentScroll > 100) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+        
+        // Garantir que navbar sempre fique visível
+        navbar.style.display = 'block';
+        navbar.style.visibility = 'visible';
+        navbar.style.opacity = '1';
+        navbar.style.transform = 'translateY(0)';
+        navbar.style.position = 'fixed';
+        navbar.style.top = '0';
     }
     
     ensureHamburgerVisible();

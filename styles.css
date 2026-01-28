@@ -127,16 +127,21 @@ html[data-page="contato"] main {
 
 /* Navigation */
 .navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.95);
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    background: rgba(255, 255, 255, 0.95) !important;
     backdrop-filter: blur(10px);
-    z-index: 1000;
+    z-index: 1000 !important;
     padding: 1rem 0;
-    transition: all 0.3s ease;
+    transition: padding 0.3s ease, box-shadow 0.3s ease;
     border-bottom: 2px solid var(--primary-gold);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
 }
 
 .navbar.scrolled {
@@ -2061,16 +2066,31 @@ html[data-page="contato"] .contato {
         background: var(--white);
         width: 100%;
         text-align: center;
-        transition: 0.3s;
+        transition: left 0.3s ease;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         padding: 2rem 0;
         border-top: 2px solid var(--primary-gold);
         max-height: calc(100vh - 70px);
         overflow-y: auto;
+        transform: translateX(0) !important;
+        will-change: left;
+        touch-action: pan-y;
+        -webkit-overflow-scrolling: touch;
     }
 
     .nav-menu.active {
         left: 0;
+        transform: translateX(0) !important;
+    }
+    
+    /* Prevenir arrastar no menu */
+    .nav-menu,
+    .nav-menu * {
+        -webkit-user-drag: none;
+        -khtml-user-drag: none;
+        -moz-user-drag: none;
+        -o-user-drag: none;
+        user-drag: none;
     }
 
     .nav-menu li {
@@ -2092,6 +2112,10 @@ html[data-page="contato"] .contato {
         visibility: visible !important;
         opacity: 1 !important;
         position: relative;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        user-select: none;
+        -webkit-user-select: none;
     }
     
     /* Garantir que hamburger sempre fique visível no mobile - todas as situações */
@@ -2101,6 +2125,17 @@ html[data-page="contato"] .contato {
         display: flex !important;
         visibility: visible !important;
         opacity: 1 !important;
+    }
+    
+    /* Prevenir arrastar no hamburger */
+    .hamburger,
+    .hamburger * {
+        -webkit-user-drag: none;
+        -khtml-user-drag: none;
+        -moz-user-drag: none;
+        -o-user-drag: none;
+        user-drag: none;
+        pointer-events: auto;
     }
 
     .hamburger span {
