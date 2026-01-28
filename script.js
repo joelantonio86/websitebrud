@@ -67,6 +67,15 @@ function closeAllSubmenus() {
             link.setAttribute('aria-expanded', 'false');
         }
     });
+    
+    // Também fechar sub-submenus
+    document.querySelectorAll('.submenu .has-submenu').forEach(li => {
+        li.classList.remove('active');
+        const link = li.querySelector('.nav-link');
+        if (link) {
+            link.setAttribute('aria-expanded', 'false');
+        }
+    });
 }
 
 // Função para fechar o menu
@@ -251,21 +260,22 @@ function setupSubmenusScript() {
         }
     });
     
-    // Configurar sub-submenus também
-    document.querySelectorAll('.submenu li.has-submenu > .nav-link').forEach(link => {
+    // Configurar sub-submenus também (Sibelius dentro de Repertório)
+    document.querySelectorAll('.submenu .has-submenu > .nav-link').forEach(link => {
         // Verificar se já tem listener configurado
         if (!link.dataset.subsubmenuConfigured) {
             link.addEventListener('click', function(e) {
+                e.stopPropagation(); // Importante: não propagar para o submenu pai
+                
                 const parentLi = this.closest('li');
                 const href = this.getAttribute('href');
                 
                 if (href === '#' || !href) {
                     e.preventDefault();
-                    e.stopPropagation();
                     
                     const isActive = parentLi.classList.contains('active');
                     
-                    // Toggle do sub-submenu atual
+                    // Toggle do sub-submenu atual (não fechar outros submenus, apenas este)
                     if (!isActive) {
                         parentLi.classList.add('active');
                         this.setAttribute('aria-expanded', 'true');
@@ -273,6 +283,13 @@ function setupSubmenusScript() {
                         parentLi.classList.remove('active');
                         this.setAttribute('aria-expanded', 'false');
                     }
+                } else {
+                    // Se tem href válido, fecha apenas este sub-submenu e navega
+                    parentLi.classList.remove('active');
+                    this.setAttribute('aria-expanded', 'false');
+                    setTimeout(() => {
+                        closeMenu();
+                    }, 100);
                 }
             });
             

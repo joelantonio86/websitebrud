@@ -250,9 +250,12 @@
         margin-left: 1rem;
     }
 
-    .submenu li.has-submenu.active > .sub-submenu {
+    .submenu li.has-submenu.active > .sub-submenu,
+    .submenu .has-submenu.active > .sub-submenu {
         max-height: 1000px;
         padding: 0.5rem 0;
+        display: block !important;
+        visibility: visible !important;
     }
 
     .sub-submenu .nav-link {
