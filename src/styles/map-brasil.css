@@ -547,33 +547,41 @@
 
 @media (max-width: 768px) {
   .mapa-brasil-section {
-    padding: var(--space-16) 0;
+    padding: var(--space-8) 0 var(--space-12);
     padding-left: env(safe-area-inset-left, 0);
     padding-right: env(safe-area-inset-right, 0);
   }
 
+  .mapa-header {
+    margin-bottom: var(--space-4);
+    padding: 0 var(--space-2) var(--space-2);
+  }
+
   .mapa-container {
-    padding: var(--space-3);
-    padding-left: max(var(--space-3), env(safe-area-inset-left, 0));
-    padding-right: max(var(--space-3), env(safe-area-inset-right, 0));
+    padding: var(--space-2);
+    padding-left: max(var(--space-2), env(safe-area-inset-left, 0));
+    padding-right: max(var(--space-2), env(safe-area-inset-right, 0));
     border-radius: var(--radius-xl);
     max-width: 100%;
     margin-left: 0;
     margin-right: 0;
+    gap: var(--space-4);
   }
 
-  /* Mapa mais amplo no mobile: menos padding, ocupa toda a largura útil */
+  /* Mapa ocupa todo o espaço no mobile: padding mínimo */
   .mapa-wrapper {
-    min-height: 420px;
-    padding: var(--space-2);
+    min-height: 380px;
+    padding: 0;
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
+    border-radius: var(--radius-lg);
   }
 
   .mapa-wrapper svg {
     width: 100%;
     max-width: 100%;
+    min-height: 360px;
   }
 
   .legenda-items {
@@ -603,14 +611,21 @@
 }
 
 @media (max-width: 480px) {
+  .mapa-brasil-section {
+    padding: var(--space-6) 0 var(--space-10);
+  }
+
   .mapa-container {
-    padding: var(--space-2);
+    padding: var(--space-1);
+    padding-left: max(var(--space-1), env(safe-area-inset-left, 0));
+    padding-right: max(var(--space-1), env(safe-area-inset-right, 0));
     border-radius: var(--radius-lg);
+    gap: var(--space-3);
   }
 
   .mapa-wrapper {
-    min-height: 380px;
-    padding: var(--space-1);
+    min-height: 340px;
+    padding: 0;
     overflow: visible;
   }
 
@@ -618,6 +633,7 @@
     overflow: visible;
     width: 100%;
     max-width: 100%;
+    min-height: 320px;
   }
 
   .mapa-title {

@@ -128,14 +128,14 @@ const MapBrasil: React.FC = () => {
   const totalBandas = useMemo(() => estadosData.reduce((sum, estado) => sum + estado.bandas, 0), []);
   const estadosComBandas = useMemo(() => estadosData.filter(e => e.bandas > 0).length, []);
 
-  // Ajustar scale baseado no tamanho da tela
+  // Ajustar scale baseado no tamanho da tela (mobile: escala maior para aproveitar o espaço)
   useEffect(() => {
     const updateScale = (): void => {
       const width = window.innerWidth;
       if (width < 480) {
-        setMapScale(650); // Mobile pequeno
+        setMapScale(950); // Mobile pequeno: mapa bem maior
       } else if (width < 768) {
-        setMapScale(700); // Mobile/Tablet
+        setMapScale(1000); // Mobile/Tablet: mapa bem maior
       } else if (width < 1024) {
         setMapScale(750); // Tablet grande
       } else {
