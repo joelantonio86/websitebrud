@@ -1,0 +1,625 @@
+/* ========================================================= */
+/* EVENTOS POR TODO BRASIL - Bandas Racionais */
+/* ========================================================= */
+
+.bandas-brasil-page {
+  padding-bottom: var(--space-12, 3rem);
+  min-height: 60vh;
+  background: linear-gradient(180deg, var(--gray-50, #f9fafb) 0%, var(--white, #fff) 6%);
+}
+
+.bandas-brasil-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 var(--space-6, 1.5rem);
+}
+
+/* Hero / Boas-vindas */
+.bandas-brasil-hero {
+  background: var(--white, #fff);
+  border-radius: 22px;
+  padding: var(--space-8, 2rem) var(--space-6, 1.5rem);
+  margin-bottom: var(--space-8, 2rem);
+  border: 1px solid var(--gray-200, #e5e7eb);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.bandas-brasil-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--primary-blue, #1e3a8a), var(--primary-gold, #ffd700));
+  border-radius: 22px 22px 0 0;
+}
+
+.bandas-brasil-hero-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto var(--space-5, 1.25rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--blue-50, #eff6ff), var(--gold-100, #fffce6));
+  border-radius: 50%;
+  color: var(--primary-blue, #1e3a8a);
+  font-size: 1.75rem;
+  box-shadow: 0 4px 14px rgba(30, 58, 138, 0.15);
+}
+
+.bandas-brasil-hero-text {
+  font-size: var(--font-size-lg, 1.125rem);
+  color: var(--gray-700, #374151);
+  line-height: 1.75;
+  text-align: center;
+  margin: 0;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bandas-brasil-hero-text strong {
+  color: var(--primary-blue, #1e3a8a);
+  font-weight: 700;
+}
+
+/* Índice por estado e cidade */
+.bandas-brasil-index {
+  background: linear-gradient(135deg, var(--blue-50, #eff6ff) 0%, var(--gold-50, #fffbeb) 100%);
+  border-radius: 18px;
+  padding: var(--space-6, 1.5rem);
+  margin-bottom: var(--space-6, 1.5rem);
+  border: 1px solid var(--gray-200, #e5e7eb);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Mobile: esconder índice desktop */
+.bandas-brasil-index-mobile {
+  display: none;
+}
+
+/* Desktop: esconder índice mobile (accordion) */
+@media (min-width: 769px) {
+  .bandas-brasil-index-desktop {
+    display: block;
+  }
+}
+
+/* Mobile: esconder toda a seção "Bandas por cidade e estado" */
+@media (max-width: 768px) {
+  .bandas-brasil-index-desktop,
+  .bandas-brasil-index-mobile {
+    display: none !important;
+  }
+}
+
+.bandas-brasil-index-hint {
+  font-size: var(--font-size-sm, 0.875rem);
+  color: var(--gray-600, #4b5563);
+  margin: 0 0 var(--space-4, 1rem);
+  line-height: 1.5;
+}
+
+.bandas-brasil-index-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.bandas-brasil-index-accordion-item {
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--white, #fff);
+  border: 1px solid var(--gray-200, #e5e7eb);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.bandas-brasil-index-accordion-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 48px;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-size: var(--font-size-base, 1rem);
+  font-weight: 600;
+  color: var(--primary-blue, #1e3a8a);
+  background: var(--white, #fff);
+  border: none;
+  cursor: pointer;
+  gap: 0.75rem;
+  transition: background 0.2s, color 0.2s;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.bandas-brasil-index-accordion-trigger:hover {
+  background: var(--blue-50, #eff6ff);
+}
+
+.bandas-brasil-index-accordion-trigger.open {
+  background: var(--blue-50, #eff6ff);
+  border-bottom: 1px solid var(--gray-200, #e5e7eb);
+}
+
+.bandas-brasil-index-accordion-sigla {
+  flex-shrink: 0;
+  font-size: var(--font-size-sm, 0.875rem);
+  font-weight: 800;
+  color: var(--white, #fff);
+  background: var(--primary-blue, #1e3a8a);
+  padding: 0.25rem 0.6rem;
+  border-radius: 8px;
+}
+
+.bandas-brasil-index-accordion-count {
+  flex: 1;
+  font-size: var(--font-size-sm, 0.875rem);
+  font-weight: 500;
+  color: var(--gray-600, #4b5563);
+}
+
+.bandas-brasil-index-accordion-chevron {
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  color: var(--gray-500, #6b7280);
+  transition: transform 0.2s;
+}
+
+.bandas-brasil-index-accordion-panel {
+  padding: 0.25rem 0.75rem 0.75rem;
+  background: var(--gray-50, #f9fafb);
+  border-top: none;
+}
+
+.bandas-brasil-index-accordion-panel[hidden] {
+  display: none;
+}
+
+.bandas-brasil-index-accordion-city {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 44px;
+  padding: 0.6rem 1rem;
+  margin-top: 0.25rem;
+  text-align: left;
+  font-size: var(--font-size-base, 1rem);
+  font-weight: 500;
+  color: var(--gray-700, #374151);
+  background: var(--white, #fff);
+  border: 1px solid var(--gray-200, #e5e7eb);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.bandas-brasil-index-accordion-city:hover {
+  background: var(--blue-50, #eff6ff);
+  border-color: var(--primary-blue, #1e3a8a);
+  color: var(--primary-blue, #1e3a8a);
+}
+
+.bandas-brasil-index-title {
+  font-size: var(--font-size-base, 1rem);
+  font-weight: 700;
+  color: var(--primary-blue, #1e3a8a);
+  margin: 0 0 var(--space-4, 1rem);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.bandas-brasil-index-icon {
+  color: var(--primary-gold, #d4af37);
+  font-size: 1rem;
+}
+
+.bandas-brasil-index-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4, 1rem) var(--space-6, 1.5rem);
+}
+
+.bandas-brasil-index-estado {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.bandas-brasil-index-sigla {
+  flex-shrink: 0;
+  min-width: 28px;
+  font-size: var(--font-size-sm, 0.875rem);
+  font-weight: 800;
+  color: var(--primary-blue, #1e3a8a);
+  background: var(--white, #fff);
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  border: 1px solid var(--gray-200, #e5e7eb);
+}
+
+.bandas-brasil-index-cidades {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.bandas-brasil-index-link {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  font-size: var(--font-size-sm, 0.875rem);
+  font-weight: 500;
+  color: var(--gray-700, #374151);
+  background: var(--white, #fff);
+  border: 1px solid var(--gray-300, #d1d5db);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.bandas-brasil-index-link:hover {
+  background: var(--primary-blue, #1e3a8a);
+  color: var(--white, #fff);
+  border-color: var(--primary-blue, #1e3a8a);
+}
+
+/* Filtro por estado */
+.bandas-brasil-filtro {
+  margin-bottom: var(--space-6, 1.5rem);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3, 0.75rem);
+}
+
+.bandas-brasil-filtro-label {
+  font-size: var(--font-size-sm, 0.875rem);
+  font-weight: 600;
+  color: var(--gray-600, #4b5563);
+}
+
+.bandas-brasil-filtro-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.bandas-brasil-pill {
+  padding: 0.5rem 1rem;
+  font-size: var(--font-size-sm, 0.875rem);
+  font-weight: 600;
+  color: var(--primary-blue, #1e3a8a);
+  background: var(--white, #fff);
+  border: 1px solid var(--gray-300, #d1d5db);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.bandas-brasil-pill:hover {
+  background: var(--blue-50, #eff6ff);
+  border-color: var(--primary-blue, #1e3a8a);
+}
+
+.bandas-brasil-pill.active {
+  background: var(--primary-blue, #1e3a8a);
+  color: var(--white, #fff);
+  border-color: var(--primary-blue, #1e3a8a);
+}
+
+/* Grid de bandas */
+.bandas-brasil-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-6, 1.5rem);
+  margin-bottom: var(--space-8, 2rem);
+}
+
+.bandas-brasil-card {
+  background: var(--white, #fff);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--gray-200, #e5e7eb);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.bandas-brasil-card:hover {
+  border-color: var(--primary-blue, #1e3a8a);
+  box-shadow: var(--shadow-lg), 0 0 0 1px rgba(30, 58, 138, 0.1);
+  transform: translateY(-4px);
+}
+
+.bandas-brasil-card-header {
+  padding: var(--space-5, 1.25rem);
+  border-bottom: 1px solid var(--gray-100, #f3f4f6);
+}
+
+.bandas-brasil-card-uf {
+  display: inline-block;
+  font-size: var(--font-size-xs, 0.75rem);
+  font-weight: 800;
+  color: var(--primary-blue, #1e3a8a);
+  background: var(--blue-50, #eff6ff);
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  margin-bottom: 0.35rem;
+}
+
+.bandas-brasil-card-titulo {
+  font-size: var(--font-size-lg, 1.125rem);
+  font-weight: 700;
+  color: var(--gray-900, #111827);
+  margin: 0 0 0.25rem;
+  line-height: 1.3;
+}
+
+.bandas-brasil-card-cidade {
+  font-size: var(--font-size-sm, 0.875rem);
+  color: var(--gray-500, #6b7280);
+  margin: 0;
+}
+
+/* Área de mídia (placeholder ou galeria) */
+.bandas-brasil-card-midia {
+  flex: 1;
+  min-height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4, 1rem);
+  background: var(--gray-50, #f9fafb);
+}
+
+.bandas-brasil-card-placeholder {
+  text-align: center;
+  padding: var(--space-5, 1.25rem);
+}
+
+.bandas-brasil-placeholder-icon {
+  font-size: 2.5rem;
+  color: var(--gray-300, #d1d5db);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.bandas-brasil-placeholder-text {
+  display: block;
+  font-size: var(--font-size-sm, 0.875rem);
+  font-weight: 600;
+  color: var(--gray-500, #6b7280);
+}
+
+.bandas-brasil-placeholder-hint {
+  display: block;
+  font-size: var(--font-size-xs, 0.75rem);
+  color: var(--gray-400, #9ca3af);
+  margin-top: 0.25rem;
+}
+
+.bandas-brasil-card-galeria {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  width: 100%;
+  position: relative;
+}
+
+.bandas-brasil-mini-thumb {
+  aspect-ratio: 1;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  background: var(--gray-200, #e5e7eb);
+}
+
+.bandas-brasil-thumb-btn {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.bandas-brasil-thumb-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.bandas-brasil-thumb-btn:hover img {
+  transform: scale(1.08);
+}
+
+.bandas-brasil-thumb-video .bandas-brasil-thumb-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(30, 58, 138, 0.85);
+  color: var(--white, #fff);
+  border-radius: 50%;
+  font-size: 0.875rem;
+}
+
+.bandas-brasil-mais {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  font-size: var(--font-size-xs, 0.75rem);
+  font-weight: 700;
+  color: var(--white, #fff);
+  background: rgba(0, 0, 0, 0.7);
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+}
+
+/* Paginação */
+.bandas-brasil-paginacao {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4, 1rem);
+  padding: var(--space-6, 1.5rem) 0;
+  border-top: 1px solid var(--gray-200, #e5e7eb);
+}
+
+.bandas-brasil-pag-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  font-size: var(--font-size-sm, 0.875rem);
+  font-weight: 600;
+  color: var(--primary-blue, #1e3a8a);
+  background: var(--white, #fff);
+  border: 1px solid var(--gray-300, #d1d5db);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.bandas-brasil-pag-btn:hover:not(:disabled) {
+  background: var(--primary-blue, #1e3a8a);
+  color: var(--white, #fff);
+  border-color: var(--primary-blue, #1e3a8a);
+}
+
+.bandas-brasil-pag-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.bandas-brasil-pag-info {
+  font-size: var(--font-size-sm, 0.875rem);
+  color: var(--gray-600, #4b5563);
+  font-weight: 500;
+}
+
+.bandas-brasil-pag-numeros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  justify-content: center;
+}
+
+.bandas-brasil-pag-num {
+  min-width: 40px;
+  height: 40px;
+  padding: 0;
+  font-size: var(--font-size-sm, 0.875rem);
+  font-weight: 600;
+  color: var(--gray-700, #374151);
+  background: var(--white, #fff);
+  border: 1px solid var(--gray-300, #d1d5db);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.bandas-brasil-pag-num:hover {
+  background: var(--blue-50, #eff6ff);
+  border-color: var(--primary-blue, #1e3a8a);
+  color: var(--primary-blue, #1e3a8a);
+}
+
+.bandas-brasil-pag-num.active {
+  background: var(--primary-blue, #1e3a8a);
+  color: var(--white, #fff);
+  border-color: var(--primary-blue, #1e3a8a);
+}
+
+@media (max-width: 768px) {
+  .bandas-brasil-page {
+    padding-bottom: max(var(--space-12, 3rem), env(safe-area-inset-bottom));
+  }
+
+  .bandas-brasil-container {
+    padding: 0 var(--space-4, 1rem);
+    padding-left: max(var(--space-4, 1rem), env(safe-area-inset-left));
+    padding-right: max(var(--space-4, 1rem), env(safe-area-inset-right));
+  }
+
+  .bandas-brasil-hero {
+    padding: var(--space-6, 1.5rem) var(--space-4, 1rem);
+  }
+
+  .bandas-brasil-hero-text {
+    font-size: var(--font-size-base, 1rem);
+  }
+
+  .bandas-brasil-index-link {
+    min-height: 44px;
+    padding: 0.5rem 1rem;
+    display: inline-flex;
+    align-items: center;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  .bandas-brasil-index-list {
+    flex-direction: column;
+    gap: var(--space-3, 0.75rem);
+  }
+
+  .bandas-brasil-filtro {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .bandas-brasil-pill {
+    min-height: 44px;
+    padding: 0.6rem 1rem;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  .bandas-brasil-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-4, 1rem);
+  }
+
+  .bandas-brasil-pag-btn {
+    min-height: 44px;
+    padding: 0.75rem 1rem;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  .bandas-brasil-pag-num {
+    min-width: 44px;
+    min-height: 44px;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  .bandas-brasil-paginacao {
+    flex-direction: column;
+    padding-bottom: max(var(--space-6, 1.5rem), env(safe-area-inset-bottom));
+  }
+}

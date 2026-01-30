@@ -1,0 +1,398 @@
+/* ========================================================= */
+/* CALENDÁRIOS BRUD — Visual profissional • UX mobile e web */
+/* ========================================================= */
+
+.calendarios-page {
+  padding-bottom: max(var(--space-12, 3rem), env(safe-area-inset-bottom));
+  min-height: 60vh;
+  background: var(--gray-50, #f9fafb);
+}
+
+.calendarios-container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 var(--space-5, 1.25rem);
+  padding-left: max(var(--space-5, 1.25rem), env(safe-area-inset-left));
+  padding-right: max(var(--space-5, 1.25rem), env(safe-area-inset-right));
+}
+
+/* ---- Títulos de seção ---- */
+.calendarios-section {
+  margin-bottom: var(--space-10, 2.5rem);
+}
+
+.calendarios-section:last-child {
+  margin-bottom: 0;
+}
+
+.calendarios-section-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--gray-900, #111827);
+  margin: 0 0 var(--space-2, 0.5rem);
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.calendarios-section-icon {
+  color: var(--primary-blue, #1e3a8a);
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.calendarios-section-desc {
+  font-size: 0.9375rem;
+  color: var(--gray-600, #4b5563);
+  line-height: 1.6;
+  margin: 0 0 var(--space-5, 1.25rem);
+  max-width: 520px;
+}
+
+/* ========== Seção 1: Agenda BRUD 2026 ========== */
+.calendarios-agenda {
+  background: var(--white, #fff);
+  border-radius: 16px;
+  padding: var(--space-6, 1.5rem);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--gray-200, #e5e7eb);
+  position: relative;
+  overflow: hidden;
+}
+
+.calendarios-agenda::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--primary-blue, #1e3a8a);
+  border-radius: 16px 16px 0 0;
+}
+
+/* Faixa ano + 12 meses */
+.calendarios-ano-strip {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5, 1.25rem);
+  margin-bottom: var(--space-5, 1.25rem);
+  padding-bottom: var(--space-5, 1.25rem);
+  border-bottom: 1px solid var(--gray-200, #e5e7eb);
+}
+
+.calendarios-ano-numero {
+  flex-shrink: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-blue, #1e3a8a);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.calendarios-meses-grid {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 0.25rem;
+}
+
+.calendarios-mes-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0.2rem;
+  background: var(--gray-100, #f3f4f6);
+  border-radius: 8px;
+  border: 1px solid transparent;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.calendarios-mes-item.tem-evento {
+  background: var(--primary-blue, #1e3a8a);
+  color: var(--white, #fff);
+  font-weight: 600;
+}
+
+.calendarios-mes-num {
+  font-size: 0.6875rem;
+  line-height: 1.2;
+  opacity: 0.9;
+}
+
+.calendarios-mes-item.tem-evento .calendarios-mes-num {
+  opacity: 1;
+}
+
+.calendarios-mes-label {
+  font-size: 0.5625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-top: 0.15rem;
+  color: var(--gray-500, #6b7280);
+}
+
+.calendarios-mes-item.tem-evento .calendarios-mes-label {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Lista dos 4 eventos */
+.calendarios-eventos-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  border: 1px solid var(--gray-200, #e5e7eb);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.calendarios-evento-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4, 1rem);
+  padding: var(--space-4, 1rem) var(--space-5, 1.25rem);
+  background: var(--white, #fff);
+  border-bottom: 1px solid var(--gray-200, #e5e7eb);
+  transition: background 0.2s ease;
+}
+
+.calendarios-evento-card:last-child,
+.calendarios-evento-card:nth-last-child(2):nth-child(odd) {
+  border-bottom: none;
+}
+
+.calendarios-evento-card:nth-child(odd) {
+  border-right: 1px solid var(--gray-200, #e5e7eb);
+}
+
+.calendarios-evento-card:hover {
+  background: var(--gray-50, #f9fafb);
+}
+
+.calendarios-evento-mes {
+  flex-shrink: 0;
+  width: 52px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--primary-blue, #1e3a8a);
+  text-align: center;
+}
+
+.calendarios-evento-body {
+  min-width: 0;
+}
+
+.calendarios-evento-titulo {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--gray-900, #111827);
+  margin: 0 0 0.2rem;
+  line-height: 1.35;
+}
+
+.calendarios-evento-local {
+  font-size: 0.8125rem;
+  color: var(--gray-500, #6b7280);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.calendarios-evento-local i {
+  color: var(--gray-400, #9ca3af);
+  font-size: 0.625rem;
+}
+
+/* ========== Seção 2: Calendários das 24 bandas (PDF) ========== */
+.calendarios-pdfs {
+  padding-top: var(--space-2, 0.5rem);
+}
+
+.calendarios-pdf-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-4, 1rem);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.calendarios-pdf-card {
+  background: var(--white, #fff);
+  border-radius: 12px;
+  border: 1px solid var(--gray-200, #e5e7eb);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.calendarios-pdf-card:hover {
+  border-color: var(--gray-300, #d1d5db);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.calendarios-pdf-card-header {
+  padding: var(--space-4, 1rem);
+  flex: 1;
+  min-width: 0;
+}
+
+/* Destaque: Cidade — Estado em evidência */
+.calendarios-pdf-cidade-estado {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--primary-blue, #1e3a8a);
+  margin: 0 0 0.35rem;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+.calendarios-pdf-brud {
+  display: inline-block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--gray-500, #6b7280);
+  letter-spacing: 0.02em;
+}
+
+/* Botão Baixar PDF — área de toque adequada, foco visível */
+.calendarios-pdf-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  margin: 0 var(--space-4, 1rem) var(--space-4, 1rem);
+  padding: 0.625rem 1rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--white, #fff);
+  background: var(--primary-blue, #1e3a8a);
+  border: none;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.calendarios-pdf-btn:hover {
+  background: var(--blue-600, #2563eb);
+  color: var(--white, #fff);
+}
+
+.calendarios-pdf-btn:active {
+  transform: scale(0.98);
+}
+
+.calendarios-pdf-btn:focus-visible {
+  outline: 2px solid var(--primary-blue, #1e3a8a);
+  outline-offset: 2px;
+}
+
+.calendarios-pdf-btn i {
+  font-size: 0.875rem;
+}
+
+/* ---- Responsivo: mobile first adjustments ---- */
+@media (max-width: 640px) {
+  .calendarios-container {
+    padding: 0 var(--space-4, 1rem);
+    padding-left: max(var(--space-4, 1rem), env(safe-area-inset-left));
+    padding-right: max(var(--space-4, 1rem), env(safe-area-inset-right));
+  }
+
+  .calendarios-agenda {
+    padding: var(--space-5, 1.25rem);
+    border-radius: 12px;
+  }
+
+  .calendarios-agenda::before {
+    border-radius: 12px 12px 0 0;
+  }
+
+  .calendarios-ano-strip {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-4, 1rem);
+    padding-bottom: var(--space-4, 1rem);
+  }
+
+  .calendarios-ano-numero {
+    font-size: 1.375rem;
+  }
+
+  .calendarios-meses-grid {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.35rem;
+  }
+
+  .calendarios-mes-item {
+    padding: 0.6rem 0.25rem;
+  }
+
+  .calendarios-eventos-list {
+    grid-template-columns: 1fr;
+    border-radius: 10px;
+  }
+
+  .calendarios-evento-card {
+    padding: var(--space-4, 1rem);
+    border-right: none;
+    border-bottom: 1px solid var(--gray-200, #e5e7eb);
+  }
+
+  .calendarios-evento-card:last-child {
+    border-bottom: none;
+  }
+
+  .calendarios-evento-card:nth-child(odd) {
+    border-right: none;
+  }
+
+  .calendarios-evento-mes {
+    width: 48px;
+  }
+
+  .calendarios-pdf-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-3, 0.75rem);
+  }
+
+  .calendarios-pdf-card {
+    border-radius: 10px;
+  }
+
+  .calendarios-pdf-btn {
+    margin: 0 var(--space-4, 1rem) var(--space-4, 1rem);
+    min-height: 48px;
+    font-size: 1rem;
+  }
+}
+
+/* Web: layout mais largo e confortável */
+@media (min-width: 900px) {
+  .calendarios-container {
+    max-width: 820px;
+    padding: 0 var(--space-6, 1.5rem);
+  }
+
+  .calendarios-section-title {
+    font-size: 1.25rem;
+  }
+
+  .calendarios-section-desc {
+    font-size: 1rem;
+  }
+
+  .calendarios-pdf-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4, 1rem);
+  }
+}

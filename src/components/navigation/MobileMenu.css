@@ -1,0 +1,151 @@
+/* Mobile Menu Styles - itens com área de toque mínima 44px */
+.mobile-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 14px 1rem;
+  min-height: 48px;
+  color: #1a1a1a;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  box-sizing: border-box;
+}
+
+.mobile-menu-item:hover,
+.mobile-menu-item:focus {
+  background-color: rgba(255, 215, 0, 0.1);
+  color: #000000;
+  outline: none;
+}
+
+.mobile-menu-item.active {
+  background-color: rgba(255, 215, 0, 0.15);
+  color: #000000;
+}
+
+.mobile-menu-item i {
+  font-size: 1.1rem;
+  width: 20px;
+  text-align: center;
+  color: #FFD700;
+}
+
+.mobile-menu-toggle {
+  justify-content: space-between;
+}
+
+.mobile-menu-toggle i.fa-chevron-down,
+.mobile-menu-toggle i.fa-chevron-up {
+  color: #666;
+  font-size: 0.85rem;
+  transition: transform 0.2s ease;
+}
+
+.mobile-menu-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.mobile-submenu {
+  display: flex;
+  flex-direction: column;
+  padding-left: 1.5rem;
+  margin-top: 0.25rem;
+  gap: 0.25rem;
+  animation: slideDown 0.2s ease;
+}
+
+.mobile-sub-submenu {
+  padding-left: 2rem;
+}
+
+.mobile-submenu .mobile-menu-item {
+  font-size: 0.95rem;
+  padding: 12px 1rem;
+  min-height: 44px;
+  color: #555;
+}
+
+.mobile-submenu .mobile-menu-item:hover {
+  background-color: rgba(255, 215, 0, 0.08);
+  color: #000000;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Override react-burger-menu styles */
+.bm-menu-wrap {
+  z-index: 10000 !important;
+}
+
+.bm-menu {
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.bm-overlay {
+  z-index: 9999 !important;
+}
+
+/* Botão fechar com área de toque 44px para mobile */
+.bm-cross-button {
+  height: 44px !important;
+  width: 44px !important;
+  min-height: 44px !important;
+  min-width: 44px !important;
+  top: max(12px, env(safe-area-inset-top, 0)) !important;
+  right: max(12px, env(safe-area-inset-right, 0)) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.bm-cross {
+  background: #1a1a1a;
+  height: 20px !important;
+  width: 3px !important;
+}
+
+.bm-cross-button:hover .bm-cross {
+  background: #000000;
+}
+
+/* Scrollbar personalizado */
+.bm-menu::-webkit-scrollbar {
+  width: 6px;
+}
+
+.bm-menu::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.bm-menu::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+
+.bm-menu::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}

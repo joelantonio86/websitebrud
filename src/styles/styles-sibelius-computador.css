@@ -1,0 +1,298 @@
+/* ========================================================= */
+/* SIBELIUS COMPUTADOR - MANUAL DE INSTALAÇÃO */
+/* ========================================================= */
+
+.sibelius-computador-page {
+  padding-bottom: var(--space-12, 3rem);
+  min-height: 60vh;
+  background: linear-gradient(180deg, var(--gray-50, #f9fafb) 0%, var(--white, #fff) 10%);
+}
+
+.sibelius-computador-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 var(--space-6, 1.5rem);
+  background: var(--white, #fff);
+  border-radius: 20px;
+  border: 1px solid var(--gray-200, #e5e7eb);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  position: relative;
+}
+
+.sibelius-computador-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-blue, #1e3a8a), var(--primary-gold, #ffd700));
+}
+
+/* Header do manual */
+.sibelius-computador-header {
+  padding: var(--space-8, 2rem) var(--space-6, 1.5rem) var(--space-6, 1.5rem);
+}
+
+.sibelius-computador-title {
+  font-size: clamp(1.5rem, 4vw, 1.875rem);
+  font-weight: 700;
+  color: var(--gray-900, #111827);
+  margin: 0 0 var(--space-4, 1rem);
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.sibelius-computador-intro {
+  font-size: var(--font-size-base, 1rem);
+  color: var(--gray-700, #374151);
+  line-height: 1.7;
+  margin: 0;
+}
+
+.sibelius-computador-intro strong {
+  color: var(--primary-blue, #1e3a8a);
+  font-weight: 600;
+}
+
+/* Seções */
+.sibelius-computador-section {
+  padding: 0 var(--space-6, 1.5rem) var(--space-8, 2rem);
+  border-top: 1px solid var(--gray-100, #f3f4f6);
+}
+
+.sibelius-computador-section:first-of-type {
+  border-top: none;
+}
+
+.sibelius-computador-section-title {
+  font-size: var(--font-size-xl, 1.25rem);
+  font-weight: 700;
+  color: var(--primary-blue, #1e3a8a);
+  margin: 0 0 var(--space-4, 1rem);
+  padding-bottom: var(--space-2, 0.5rem);
+  border-bottom: 2px solid var(--gray-200, #e5e7eb);
+  font-family: var(--font-primary);
+}
+
+.sibelius-computador-section-intro {
+  font-size: var(--font-size-base, 1rem);
+  color: var(--gray-700, #374151);
+  line-height: 1.6;
+  margin: 0 0 var(--space-4, 1rem);
+}
+
+/* Lista de passos */
+.sibelius-computador-steps {
+  list-style: none;
+  counter-reset: sibelius-step var(--step-start, 0);
+  padding: 0;
+  margin: 0;
+}
+
+.sibelius-computador-step {
+  counter-increment: sibelius-step;
+  position: relative;
+  margin-bottom: var(--space-5, 1.25rem);
+  padding: var(--space-5, 1.25rem) var(--space-5, 1.25rem) var(--space-5, 1.25rem) calc(var(--space-5, 1.25rem) + 44px);
+  background: var(--gray-50, #f9fafb);
+  border-radius: 14px;
+  border: 1px solid var(--gray-200, #e5e7eb);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.sibelius-computador-step:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border-color: var(--gray-300, #d1d5db);
+}
+
+.sibelius-computador-step::before {
+  content: counter(sibelius-step);
+  position: absolute;
+  left: var(--space-5, 1.25rem);
+  top: var(--space-5, 1.25rem);
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--primary-blue, #1e3a8a), var(--blue-600, #2563eb));
+  color: #fff;
+  font-size: var(--font-size-sm, 0.875rem);
+  font-weight: 700;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(30, 58, 138, 0.3);
+}
+
+.sibelius-computador-step-text {
+  font-size: var(--font-size-base, 1rem);
+  color: var(--gray-800, #1f2937);
+  line-height: 1.65;
+  display: block;
+}
+
+.sibelius-computador-step-text strong {
+  color: var(--primary-blue, #1e3a8a);
+  font-weight: 600;
+}
+
+/* Imagem dentro do passo */
+.sibelius-computador-step-figure {
+  margin: var(--space-4, 1rem) 0 0;
+  padding: 0;
+  text-align: center;
+}
+
+.sibelius-computador-step-figure img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  border: 1px solid var(--gray-200, #e5e7eb);
+  box-shadow: var(--shadow-sm);
+  display: block;
+  margin: 0 auto;
+}
+
+.sibelius-computador-step-figcaption {
+  font-size: var(--font-size-xs, 0.75rem);
+  color: var(--gray-500, #6b7280);
+  margin-top: var(--space-2, 0.5rem);
+  line-height: 1.4;
+  font-style: italic;
+}
+
+/* Destaque (highlight) */
+.sibelius-computador-highlight {
+  margin: var(--space-6, 1.5rem) var(--space-6, 1.5rem) var(--space-8, 2rem);
+  padding: var(--space-5, 1.25rem) var(--space-6, 1.5rem);
+  background: linear-gradient(135deg, var(--blue-50, #eff6ff) 0%, var(--gold-100, #fffce6) 100%);
+  border-left: 4px solid var(--primary-blue, #1e3a8a);
+  border-radius: 0 12px 12px 0;
+  box-shadow: 0 2px 8px rgba(30, 58, 138, 0.08);
+}
+
+.sibelius-computador-highlight p {
+  margin: 0;
+  font-size: var(--font-size-base, 1rem);
+  color: var(--gray-800, #1f2937);
+  line-height: 1.65;
+}
+
+.sibelius-computador-highlight strong {
+  color: var(--primary-blue, #1e3a8a);
+  font-weight: 600;
+}
+
+/* Vídeo */
+.sibelius-computador-video {
+  padding: var(--space-8, 2rem) var(--space-6, 1.5rem);
+  border-top: 2px solid var(--gray-200, #e5e7eb);
+  text-align: center;
+}
+
+.sibelius-computador-video-title {
+  font-size: var(--font-size-xl, 1.25rem);
+  font-weight: 700;
+  color: var(--primary-blue, #1e3a8a);
+  margin: 0 0 var(--space-5, 1.25rem);
+  font-family: var(--font-heading);
+}
+
+.sibelius-computador-video-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  padding-bottom: 56.25%;
+  height: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  background: #000;
+}
+
+.sibelius-computador-video-wrap iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .sibelius-computador-page {
+    background: var(--white, #fff);
+    padding-bottom: max(var(--space-12, 3rem), env(safe-area-inset-bottom));
+  }
+
+  .sibelius-computador-container {
+    margin: 0;
+    padding: 0;
+    padding-left: env(safe-area-inset-left, 0);
+    padding-right: env(safe-area-inset-right, 0);
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    box-shadow: none;
+  }
+
+  .sibelius-computador-header {
+    padding: var(--space-6, 1.5rem) var(--space-4, 1rem);
+  }
+
+  .sibelius-computador-title {
+    font-size: 1.5rem;
+  }
+
+  .sibelius-computador-section {
+    padding: 0 var(--space-4, 1rem) var(--space-6, 1.5rem);
+  }
+
+  .sibelius-computador-section-title {
+    font-size: var(--font-size-lg, 1.125rem);
+  }
+
+  .sibelius-computador-step {
+    padding: var(--space-4, 1rem) var(--space-4, 1rem) var(--space-4, 1rem) calc(var(--space-4, 1rem) + 36px);
+    margin-bottom: var(--space-4, 1rem);
+  }
+
+  .sibelius-computador-step::before {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+    font-size: 0.8125rem;
+    left: var(--space-4, 1rem);
+    top: var(--space-4, 1rem);
+  }
+
+  .sibelius-computador-step-text {
+    font-size: var(--font-size-sm, 0.875rem);
+  }
+
+  .sibelius-computador-step-figure img {
+    border-radius: 10px;
+  }
+
+  .sibelius-computador-highlight {
+    margin: var(--space-4, 1rem) var(--space-4, 1rem) var(--space-6, 1.5rem);
+    padding: var(--space-4, 1rem) var(--space-4, 1rem);
+    border-radius: 0 10px 10px 0;
+  }
+
+  .sibelius-computador-video {
+    padding: var(--space-6, 1.5rem) var(--space-4, 1rem);
+  }
+
+  .sibelius-computador-video-title {
+    font-size: var(--font-size-lg, 1.125rem);
+  }
+}

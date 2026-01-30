@@ -1,46 +1,34 @@
-# Dependências
-node_modules/
-package-lock.json
-yarn.lock
-
-# Build
-dist/
-build/
-
-# Arquivos minificados (gerados)
-*.min.css
-*.min.js
-
 # Logs
+logs
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# Sistema Operacional
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
 .DS_Store
-Thumbs.db
-desktop.ini
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
-# IDEs
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# Arquivos temporários
-*.tmp
-*.temp
-.cache/
-
-# Service Worker (manter, mas ignorar cache)
-sw.js.map
-
-# Arquivos de ambiente
+# Environment variables
 .env
 .env.local
-.env.production
+.env.production.local
+.env.development.local
 
-# Documentação interna (não enviar para GitHub)
-ESTRATEGIA_FUTURA.md
+# Build output
+build
+dist

@@ -1,0 +1,14 @@
+/* Layout básico */
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#main-content {
+  flex: 1;
+  min-height: 50vh;
+  position: relative;
+  display: block !important;
+  visibility: visible !important;
+}

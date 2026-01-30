@@ -1,0 +1,241 @@
+/* ========================================================= */
+/* LETRAS DAS MÚSICAS - UI/UX PROFISSIONAL */
+/* ========================================================= */
+
+.letras-musicas-page {
+  padding-bottom: var(--space-12, 3rem);
+  min-height: 60vh;
+  background: linear-gradient(180deg, var(--gray-50, #f9fafb) 0%, var(--white, #fff) 12%);
+}
+
+.letras-musicas-container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 var(--space-6, 1.5rem);
+}
+
+/* Barra de busca */
+.letras-musicas-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4, 1rem);
+  margin-bottom: var(--space-6, 1.5rem);
+  padding: var(--space-4, 1rem) 0;
+}
+
+.letras-musicas-search-wrap {
+  flex: 1;
+  min-width: 200px;
+  position: relative;
+}
+
+.letras-musicas-search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gray-400, #9ca3af);
+  font-size: 1rem;
+  pointer-events: none;
+}
+
+.letras-musicas-search {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.75rem;
+  font-size: 16px; /* Evita zoom automático no iOS ao focar */
+  line-height: 1.5;
+  border: 1px solid var(--gray-300, #d1d5db);
+  border-radius: 12px;
+  background: var(--white, #fff);
+  color: var(--gray-800, #1f2937);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  min-height: 44px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.letras-musicas-search::placeholder {
+  color: var(--gray-500, #6b7280);
+}
+
+.letras-musicas-search:hover {
+  border-color: var(--gray-400, #9ca3af);
+}
+
+.letras-musicas-search:focus {
+  outline: none;
+  border-color: var(--primary-blue, #1e3a8a);
+  box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.15);
+}
+
+.letras-musicas-count {
+  font-size: var(--font-size-sm, 0.875rem);
+  color: var(--gray-600, #4b5563);
+  white-space: nowrap;
+}
+
+/* Lista acordeão */
+.letras-musicas-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.letras-musicas-item {
+  margin-bottom: var(--space-2, 0.5rem);
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--white, #fff);
+  border: 1px solid var(--gray-200, #e5e7eb);
+  box-shadow: var(--shadow-sm, 0 1px 2px rgba(0, 0, 0, 0.05));
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.letras-musicas-item:hover {
+  border-color: var(--gray-300, #d1d5db);
+  box-shadow: var(--shadow-md, 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1));
+}
+
+.letras-musicas-item:has(.is-open) {
+  border-color: var(--primary-blue, #1e3a8a);
+  box-shadow: 0 0 0 1px var(--primary-blue, #1e3a8a), var(--shadow-md);
+}
+
+.letras-musicas-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem 1.25rem;
+  text-align: left;
+  font-size: var(--font-size-base, 1rem);
+  font-weight: 600;
+  color: var(--gray-800, #1f2937);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  min-height: 44px;
+  gap: 0.75rem;
+  transition: color 0.2s, background 0.2s;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.letras-musicas-trigger:hover {
+  color: var(--primary-blue, #1e3a8a);
+  background: var(--gray-50, #f9fafb);
+}
+
+.letras-musicas-trigger:focus-visible {
+  outline: 2px solid var(--primary-blue, #1e3a8a);
+  outline-offset: 2px;
+}
+
+.letras-musicas-trigger.is-open {
+  color: var(--primary-blue, #1e3a8a);
+  background: linear-gradient(135deg, var(--blue-50, #eff6ff) 0%, var(--gold-50, #fffbeb) 100%);
+}
+
+.letras-musicas-trigger-title {
+  flex: 1;
+  line-height: 1.4;
+}
+
+.letras-musicas-trigger-icon {
+  flex-shrink: 0;
+  color: var(--gray-500, #6b7280);
+  font-size: 0.75rem;
+  transition: transform 0.25s ease;
+}
+
+.letras-musicas-trigger.is-open .letras-musicas-trigger-icon {
+  transform: rotate(180deg);
+  color: var(--primary-blue, #1e3a8a);
+}
+
+.letras-musicas-panel {
+  overflow: hidden;
+  transition: height 0.3s ease;
+}
+
+.letras-musicas-panel:not(.is-open) {
+  display: none;
+}
+
+.letras-musicas-panel.is-open {
+  display: block;
+  border-top: 1px solid var(--gray-200, #e5e7eb);
+}
+
+.letras-musicas-lyrics {
+  margin: 0;
+  padding: 1.25rem 1.5rem;
+  font-family: inherit;
+  font-size: var(--font-size-sm, 0.875rem);
+  line-height: 1.7;
+  color: var(--gray-700, #374151);
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  background: var(--gray-50, #f9fafb);
+  border-left: 4px solid var(--primary-gold, #d4af37);
+}
+
+/* Estado vazio */
+.letras-musicas-empty {
+  text-align: center;
+  padding: var(--space-12, 3rem) var(--space-6, 1.5rem);
+  background: var(--white, #fff);
+  border-radius: 16px;
+  border: 1px solid var(--gray-200, #e5e7eb);
+}
+
+.letras-musicas-empty-icon {
+  font-size: 3rem;
+  color: var(--gray-300, #d1d5db);
+  margin-bottom: var(--space-4, 1rem);
+}
+
+.letras-musicas-empty p {
+  margin: 0;
+  color: var(--gray-600, #4b5563);
+  font-size: var(--font-size-base, 1rem);
+}
+
+.letras-musicas-empty-hint {
+  margin-top: 0.5rem !important;
+  font-size: var(--font-size-sm, 0.875rem) !important;
+  color: var(--gray-500, #6b7280) !important;
+}
+
+/* Mobile: área de toque e safe-area */
+@media (max-width: 768px) {
+  .letras-musicas-page {
+    padding-bottom: max(var(--space-12, 3rem), env(safe-area-inset-bottom));
+  }
+
+  .letras-musicas-container {
+    padding: 0 var(--space-4, 1rem);
+    padding-left: max(var(--space-4, 1rem), env(safe-area-inset-left));
+    padding-right: max(var(--space-4, 1rem), env(safe-area-inset-right));
+  }
+
+  .letras-musicas-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .letras-musicas-search-wrap {
+    min-width: 0;
+  }
+
+  .letras-musicas-trigger {
+    padding: 1rem 1rem;
+    min-height: 48px;
+  }
+
+  .letras-musicas-lyrics {
+    padding: 1rem 1.25rem;
+    font-size: 0.9375rem;
+  }
+}

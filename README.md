@@ -1,249 +1,109 @@
-# 🎵 Banda Racional Universo em Desencanto
+# 🎵 Banda Racional - Site Oficial
 
-Site oficial da **Banda União Racional (BUR)** - uma Banda Marcial sem fins lucrativos que divulga a **CULTURA RACIONAL DO TERCEIRO MILÊNIO** através da música.
-
-## 📋 Sobre
-
-Este projeto é o site oficial da Banda Racional Universo em Desencanto, desenvolvido com design moderno e profissional, mantendo a identidade visual da Cultura Racional.
-
-### ✨ Características
-
-- 🎨 Design moderno com identidade visual da Cultura Racional
-- 📱 Totalmente responsivo (desktop, tablet, mobile)
-- ♿ Acessibilidade completa (ARIA, navegação por teclado)
-- ⚡ Performance otimizada (PWA, lazy loading, preload)
-- 🔍 SEO otimizado
-- 🎯 Navegação intuitiva com submenus
-- 📦 JavaScript modularizado (ES6)
-- ✅ Validação de formulários melhorada
-- 🔄 Service Worker (funciona offline)
+Site oficial da Banda Racional Universo em Desencanto desenvolvido com **React + TypeScript + Vite**.
 
 ## 🚀 Tecnologias
 
-- **HTML5** - Estrutura semântica
-- **CSS3** - Variáveis CSS, Grid, Flexbox, Animações
-- **JavaScript (ES6 Modules)** - Código modularizado
-- **Vite** - Sistema de build e desenvolvimento
-- **Service Worker** - PWA (Progressive Web App)
-- **Font Awesome 6.4.0** - Ícones
-- **Google Fonts** - Poppins e Playfair Display
+- **React 18** - Biblioteca JavaScript para interfaces
+- **TypeScript** - Tipagem estática para JavaScript
+- **Vite** - Build tool moderna e rápida
+- **React Router** - Roteamento para aplicações React
+- **CSS** - Estilos organizados por página e componente (design system, responsivo)
 
 ## 📁 Estrutura do Projeto
 
 ```
-websitebrud/
-├── index.html              # Página principal
-├── repertorio.html         # Repertório completo
-├── partituras.html         # Partituras para download
-├── eventos.html            # Eventos e shows
-├── letras-musicas.html     # Letras das músicas
-├── material-apoio.html     # Material de apoio
-├── sibelius-*.html         # Guias Sibelius
-│
-├── styles.css              # Estilos base
-├── styles-index.css        # Estilos homepage
-├── styles-repertorio.css  # Estilos repertório
-├── styles-*.css           # Outros estilos
-│
-├── script.js               # JavaScript principal (fallback)
-├── js/                     # Módulos JavaScript ES6
-│   ├── main.js             # Ponto de entrada
-│   ├── navigation.js       # Menu e navegação
-│   ├── animations.js       # Animações e contadores
-│   ├── forms.js            # Validação de formulários
-│   ├── utils.js            # Funções utilitárias
-│   └── analytics.js        # Analytics (Google/Plausible)
-├── repertorio.js           # JavaScript repertório
-├── partituras.js           # JavaScript partituras
-├── sw.js                   # Service Worker (PWA)
-├── manifest.json           # Manifest PWA
-├── vite.config.js          # Configuração Vite
-├── package.json            # Dependências NPM
-│
-├── images/                 # Imagens
-├── musicas/                # Arquivos de áudio
-└── partituras/             # Partituras (PDF, Sibelius)
+src/
+├── components/          # Componentes reutilizáveis
+│   ├── layout/         # Layout e PageHeader
+│   ├── navigation/     # Navegação e menu (desktop e mobile)
+│   ├── footer/         # Rodapé
+│   ├── sections/       # Seções da página inicial (Hero, Sobre, MapBrasil, etc.)
+│   ├── partituras/     # Widget de partituras
+│   └── tour/           # Grid e modal de mídia (turnês)
+├── pages/              # Páginas/rotas (Home, Repertório, Partituras, Eventos, etc.)
+├── data/               # Dados (partituras, bandas, turnês, calendários, letras)
+├── hooks/               # Custom hooks
+├── styles/             # Estilos CSS globais e por página
+├── types/               # Definições TypeScript
+└── assets/              # Imagens e recursos estáticos
 ```
 
-## 🎨 Paleta de Cores
-
-- **Dourado** (#FFD700) - Cor principal
-- **Azul Escuro** (#1E3A8A) - Cor secundária
-- **Branco** (#FFFFFF) - Textos claros
-- **Preto** (#000000) - Contraste
-
-## 📄 Páginas
-
-1. **Homepage** - Hero, Sobre, Estatísticas, Agenda, Galeria, Contato
-2. **Repertório** - Lista completa de músicas com player de áudio
-3. **Partituras** - Download de partituras por instrumento
-4. **Eventos** - Shows e apresentações
-5. **Letras** - Letras das músicas
-6. **Material de Apoio** - Recursos para músicos
-7. **Guias Sibelius** - Instruções para computador, iOS e Android
-
-## 🛠️ Como Usar
-
-### Execução Local
-
-#### Opção 1: Com Vite (Recomendado)
+## 🛠️ Instalação
 
 ```bash
-# Instalar dependências (primeira vez)
+# Instalar dependências
 npm install
 
 # Iniciar servidor de desenvolvimento
 npm run dev
 
-# Acesse: http://localhost:3000
-```
-
-#### Opção 2: Servidor HTTP Simples
-
-```bash
-# Python 3
-python -m http.server 8000
-
-# Node.js
-npx http-server
-
-# PHP
-php -S localhost:8000
-```
-
-Acesse: `http://localhost:8000`
-
-### Build para Produção
-
-```bash
-# Build completo (minifica tudo)
+# Build para produção
 npm run build
 
-# Os arquivos otimizados estarão em: dist/
+# Preview do build
+npm run preview
+
+# Verificar tipos TypeScript
+npm run type-check
+
+# Lint do código
+npm run lint
 ```
 
-### Deploy
+## 🌐 Publicar no GitHub Pages
 
-- **Netlify/Vercel:** Arraste a pasta `dist/` ou conecte com Git
-- **GitHub Pages:** Faça push da pasta `dist/` para branch `gh-pages`
+O site funciona no GitHub Pages. Passos:
 
-## 📱 Responsividade
+1. **Ajuste o `base` no `vite.config.ts`**  
+   Se o repositório for `websitebrud`, a URL será `https://seu-usuario.github.io/websitebrud/`. O `base` fica como `'/websitebrud/'` **somente** quando a variável de ambiente `GITHUB_PAGES=true` está definida no momento do build. Se o nome do repositório for outro, altere no `vite.config.ts` o valor usado quando `GITHUB_PAGES === 'true'`.
 
-- **Desktop** (1200px+): Layout completo
-- **Tablet** (768px - 1199px): Layout adaptado
-- **Mobile** (até 767px): Menu hambúrguer, layout em coluna
+2. **Build para GitHub Pages**  
+   É **obrigatório** definir `GITHUB_PAGES=true` antes do build, senão o `base` fica `/` e as rotas quebram no GitHub Pages.
+
+   - **Windows (PowerShell):** `$env:GITHUB_PAGES='true'; npm run build:gh-pages`  
+   - **Windows (CMD):** `set GITHUB_PAGES=true && npm run build:gh-pages`  
+   - **Mac/Linux:** `GITHUB_PAGES=true npm run build:gh-pages`
+
+   O script `build:gh-pages` faz o build e em seguida executa `scripts/copy-404.js`, que copia `index.html` para `404.html` (necessário para o SPA: ao acessar uma rota direta, o GitHub Pages serve o 404 e o React Router resolve a URL).
+
+3. **Publicar a pasta `dist`**  
+   - **GitHub Actions:** em **Settings → Pages → Source**, escolha **GitHub Actions** e use um workflow que rode o build com `GITHUB_PAGES=true` e publique a pasta `dist`.  
+   - **Branch:** crie um branch `gh-pages`, faça o build com `GITHUB_PAGES=true`, copie o conteúdo de `dist` para a raiz desse branch e envie. Em **Settings → Pages** use **Deploy from a branch** e selecione o branch `gh-pages` e a pasta raiz.
+
+## 📝 Path Aliases
+
+O projeto usa path aliases (configurados no `vite.config.ts`) para imports mais limpos:
+
+```typescript
+import { PageHeader } from '@/components/layout';
+import { Hero, Sobre, MapBrasil } from '@/components/sections';
+import type { NavigationProps } from '@/types/navigation';
+```
 
 ## ✅ Funcionalidades
 
-- ✅ Menu fixo com scroll effect
-- ✅ Menu hambúrguer para mobile
-- ✅ Submenus funcionais
-- ✅ Player de áudio para músicas
-- ✅ Sistema de filtros
-- ✅ Download de partituras
-- ✅ Formulário de contato com validação em tempo real
-- ✅ Animações ao scroll
-- ✅ Contadores animados
-- ✅ Botão "Voltar ao topo"
-- ✅ PWA (funciona offline)
-- ✅ Service Worker (cache inteligente)
-- ✅ Preload de recursos críticos
-- ✅ Lazy loading de imagens
-- ✅ Analytics (Google/Plausible)
+- ✅ Menu hambúrguer e navegação responsiva (mobile e desktop)
+- ✅ React Router com rotas para todas as páginas
+- ✅ TypeScript em todo o projeto
+- ✅ **Home:** Hero, Sobre, Mapa do Brasil (interativo), Destaques, Agenda
+- ✅ **Repertório:** categorias em accordion, players de áudio, exportar PDF
+- ✅ **Partituras:** busca, filtro por instrumento, abas por categoria, players MP3
+- ✅ **Eventos:** histórico (turnês Europa 2019, Suécia 2017) e Eventos por todo Brasil (bandas por estado)
+- ✅ **Calendários:** agenda BRUD 2026 e PDFs das bandas
+- ✅ **Material de Apoio:** documentos, vídeos e áudios
+- ✅ **Sibelius:** manuais para Computador, Android e iOS
+- ✅ **Letras das Músicas:** busca e acordeão
+- ✅ **Contato:** formulário
+- ✅ Design system, safe areas e touch targets para mobile
+- ✅ PWA (manifest, ícone)
 
-## 🎯 Sobre a BUR
+## 🎯 Próximos Passos
 
-- **24 Bandas** em todo o Brasil
-- **811 Integrantes** aproximadamente
-- Músicos, balizas, porta-bandeiras e regentes
-- Bandas Racionais em várias capitais brasileiras
-
-## 📚 Documentação
-
-- `ESTRATEGIA_FUTURA.md` - Estratégia de desenvolvimento futuro (React, backend)
-- `musicas/README.md` - Guia de organização de áudio
-- `partituras/README.md` - Guia de organização de partituras
-
-## 🔧 Personalização
-
-### Adicionar Músicas
-
-Edite `repertorio.js`:
-
-```javascript
-{
-    nome: "Nome da Música",
-    categoria: "hinos", // ou "marchas", "outras"
-    audio: "musicas/nome.mp3"
-}
-```
-
-### Personalizar Cores
-
-Edite `styles.css`:
-
-```css
-:root {
-    --primary-gold: #FFD700;
-    --primary-blue: #1E3A8A;
-}
-```
-
-### Configurar Analytics
-
-Edite `js/analytics.js`:
-
-```javascript
-const ANALYTICS_CONFIG = {
-    provider: 'google', // ou 'plausible'
-    googleId: 'G-SEU-ID-AQUI',
-    plausibleDomain: 'seu-dominio.com.br'
-};
-```
-
-## ⚙️ Melhorias Implementadas
-
-### ✅ Alta Prioridade
-- **Preload de recursos críticos** - CSS, fontes e imagens carregam mais rápido
-- **Lazy loading de imagens** - Imagens carregam sob demanda
-- **Minificação de CSS/JS** - Redução de 30-50% no tamanho dos arquivos (via Vite)
-
-### ✅ Média Prioridade
-- **JavaScript modularizado** - 6 módulos ES6 organizados (`js/`)
-- **Validação de formulários melhorada** - Validação em tempo real com feedback visual
-- **Service Worker (PWA)** - Site funciona offline, pode ser instalado no celular
-
-### ✅ Baixa Prioridade
-- **Sistema de build (Vite)** - Build automatizado, minificação, otimização
-- **Analytics** - Google Analytics 4 e Plausible configurados (pronto para usar)
-
-### ✅ Alta Prioridade
-- Preload de recursos críticos (CSS, fontes, imagens)
-- Lazy loading de imagens
-- Minificação de CSS/JS (via Vite)
-
-### ✅ Média Prioridade
-- JavaScript modularizado (6 módulos ES6)
-- Validação de formulários melhorada (tempo real, feedback visual)
-- Service Worker (PWA completo)
-
-### ✅ Baixa Prioridade
-- Sistema de build (Vite configurado)
-- Analytics (Google Analytics 4 / Plausible)
-
-## 🌐 Navegadores Suportados
-
-- Chrome (últimas versões)
-- Firefox (últimas versões)
-- Safari (últimas versões)
-- Edge (últimas versões)
+1. Implementar testes (unitários e E2E)
+2. Otimizar performance (lazy de rotas, imagens)
+3. Ajustes de conteúdo e mídia conforme demanda
 
 ## 📄 Licença
 
-Este projeto foi desenvolvido para a **Banda Racional Universo em Desencanto** - Cultura Racional.
-
----
-
-**Desenvolvido com ❤️ para a Cultura Racional**
-
-*Banda Racional Universo em Desencanto - Divulgando a música e a energia da Cultura Racional por todo o Brasil*
+MIT

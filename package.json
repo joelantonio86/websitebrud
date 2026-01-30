@@ -1,26 +1,46 @@
 {
   "name": "banda-racional-site",
-  "version": "1.0.0",
-  "description": "Site oficial da Banda Racional Universo em Desencanto",
+  "version": "2.0.0",
+  "description": "Site oficial da Banda Racional Universo em Desencanto - React + TypeScript",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "tsc && vite build",
+    "build:gh-pages": "vite build && node scripts/copy-404.js",
     "preview": "vite preview",
-    "minify:css": "cleancss -o dist/styles.min.css styles.css styles-improvements.css styles-menu-submenu.css styles-index.css",
-    "minify:js": "terser script.js -o dist/script.min.js -c -m"
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "type-check": "tsc --noEmit"
   },
   "keywords": [
     "banda",
     "racional",
     "cultura-racional",
-    "musica"
+    "musica",
+    "react",
+    "typescript"
   ],
   "author": "Banda Racional Universo em Desencanto",
   "license": "MIT",
+  "dependencies": {
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
+    "react": "^18.2.0",
+    "react-burger-menu": "^3.1.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.20.0",
+    "react-simple-maps": "^3.0.0"
+  },
   "devDependencies": {
-    "vite": "^5.0.0",
-    "clean-css-cli": "^5.6.2",
-    "terser": "^5.24.0"
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@typescript-eslint/eslint-plugin": "^6.14.0",
+    "@typescript-eslint/parser": "^6.14.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "eslint": "^8.55.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.0"
   }
 }
