@@ -125,7 +125,7 @@ export const PartiturasWidget: React.FC<PartiturasWidgetProps> = ({ partitura, g
             <div className="pr-audio-wrap">
               <audio
                 controls
-                preLoad="none"
+                preload="none"
                 playsInline
                 onError={() => markAudioError(`${folder}-full`)}
               >
@@ -174,7 +174,7 @@ export const PartiturasWidget: React.FC<PartiturasWidgetProps> = ({ partitura, g
                   <div className="pr-audio-wrap">
                     <audio
                       controls
-                      preLoad="none"
+                      preload="none"
                       playsInline
                       onError={() => markAudioError(`${folder}-${mKey}`)}
                     >

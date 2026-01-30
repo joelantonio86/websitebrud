@@ -27,13 +27,7 @@ export default defineConfig({
     rollupOptions: {
       input: resolve(__dirname, 'index.html'),
     },
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-      },
-    },
+    minify: true,
     cssMinify: true,
     assetsInlineLimit: 4096,
   },

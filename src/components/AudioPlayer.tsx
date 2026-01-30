@@ -7,7 +7,7 @@ interface AudioPlayerProps {
   hasMP3: boolean;
 }
 
-const AudioPlayer: React.FC<AudioPlayerProps> = ({ musicaCode, musicaTitle, hasMP3 }) => {
+const AudioPlayer: React.FC<AudioPlayerProps> = ({ musicaCode, musicaTitle: _musicaTitle, hasMP3 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
